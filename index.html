@@ -2022,7 +2022,7 @@ function formPessoa(vp,fam0){S.sujo=false;S.step=1;const vs=minhasVilas(),v0=vp|
     <button type="button" class="btn ghost" data-act="gps" id="fp-gps">${ic('pin',18)}<span>Marcar a casa no mapa</span></button>
     <label class="field"><span id="fp-parl">${fam0&&famResp(fam0)?'O que ela é de '+esc(famResp(fam0).nome.split(' ')[0])+', responsável da casa?':'O que ela é na casa?'}</span><select id="fp-par">${opts(PARS.map(x=>[x,x]),fam0?'Filho':'Responsável')}</select></label>
     <p class="meta">Parente que mora em outra casa (filho casado, irmã, pai) se liga depois, no cadastro dela, em Família.</p>
-    <label class="field"><span>Liderança que acompanha</span><select id="fp-lider"><option value="">Sem liderança</option>${opts(lideres.filter(l=>vs.some(v=>v.id===l.vila)).map(l=>[l.id,l.nome+', '+vN(l.vila)]),S.perfil==='lider'?'L1':'')}</select></label>
+    <label class="field"><span>Liderança que acompanha</span><select id="fp-lider"><option value="">Sem liderança</option>${opts(lideres.filter(l=>vs.some(v=>v.id===l.vila)).map(l=>[l.id,l.nome+', '+vN(l.vila)]),S.perfil==='lider'?(window.GU?GU.lider:'L1'):'')}</select></label>
     <p class="meta">Marcadores (opcional)</p>${tagChecks('fp-tag',[])}</div>
   <div class="step" data-s="3" hidden><h3>O que ela precisa para ela ou a família?</h3><p class="meta">Pode registrar vários pedidos. Se não precisar de nada agora, deixe em branco: dá para registrar depois no cadastro dela.</p>
     <div id="fp-peds">${pedRow()}</div><button type="button" class="btn ghost" data-act="ped-mais">${ic('plus',18)}Adicionar outro pedido</button></div>
@@ -2071,7 +2071,7 @@ document.addEventListener('submit',e=>{e.preventDefault();const val=id=>$(id).va
     const nome=val('fp-nome');let fam=$('fp-fam').value,vila=$('fp-vila').value;
     if(vila==='nova'){vila=window.GEC_CFG?uidCurto('V'):'N'+vilas.length;vilas.push({id:vila,nome:val('fp-vnova'),coord:window.GU?(GU.perfil==='area'?GU.id:''):'C1'})}
     if(fam==='nova'){fam=window.GEC_CFG?uidCurto('F'):'F'+(familias.length+1);familias.push({id:fam,nome:'Família '+(nome.split(' ').slice(1).join(' ')||nome)})}
-    const p={id:nextId(pessoas),nome,apelido:val('fp-apelido'),tel:val('fp-tel'),nasc:$('fp-nasc').value,vila,bairro:vila==='SD'?$('fp-bairro').value:'',rua:$('fp-rw').hidden?'':val('fp-rua'),ref:val('fp-ref'),fam,par:$('fp-par').value,lider:$('fp-lider').value,cad:HOJE,news:$('fp-news').checked,por:eu(),obs:'',foto:'',com:lerCom('fp'),tags:lerTags('fp-tag'),loc:$('fp-gps').dataset.on==='1'};
+    const p={id:nextId(pessoas),nome,apelido:val('fp-apelido'),tel:val('fp-tel'),nasc:$('fp-nasc').value,vila,bairro:vila==='SD'?$('fp-bairro').value:'',rua:$('fp-rw').hidden?'':val('fp-rua'),ref:val('fp-ref'),fam,par:$('fp-par').value,lider:window.GU&&S.perfil==='lider'?GU.lider:$('fp-lider').value,cad:HOJE,news:$('fp-news').checked,por:eu(),obs:'',foto:'',com:lerCom('fp'),tags:lerTags('fp-tag'),loc:$('fp-gps').dataset.on==='1'};
     pessoas.push(p);lerFoto($('fp-foto').files[0],p);logA('Cadastro','Cadastrou '+p.nome+' ('+vN(p.vila)+', '+fN(p.fam)+', '+p.par.toLowerCase()+')',{t:'p',id:p.id});
     let nd=0;document.querySelectorAll('#fp-peds .pedrow').forEach(r=>{const t=r.querySelector('.ped-desc').value.trim();if(t){novaDem(D(nextId(demandas),p.id,r.querySelector('.ped-cat').value,t,'aberta',HOJE,'2026-11-17'));nd++}});
     $('modal').hidden=true;S.pid=p.id;S.tab='dados';go('pessoas');toast('Cadastro salvo, número '+reg(p)+(nd?', com '+nd+(nd>1?' pedidos':' pedido'):''))}
@@ -2275,11 +2275,11 @@ addEventListener('pagehide',()=>{if(S.on){varre();salvaLocal()}});
 async function salvaLocal(){const snap={};for(const [c,a] of Object.entries(COLS))snap[c]=a;await IDB.set('snap',{seq:SY.seq,cols:snap,config:cfgDoc(),fila:[...SY.fila.keys()],u:window.GU,quando:Date.now()})}
 /* ---------- enviar e receber ---------- */
 async function envia(){if(SY.enviando||!SY.online||!SY.token||!SY.fila.size)return;SY.enviando=true;mostraBarra();
-  try{const itens=[...SY.fila.values()];let lote=[],tam=0;const manda=async()=>{if(!lote.length)return;const r=await rpc('gec_enviar',{p_token:SY.token,p_docs:lote.map(x=>x.del?{col:x.col,id:x.id,del:true}:{col:x.col,id:x.id,data:x.data})});
+  try{SY.erro='';const itens=[...SY.fila.values()];let lote=[],tam=0;const manda=async()=>{if(!lote.length)return;const r=await rpc('gec_enviar',{p_token:SY.token,p_docs:lote.map(x=>x.del?{col:x.col,id:x.id,del:true}:{col:x.col,id:x.id,data:x.data})});
       const ok=new Set(r.ok||[]),neg=new Set(r.negados||[]);for(const x of lote){const k=x.col+'|'+x.id;if(ok.has(k)||neg.has(k)){if(SY.fila.get(k)===x||ok.has(k)){SY.fila.delete(k);if(x.del)delete SY.last[x.col][x.id];else SY.last[x.col][x.id]=JSON.stringify(x.data)}}}
       if(neg.size){SY.erro=neg.size+(neg.size>1?' alterações não foram aceitas':' alteração não foi aceita')+' (sem permissão). Elas voltam como estavam.';setTimeout(()=>{SY.erro='';mostraBarra()},8000);[...neg].forEach(k=>{const [c,id]=k.split('|');delete SY.last[c][id]});SY.seq=0}
       lote=[];tam=0};
-    for(const x of itens){const t=x.del?50:JSON.stringify(x.data).length;if(lote.length>=150||tam+t>1500000)await manda();lote.push(x);tam+=t}await manda();SY.erro=''}
+    for(const x of itens){const t=x.del?50:JSON.stringify(x.data).length;if(lote.length>=150||tam+t>1500000)await manda();lote.push(x);tam+=t}await manda()}
   catch(e){if(ehSessao(e))return sessaoAcabou();if(!navigator.onLine)SY.online=false;else SY.erro='Não deu para enviar agora. Vou tentar de novo sozinho.'}
   finally{SY.enviando=false;mostraBarra();salvaLocal()}}
 async function recebe(){if(!SY.online||!SY.token)return;try{let mais=true,n=0;while(mais&&n<50){const r=await rpc('gec_puxar',{p_token:SY.token,p_desde:SY.seq});n++;
@@ -2299,7 +2299,7 @@ function entra(){S.on=true;S.ia=[];S.pid=null;S.vila='';$('login').hidden=true;$
 async function sessaoAcabou(){SY.token=null;await IDB.set('token',null);S.on=false;$('app').hidden=true;$('login').hidden=false;barra.hidden=true;toast('Sua sessão acabou. Entre de novo com o seu código.')}
 /* ---------- tela de entrada ---------- */
 (()=>{const f=$('fl');if(!f)return;const pl=$('fl-perfil');if(pl)pl.closest('label').remove();f.querySelectorAll('p.meta').forEach(p=>{if(/prévia/.test(p.textContent))p.remove()});
-  const tel=$('fl-tel');tel.required=true;tel.autocomplete='username';const sn=$('fl-senha');sn.required=true;sn.autocomplete='current-password';sn.setAttribute('inputmode','numeric');sn.placeholder='8 números';
+  const tel=$('fl-tel');tel.required=true;tel.autocomplete='username';const sn=$('fl-senha');sn.required=true;sn.autocomplete='current-password';sn.setAttribute('inputmode','numeric');sn.placeholder='Seu código de acesso';
   const msg=document.createElement('p');msg.id='fl-msg';msg.className='meta';msg.setAttribute('role','alert');f.querySelector('.btn.wide').insertAdjacentElement('afterend',msg)})();
 document.addEventListener('submit',async e=>{if(e.target.id!=='fl')return;e.preventDefault();e.stopImmediatePropagation();const b=e.target.querySelector('.btn.wide'),m=$('fl-msg');b.disabled=true;m.textContent='Entrando...';
   try{const r=await rpc('gec_login',{p_login:$('fl-tel').value,p_codigo:$('fl-senha').value});
@@ -2313,55 +2313,10 @@ document.addEventListener('click',async e=>{const b=e.target.closest('[data-act]
   if(a==='sair'){e.stopImmediatePropagation();varre();if(SY.fila.size&&SY.online)await envia();
     if(SY.fila.size){toast('Ainda tem alteração sem enviar. Conecte na internet antes de sair.');return}
     try{await rpc('gec_sair',{p_token:SY.token})}catch(_){}SY.token=null;await IDB.limpa();zera();window.GU=null;S.on=false;$('app').hidden=true;$('login').hidden=false;barra.hidden=true;scrollTo(0,0)}
-  else if(a==='acessos'){e.stopImmediatePropagation();abreAcessos()}
-  else if(a==='ac-novo'){e.stopImmediatePropagation();formAcesso()}
-  else if(a==='ac-edit'){e.stopImmediatePropagation();formAcesso(ACS.find(x=>x.id===b.dataset.id))}
-  else if(a==='ac-cod'){e.stopImmediatePropagation();const u=ACS.find(x=>x.id===b.dataset.id);try{const r=await rpc('gec_usuario_codigo',{p_token:SY.token,p_id:u.id});mostraCodigo(u,r.codigo,false)}catch(err){toast('Não deu para gerar o código agora')}}
-  else if(a==='ac-volta'){e.stopImmediatePropagation();abreAcessos()}
-  else if(a==='ac-copia'){e.stopImmediatePropagation();const t=$('ac-txt');try{await navigator.clipboard.writeText(t.value);toast('Mensagem copiada')}catch(_){t.select();toast('Selecione e copie')}}
-  else if(a==='backup'){e.stopImmediatePropagation();try{toast('Gerando a cópia...');const r=await rpc('gec_backup',{p_token:SY.token});const bl=new Blob([JSON.stringify(r)],{type:'application/json'});baixa(bl,'gabinete-em-campo-copia-'+HOJE+'.json');toast('Cópia baixada')}catch(err){toast('Não deu para gerar a cópia agora')}}},true);
+  },true);
 /* ---------- baixar arquivos (PDF, planilha) fora do Claude ---------- */
 function baixa(blob,nome){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=nome;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(u);a.remove()},4000)}
 setTimeout(()=>{if(!DL)DL={save:async({filename,data})=>{const tipo=/\.pdf$/i.test(filename)?'application/pdf':/\.csv$/i.test(filename)?'text/csv':/\.json$/i.test(filename)?'application/json':'application/octet-stream';baixa(data instanceof Blob?data:new Blob([data],{type:tipo}),filename)}}},300);
-/* ---------- acessos da equipe (coordenação geral) ---------- */
-let ACS=[];
-async function abreAcessos(){$('sheet').innerHTML=`<div class="bar"><h2>Acessos da equipe</h2>${fecha}</div><p class="meta">Carregando...</p>`;$('modal').hidden=false;
-  try{ACS=await rpc('gec_usuarios',{p_token:SY.token})}catch(e){$('sheet').innerHTML=`<div class="bar"><h2>Acessos da equipe</h2>${fecha}</div><p class="empty">${navigator.onLine?'Não deu para carregar.':'Precisa de internet para ver os acessos.'}</p>`;return}
-  $('sheet').innerHTML=`<div class="bar"><h2>Acessos da equipe</h2>${fecha}</div><p class="meta">Cada pessoa entra com o telefone e um código de 8 números. O código aparece só uma vez, na hora de criar ou trocar.</p>
-  <button class="btn wide" data-act="ac-novo">${ic('plus',18)}Novo acesso</button>
-  <div class="list">${ACS.map(u=>`<div class="row"><span class="cic cc" style="--cc:${u.ativo?'#1f55d0':'#9aa8bf'}">${ic(u.perfil==='geral'?'shield':u.perfil==='area'?'team':'users')}</span><div><strong>${esc(u.nome)}${u.ativo?'':' (desativado)'}</strong><span class="meta">${PAP[u.perfil]}${u.perfil!=='geral'&&u.vilas.length?' · '+esc(u.vilas.map(vN).join(', ')):''}</span><span class="meta">Telefone ${esc(u.login)} · ${u.ult_login?'último acesso '+dm(String(u.ult_login).slice(0,10)):'ainda não entrou'}</span></div><button class="btn ghost sm" data-act="ac-edit" data-id="${u.id}">Editar</button></div>`).join('')}</div>
-  <div class="card"><h3>Cópia de segurança</h3><p class="meta">Baixa um arquivo com todos os dados. Guarde num lugar seguro: ele tem dados pessoais.</p><button class="btn ghost" data-act="backup">${ic('file',18)}Baixar cópia de tudo</button></div>`}
-function formAcesso(u){const vs=vilas.slice().sort((a,b)=>a.nome.localeCompare(b.nome)),pf=u?u.perfil:'lider';
-  $('sheet').innerHTML=`<div class="bar"><button class="iconbtn" data-act="ac-volta" aria-label="Voltar">${ic('back')}</button><h2 style="flex:1">${u?'Editar acesso':'Novo acesso'}</h2>${fecha}</div><form id="fac">
-  <label class="field"><span>Nome</span><input id="ac-nome" required value="${esc(u?u.nome:'')}" autocomplete="off"></label>
-  <label class="field"><span>Telefone (é o login)</span><input id="ac-tel" required type="tel" inputmode="tel" value="${esc(u?u.login:'')}" placeholder="(94) 9 0000-0000"></label>
-  <label class="field"><span>Função</span><select id="ac-perfil">${opts([['lider','Liderança'],['area','Coordenador de área'],['geral','Coordenação geral']],pf)}</select></label>
-  <div id="ac-lider"${pf==='lider'?'':' hidden'}><label class="field"><span>Vila da liderança</span><select id="ac-vila">${opts(vs.map(v=>[v.id,v.nome]),u&&u.vilas[0]||'')}</select></label></div>
-  <div id="ac-area"${pf==='area'?'':' hidden'}><p class="meta">Vilas que essa pessoa coordena</p><div class="chk">${vs.map(v=>`<label class="chip"><input type="checkbox" name="ac-vs" value="${v.id}"${u&&u.vilas.includes(v.id)?' checked':''}>${esc(v.nome)}</label>`).join('')}</div></div>
-  ${u?`<label class="check"><input type="checkbox" id="ac-ativo"${u.ativo?' checked':''}><span>Acesso ativo</span></label>`:''}
-  <button class="btn wide">${u?'Salvar':'Criar acesso e gerar código'}</button>
-  ${u?`<button type="button" class="btn ghost wide" data-act="ac-cod" data-id="${u.id}">Gerar código novo</button><p class="meta">Gerar código novo desconecta a pessoa de todos os aparelhos. Use se ela esqueceu o código ou perdeu o celular.</p>`:''}
-  </form>`;$('modal').hidden=false;$('sheet').scrollTop=0;$('ac-perfil').onchange=()=>{const p=$('ac-perfil').value;$('ac-lider').hidden=p!=='lider';$('ac-area').hidden=p!=='area'}}
-function mostraCodigo(u,cod,novo){const link=location.origin+location.pathname,txt=`Olá, ${u.nome.split(' ')[0]}! Seu acesso ao Gabinete em Campo:\n\nSite: ${link}\nTelefone: ${u.login}\nCódigo: ${cod}\n\nNo iPhone, abra o site no Safari e toque em Compartilhar > Adicionar à Tela de Início. No Android, abra no Chrome e toque em Instalar.\nNão passe esse código para ninguém.`;
-  $('sheet').innerHTML=`<div class="bar"><h2>${novo?'Acesso criado':'Código novo'}</h2>${fecha}</div><div class="card" style="text-align:center"><p class="meta">Código de ${esc(u.nome)}</p><p style="font-size:2.2rem;font-weight:800;letter-spacing:.12em;margin:6px 0">${cod.slice(0,4)} ${cod.slice(4)}</p><p class="meta">Ele aparece só agora. Passe para a pessoa de forma reservada.</p></div>
-  <label class="field"><span>Mensagem pronta para mandar no WhatsApp da pessoa</span><textarea id="ac-txt" rows="9">${esc(txt)}</textarea></label>
-  <div class="two"><button class="btn" data-act="ac-copia">Copiar mensagem</button><a class="btn ghost" target="_blank" rel="noopener" href="https://wa.me/55${u.login}?text=${encodeURIComponent(txt)}">Abrir no WhatsApp</a></div><button class="btn ghost wide" data-act="ac-volta">Voltar para os acessos</button>`}
-document.addEventListener('submit',async e=>{if(e.target.id!=='fac')return;e.preventDefault();e.stopImmediatePropagation();
-  const p=$('ac-perfil').value;
-  let vls=p==='lider'?[$('ac-vila').value]:p==='area'?[...document.querySelectorAll('input[name="ac-vs"]:checked')].map(x=>x.value):[];
-  if(p==='area'&&!vls.length){toast('Marque pelo menos uma vila');return}
-  const nome=$('ac-nome').value.trim();let liderId=null;
-  if(p==='lider'){let l=lideres.find(x=>x.nome===nome&&x.vila===vls[0]);if(!l){l={id:'L'+uid().toString(36),nome,vila:vls[0]};lideres.push(l)}liderId=l.id}
-  const dados={nome,login:$('ac-tel').value,perfil:p,vilas:vls,lider:liderId};const ant=e.target.dataset.uid;if(ant){dados.id=ant;dados.ativo=$('ac-ativo').checked}
-  try{const r=await rpc('gec_usuario_salvar',{p_token:SY.token,p_dados:dados});
-    if(p==='area'){if(!coords.some(c=>c.id===r.id))coords.push({id:r.id,nome});else coords.find(c=>c.id===r.id).nome=nome;vilas.forEach(v=>{if(vls.includes(v.id))v.coord=r.id;else if(v.coord===r.id)v.coord=''})}
-    logA('Equipe',(ant?'Alterou o acesso de ':'Criou o acesso de ')+nome+' ('+PAP[p].toLowerCase()+')');varre();envia();
-    if(r.codigo)mostraCodigo(r,r.codigo,true);else{toast('Acesso salvo');abreAcessos()}}
-  catch(err){toast(/TELEFONE/.test(err.message)?'Telefone inválido: use DDD + número':/duplicate|unique/i.test(err.message)?'Esse telefone já tem acesso':'Não deu para salvar agora')}},true);
-/* guarda o id do usuário no formulário de edição */
-new MutationObserver(()=>{const f=$('fac');if(f&&!f.dataset.marcado){f.dataset.marcado='1';const b=f.querySelector('[data-act="ac-cod"]');if(b)f.dataset.uid=b.dataset.id}}).observe(document.body,{childList:true,subtree:true});
-/* botão "Acessos da equipe" na tela Equipe (só coordenação geral) */
-const _eq=V.equipe;V.equipe=function(){const h=_eq();if(S.perfil!=='geral')return h;const i=h.indexOf('</div>');return h.slice(0,i+6)+`<button class="btn" data-act="acessos">${ic('shield',18)}Acessos da equipe e cópia de segurança</button>`+h.slice(i+6)};
 /* ---------- começar ---------- */
 async function carregaLocal(){const s=await IDB.get('snap');zera();if(!s||!s.cols)return;for(const [c,a] of Object.entries(s.cols))if(COLS[c]&&Array.isArray(a))COLS[c].push(...a);cfgAplica(s.config);SY.seq=s.seq||0;
   const pend=new Set(s.fila||[]);for(const [c,a] of Object.entries(COLS))for(const x of a){const id=String(x.id);if(!pend.has(c+'|'+id))SY.last[c][id]=JSON.stringify(x)}if(!pend.has('config|tipos'))SY.last.config.tipos=JSON.stringify(cfgDoc())}
@@ -2371,7 +2326,162 @@ async function carregaLocal(){const s=await IDB.get('snap');zera();if(!s||!s.col
 /* aplicativo instalável e funcionando sem internet */
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 window.GEC_SYNC=SY;
+/* acessos da equipe: chamadas ao banco (a tela fica no módulo Acessos) */
+window.GEC_API={
+  lista:()=>rpc('gec_usuarios',{p_token:SY.token}),
+  salvar:d=>rpc('gec_usuario_salvar',{p_token:SY.token,p_dados:d}),
+  codigo:(id,c)=>rpc('gec_usuario_codigo',{p_token:SY.token,p_id:id,p_codigo:c||null}),
+  backup:()=>rpc('gec_backup',{p_token:SY.token}),
+  baixa,depois:()=>{varre();envia()},online:()=>navigator.onLine};
 })()}
+/* =====================================================================
+   Acessos: aba exclusiva do login mestre para criar logins, códigos
+   e escolher o que cada pessoa pode fazer. O banco segue as mesmas regras.
+   ===================================================================== */
+const PAPA={geral:'Coordenação geral',area:'Coordenador de área',lider:'Liderança'};
+const PERMS=[['cadastro','Cadastrar e editar pessoas e casas','users'],['demandas','Criar e mudar demandas','heart'],['oficios','Ofícios e entidades','mail'],['agenda','Agenda e visitas','cal'],['relatorios','Ver relatórios','chart'],['exportar','Baixar PDF e planilhas','file'],['mala','Mala direta no WhatsApp','chat'],['registro','Ver o registro de atividades da equipe','shield']];
+function ehMestre(){return window.GU?!!GU.mestre:S.perfil==='geral'}
+function temPerm(k){if(ehMestre()||!window.GU)return true;return (GU.perms||{})[k]!==false}
+/* o que cada permissão bloqueia na tela */
+const PVIEW={relatorios:'relatorios',novidades:'mala',oficios:'oficios',entidades:'oficios',agenda:'agenda'};
+const PACT={cadastro:['novo-pessoa','pedit','premove','prestaura','famadd','ligar','ligx','casatroca'],demandas:['novo-demanda','dedit','st','segue','reabrir','dcancel','entped'],
+  oficios:['novoof','oficio','ofst','ofreit','novaent','entedit','entrem','entof'],agenda:['novo-ag','agremove','novavis','visrem'],relatorios:['relir','rel','antesvis','redit','meu'],
+  exportar:['relpdf','relpdf-painel','relbaixa','fichapdf','fampdf','dempdf','tempopdf','ofpdf','indpdf','anxbaixa'],mala:['nvenv','nvcopia']};
+const ACTP={};Object.entries(PACT).forEach(([k,as])=>as.forEach(a=>ACTP[a]=k));
+const PNOME=Object.fromEntries(PERMS.map(p=>[p[0],p[1].toLowerCase()]));
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||!S.on)return;let k=ACTP[b.dataset.act];
+  if(!k&&b.dataset.act==='ir'&&PVIEW[b.dataset.id])k=PVIEW[b.dataset.id];if(!k&&b.dataset.act==='ir'&&b.dataset.id==='acessos'&&!ehMestre())k='mestre';
+  if(k&&(k==='mestre'||!temPerm(k))){e.preventDefault();e.stopImmediatePropagation();toast('Seu acesso não permite isso. Fale com a coordenação.')}},true);
+/* esconde da navegação o que a pessoa não pode usar */
+function ajustaNav(){const t=$('tabs');if(!t)return;let a=t.querySelector('a[href="#acessos"]');
+  if(!a){a=document.createElement('a');a.href='#acessos';a.className='dk';a.innerHTML=`${ic('shield')}<span>Acessos</span>`;t.appendChild(a)}
+  a.hidden=!ehMestre();Object.entries(PVIEW).forEach(([v,k])=>{const x=t.querySelector(`a[href="#${v}"]`);if(x)x.hidden=!temPerm(k)})}
+const bloqueado=t=>`${bar(t)}<div class="card"><p class="empty">Seu acesso não inclui esta parte do sistema. Se precisar, fale com a coordenação.</p></div>`;
+const SEMN=['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'],MESL=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const dataLonga=d=>{const x=new Date(d+'T12:00:00');return SEMN[x.getDay()]+', '+x.getDate()+' de '+MESL[x.getMonth()]};
+Object.keys(V).forEach(k=>{const f=V[k];if(typeof f!=='function')return;V[k]=function(){ajustaNav();if(PVIEW[k]&&!temPerm(PVIEW[k]))return bloqueado({relatorios:'Relatórios',novidades:'Mala direta',oficios:'Ofícios',entidades:'Entidades',agenda:'Agenda'}[k]);return f.apply(this,arguments)}});
+(()=>{const f=V.inicio;V.inicio=function(){let h=f.apply(this,arguments);h=h.replace('Terça-feira, 10 de novembro',dataLonga(HOJE));
+  Object.entries(PVIEW).forEach(([v,k])=>{if(!temPerm(k))h=h.replace(new RegExp(`<button class="(tile|row)" data-act="ir" data-id="${v}">[\\s\\S]*?</button>`,'g'),'')});
+  if(!temPerm('cadastro'))h=h.replace(/<button class="tile" data-act="novo-pessoa"[\s\S]*?<\/button>/,'');if(!temPerm('demandas'))h=h.replace(/<button class="tile" data-act="novo-demanda"[\s\S]*?<\/button>/,'');
+  if(ehMestre())h=h.replace(/(<div class="tiles">[\s\S]*?)(<\/div>)/,`$1<button class="tile" data-act="ir" data-id="acessos"><span class="cic cheio" style="--cc:#1d4f9e">${ic('shield',24)}</span>Acessos</button>$2`);return h}})();
+(()=>{const f=V.equipe;V.equipe=function(){if(!temPerm('registro')&&S.eqt==='log')S.eqt='org';let h=f.apply(this,arguments);if(!temPerm('registro'))h=h.replace(/<button data-act="eqt" data-id="log"[\s\S]*?<\/button>/,'');
+  if(ehMestre()){const i=h.indexOf('</div>');h=h.slice(0,i+6)+`<button class="btn ghost" data-act="ir" data-id="acessos">${ic('shield',18)}Acessos: logins, códigos e permissões</button>`+h.slice(i+6)}return h}})();
+
+/* ---------- de onde vêm os acessos: banco (site oficial) ou prévia ---------- */
+const novoCod=()=>{const a=new Uint32Array(1);crypto.getRandomValues(a);return String(a[0]%100000000).padStart(8,'0')};
+const DEMO={u:null,ini(){if(this.u)return;let i=0;const tel=()=>'949910000'+String(10+i++);
+    this.u=[{id:'eu',nome:PERF.geral.full==='Coordenação geral'?'Adriano Araújo':PERF.geral.full,login:'94981194050',perfil:'geral',vilas:[],lider:null,ativo:true,perms:{},mestre:true,ult_login:new Date().toISOString()}]
+      .concat(coords.map(c=>({id:'c'+c.id,nome:c.nome,login:tel(),perfil:'area',vilas:vilas.filter(v=>v.coord===c.id).map(v=>v.id),lider:null,ativo:true,perms:{},mestre:false,ult_login:null})))
+      .concat(lideres.slice(0,6).map(l=>({id:'l'+l.id,nome:l.nome,login:tel(),perfil:'lider',vilas:[l.vila],lider:l.id,ativo:true,perms:{},mestre:false,ult_login:null})))},
+  async lista(){this.ini();return JSON.parse(JSON.stringify(this.u))},
+  async salvar(d){this.ini();const lg=String(d.login).replace(/\D/g,'');if(lg.length<10)throw new Error('TELEFONE');if(this.u.some(x=>x.login===lg&&x.id!==d.id))throw new Error('duplicate');
+    let cod=null;if(d.codigo)codOk(d.codigo,lg);const pr={};PERMS.forEach(([k])=>{if(d.perms&&d.perms[k]===false)pr[k]=false});
+    if(!d.id){cod=d.codigo||novoCod();const x={id:'n'+Date.now(),nome:d.nome,login:lg,perfil:d.perfil,vilas:d.vilas,lider:d.lider,ativo:true,perms:pr,mestre:!!d.mestre&&d.perfil==='geral',ult_login:null};this.u.push(x);return {...x,codigo:cod}}
+    const x=this.u.find(y=>y.id===d.id);const eu=x.id==='eu';Object.assign(x,{nome:d.nome,login:lg,perfil:eu?'geral':d.perfil,vilas:d.vilas,lider:d.lider,ativo:eu?true:d.ativo,perms:eu?{}:pr,mestre:eu||(!!d.mestre&&d.perfil==='geral')});return {...x,codigo:null}},
+  async codigo(id,c){this.ini();const x=this.u.find(y=>y.id===id);if(c)codOk(c,x.login);return {codigo:c||novoCod()}},
+  async backup(){return {gerado:new Date().toISOString(),docs:Object.entries({pessoas,familias,demandas,entidades,oficios,visitas,agenda,lideres,coords,vilas}).flatMap(([col,a])=>a.map(d=>({col,id:String(d.id),data:d})))}},
+  depois(){},online:()=>true,
+  baixa(blob,nome){if(DL)DL.save({filename:nome,data:blob}).catch(()=>{});else toast('Na prévia não dá para baixar. No site oficial funciona.')}};
+const API=()=>window.GEC_API||DEMO;
+function codOk(c,lg){c=String(c);if(!/^\d{6,12}$/.test(c))throw new Error('CODIGO_FORMATO');
+  if(/^(\d)\1+$/.test(c)||'012345678901234567890'.includes(c)||'98765432109876543210'.includes(c)||(lg&&lg.includes(c)))throw new Error('CODIGO_FRACO');return c}
+const erroAc=m=>/CODIGO_FORMATO/.test(m)?'O código precisa ter de 6 a 12 números':/CODIGO_FRACO/.test(m)?'Código fácil demais (sequência, número repetido ou parte do telefone). Escolha outro.':/TELEFONE/.test(m)?'Telefone inválido: use DDD + número':/duplicate|unique/i.test(m)?'Esse telefone já tem acesso':/NOME/.test(m)?'Escreva o nome da pessoa':/PROIBIDO/.test(m)?'Só o login mestre pode mexer nos acessos':'Não deu para salvar agora. Confira a internet.';
+
+/* ---------- a aba ---------- */
+const AC={lista:null,carregando:false,erro:'',q:'',f:'todos'};
+async function acCarrega(){if(AC.carregando)return;AC.carregando=true;AC.erro='';
+  try{AC.lista=await API().lista()}catch(e){AC.erro=API().online()?'Não deu para carregar os acessos.':'Precisa de internet para ver e mudar os acessos.'}
+  AC.carregando=false;if(S.view==='acessos'&&$('modal').hidden)render()}
+const acIc=u=>u.mestre?'shield':u.perfil==='geral'?'shield':u.perfil==='area'?'team':'users';
+const acCor=u=>!u.ativo?'#9aa8bf':u.mestre?'#1d4f9e':u.perfil==='geral'?'#2f7fe0':u.perfil==='area'?'#7c5ce6':'#1f9a52';
+const acBloq=u=>u.mestre?[]:PERMS.filter(([k])=>(u.perms||{})[k]===false&&(k!=='registro'||u.perfil==='geral'));
+const acSub=u=>(u.mestre?'Login mestre · ':'')+PAPA[u.perfil]+(u.perfil!=='geral'&&u.vilas.length?' · '+u.vilas.map(vN).join(', '):'');
+V.acessos=function(){ajustaNav();if(!ehMestre())return `${bar('Acessos')}<div class="card"><p class="empty">Só o login mestre vê esta aba.</p></div>`;
+  if(!AC.lista&&!AC.erro){acCarrega();return `${bar('Acessos')}<p class="meta">Carregando os acessos...</p>`}
+  if(AC.erro&&!AC.lista)return `${bar('Acessos')}<div class="card"><p class="empty">${esc(AC.erro)}</p><button class="btn" data-act="ac-recarrega">Tentar de novo</button></div>`;
+  const L=AC.lista,q=AC.q.trim(),cont=p=>L.filter(u=>u.perfil===p).length;
+  const fs=L.filter(u=>(AC.f==='todos'||(AC.f==='off'?!u.ativo:u.perfil===AC.f&&u.ativo))&&(!q||bate(u.nome+' '+u.login,q)));
+  const row=u=>{const bl=acBloq(u);return `<button class="row" data-act="ac-edit" data-id="${esc(u.id)}"><span class="cic cc" style="--cc:${acCor(u)}">${ic(acIc(u))}</span><div><strong>${esc(u.nome)}${u.ativo?'':' (desativado)'}</strong><span class="meta">${esc(acSub(u))}</span><span class="meta">${esc(u.login)} · ${u.ult_login?'último acesso '+dm(String(u.ult_login).slice(0,10)):'ainda não entrou'}${bl.length?' · '+bl.length+(bl.length>1?' bloqueios':' bloqueio'):''}</span></div>${ic('go',18)}</button>`};
+  return `${bar('Acessos')}
+  ${window.GEC_API?'':'<p class="meta">Prévia: aqui você vê como funciona. Os logins de verdade são criados no site oficial.</p>'}
+  <div class="tiles" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+    <div class="card" style="gap:2px"><strong style="font-size:1.4rem">${cont('geral')}</strong><span class="meta">Coordenação geral</span></div>
+    <div class="card" style="gap:2px"><strong style="font-size:1.4rem">${cont('area')}</strong><span class="meta">Coord. de área</span></div>
+    <div class="card" style="gap:2px"><strong style="font-size:1.4rem">${cont('lider')}</strong><span class="meta">Lideranças</span></div></div>
+  <button class="btn wide" data-act="ac-novo">${ic('plus',18)}Criar login</button>
+  <label class="search"><span class="vh">Procurar acesso</span>${ic('search',18)}<input id="acq" type="search" autocomplete="off" placeholder="Procurar por nome ou telefone" value="${esc(AC.q)}"></label>
+  ${seg('acf',AC.f,[['todos','Todos'],['geral','Geral'],['area','Área'],['lider','Liderança'],['off','Desativados']])}
+  <div id="ac-lista">${list(fs.map(row),'Nenhum acesso aqui.')}</div>
+  <div class="card"><h3>Meu código</h3><p class="meta">Troque o código do seu login mestre quando quiser. Os outros aparelhos onde você entrou saem sozinhos; este continua conectado.</p><button class="btn ghost" data-act="ac-meucod">${ic('shield',18)}Trocar meu código</button></div>
+  <div class="card"><h3>Cópia de segurança</h3><p class="meta">Baixa um arquivo com todos os dados. Guarde num lugar seguro: ele tem dados pessoais.</p><button class="btn ghost" data-act="ac-backup">${ic('file',18)}Baixar cópia de tudo</button></div>`};
+document.addEventListener('input',e=>{if(e.target.id!=='acq')return;AC.q=e.target.value;const L=AC.lista||[],q=AC.q.trim();const el=$('ac-lista');if(!el)return;
+  const ok=new Set(L.filter(u=>!q||bate(u.nome+' '+u.login,q)).map(u=>u.id));el.querySelectorAll('[data-act="ac-edit"]').forEach(b=>b.hidden=!ok.has(b.dataset.id))});
+
+function acForm(u){const vs=vilas.slice().sort((a,b)=>a.nome.localeCompare(b.nome)),pf=u?u.perfil:'lider',eu=u&&(window.GU?u.id===GU.id:u.id==='eu'),ms=u?u.mestre:false,pr=u?u.perms||{}:{};
+  $('sheet').innerHTML=`<div class="bar"><h2 style="flex:1">${u?(eu?'Meu acesso':'Editar acesso'):'Criar login'}</h2>${fecha}</div><form id="fac"${u?` data-uid="${esc(u.id)}"`:''}>
+  <label class="field"><span>Nome</span><input id="ac-nome" required value="${esc(u?u.nome:'')}" autocomplete="off"></label>
+  <label class="field"><span>Telefone com DDD (é o login)</span><input id="ac-tel" required type="tel" inputmode="tel" value="${esc(u?u.login:'')}" placeholder="94 9 0000-0000"></label>
+  <label class="field"><span>Nível de acesso</span><select id="ac-perfil"${eu?' disabled':''}>${opts([['lider','Liderança (vê só o pessoal dela)'],['area','Coordenador de área (vê as vilas dele)'],['geral','Coordenação geral (vê tudo)']],pf)}</select></label>
+  <div id="ac-lider"${pf==='lider'?'':' hidden'}><label class="field"><span>Vila da liderança</span><select id="ac-vila">${opts(vs.map(v=>[v.id,v.nome]),u&&u.vilas[0]||'')}</select></label></div>
+  <div id="ac-area"${pf==='area'?'':' hidden'}><p class="meta">Vilas que essa pessoa coordena</p><div class="chk">${vs.map(v=>`<label class="chip"><input type="checkbox" name="ac-vs" value="${v.id}"${u&&u.vilas.includes(v.id)?' checked':''}>${esc(v.nome)}</label>`).join('')}</div></div>
+  <div id="ac-mw"${pf==='geral'&&!eu?'':' hidden'}><label class="check"><input type="checkbox" id="ac-mestre"${ms?' checked':''}><span><strong>Login mestre</strong><br><span class="meta">Pode criar logins e mudar o acesso de todo mundo. Dê só para quem você confia muito.</span></span></label></div>
+  <div id="ac-pw"${ms||eu?' hidden':''}><p class="meta" style="margin-top:6px"><strong>O que essa pessoa pode fazer</strong></p><div class="list">${PERMS.map(([k,t,i])=>`<label class="row check" data-perm="${k}"${k==='registro'&&pf!=='geral'?' hidden':''} style="cursor:pointer"><span class="cic cc" style="--cc:#2f7fe0">${ic(i,18)}</span><span style="flex:1">${t}</span><input type="checkbox" name="ac-p" value="${k}"${pr[k]===false?'':' checked'}></label>`).join('')}</div><p class="meta">Ela só vê as pessoas das vilas ou da liderança dela, mesmo com tudo marcado.</p></div>
+  ${u?'':`<p class="meta" style="margin-top:6px"><strong>Código de acesso</strong></p><div class="seg" id="ac-cm"><button type="button" data-act="ac-cm" data-id="auto" aria-pressed="true">Gerar automático</button><button type="button" data-act="ac-cm" data-id="eu" aria-pressed="false">Eu escolho</button></div>
+  <label class="field" id="ac-cw" hidden><span>Código (6 a 12 números)</span><input id="ac-cod" type="text" inputmode="numeric" autocomplete="off" maxlength="12" pattern="[0-9]{6,12}" placeholder="Ex.: 4 8 2 9 1 7"></label>`}
+  ${u&&!eu?`<label class="check"><input type="checkbox" id="ac-ativo"${u.ativo?' checked':''}><span>Acesso ativo<br><span class="meta">Desmarque para bloquear a pessoa na hora, em todos os aparelhos.</span></span></label>`:''}
+  <button class="btn wide">${u?'Salvar':'Criar login'}</button>
+  ${u?`<button type="button" class="btn ghost wide" data-act="ac-trocacod" data-id="${esc(u.id)}">${eu?'Trocar meu código':'Trocar código'}</button><p class="meta">${eu?'Este aparelho continua conectado.':'Trocar o código desconecta a pessoa de todos os aparelhos. Use se ela esqueceu o código ou perdeu o celular.'}</p>`:''}
+  </form>`;$('modal').hidden=false;$('sheet').scrollTop=0;
+  const sincr=()=>{const p=$('ac-perfil').value;$('ac-lider').hidden=p!=='lider';$('ac-area').hidden=p!=='area';$('ac-mw').hidden=p!=='geral'||eu;if(p!=='geral')$('ac-mestre').checked=false;$('ac-pw').hidden=eu||$('ac-mestre').checked;
+    const r=document.querySelector('[data-perm="registro"]');if(r)r.hidden=p!=='geral'};
+  $('ac-perfil').onchange=sincr;$('ac-mestre').onchange=sincr}
+function acCodForm(u){const eu=window.GU?u.id===GU.id:u.id==='eu';
+  $('sheet').innerHTML=`<div class="bar"><h2 style="flex:1">${eu?'Trocar meu código':'Trocar código de '+esc(u.nome.split(' ')[0])}</h2>${fecha}</div><form id="fcod" data-uid="${esc(u.id)}">
+  <div class="seg" id="ac-cm"><button type="button" data-act="ac-cm" data-id="auto" aria-pressed="${!eu}">Gerar automático</button><button type="button" data-act="ac-cm" data-id="eu" aria-pressed="${eu}">Eu escolho</button></div>
+  <label class="field" id="ac-cw"${eu?'':' hidden'}><span>Novo código (6 a 12 números)</span><input id="ac-cod" type="text" inputmode="numeric" autocomplete="off" maxlength="12" pattern="[0-9]{6,12}"></label>
+  <p class="meta">Não use sequência (123456), número repetido (111111) nem pedaço do telefone.</p>
+  <button class="btn wide">Trocar código</button><button type="button" class="btn ghost wide" data-act="ac-edit" data-id="${esc(u.id)}">Voltar</button></form>`;$('modal').hidden=false}
+const grupo4=c=>c.replace(/(\d{4})(?=\d)/g,'$1 ');
+function acMostra(u,cod,novo){const eu=window.GU?u.id===GU.id:u.id==='eu',link=location.origin+location.pathname,txt=`Olá, ${u.nome.split(' ')[0]}! Seu acesso ao Gabinete em Campo:\n\nSite: ${link}\nTelefone: ${u.login}\nCódigo: ${cod}\n\nNo iPhone, abra o site no Safari e toque em Compartilhar > Adicionar à Tela de Início. No Android, abra no Chrome e toque em Instalar.\nNão passe esse código para ninguém.`;
+  $('sheet').innerHTML=`<div class="bar"><h2 style="flex:1">${novo?'Login criado':eu?'Seu código novo':'Código novo'}</h2>${fecha}</div><div class="card" style="text-align:center"><p class="meta">${eu?'Seu código':'Código de '+esc(u.nome)}</p><p style="font-size:2.2rem;font-weight:800;letter-spacing:.12em;margin:6px 0">${grupo4(cod)}</p><p class="meta">Ele aparece só agora. ${eu?'Anote num lugar seguro.':'Passe para a pessoa de forma reservada.'}</p></div>
+  ${eu?'':`<label class="field"><span>Mensagem pronta para mandar no WhatsApp da pessoa</span><textarea id="ac-txt" rows="9">${esc(txt)}</textarea></label>
+  <div class="two"><button class="btn" data-act="ac-copia">Copiar mensagem</button><a class="btn ghost" target="_blank" rel="noopener" href="https://wa.me/55${esc(u.login)}?text=${encodeURIComponent(txt)}">Abrir no WhatsApp</a></div>`}
+  <button class="btn ghost wide" data-act="ac-fim">Voltar para os acessos</button>`;$('modal').hidden=false;$('sheet').scrollTop=0}
+const acAcha=id=>(AC.lista||[]).find(x=>x.id===id);
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;if(!/^ac-|^acf$/.test(a))return;e.stopImmediatePropagation();
+  if(!ehMestre()){toast('Só o login mestre pode mexer nos acessos');return}
+  if(a==='acf'){AC.f=b.dataset.id;render()}
+  else if(a==='ac-recarrega'){AC.lista=null;AC.erro='';render()}
+  else if(a==='ac-novo')acForm();
+  else if(a==='ac-edit'){const u=acAcha(b.dataset.id);if(u)acForm(u)}
+  else if(a==='ac-meucod'){const u=(AC.lista||[]).find(x=>window.GU?x.id===GU.id:x.id==='eu');if(u)acCodForm(u)}
+  else if(a==='ac-trocacod'){const u=acAcha(b.dataset.id);if(u)acCodForm(u)}
+  else if(a==='ac-cm'){const p=b.closest('.seg');p.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));const w=$('ac-cw');w.hidden=b.dataset.id!=='eu';$('ac-cod').required=!w.hidden;if(!w.hidden)$('ac-cod').focus()}
+  else if(a==='ac-copia'){const t=$('ac-txt');try{await navigator.clipboard.writeText(t.value);toast('Mensagem copiada')}catch(_){t.select();toast('Selecione e copie')}}
+  else if(a==='ac-fim'){$('modal').hidden=true;$('sheet').innerHTML='';render()}
+  else if(a==='ac-backup'){try{toast('Gerando a cópia...');const r=await API().backup();API().baixa(new Blob([JSON.stringify(r)],{type:'application/json'}),'gabinete-em-campo-copia-'+HOJE+'.json');logA('Acessos','Baixou a cópia de segurança')}catch(_){toast('Não deu para gerar a cópia agora')}}},true);
+document.addEventListener('submit',async e=>{const f=e.target;if(f.id!=='fac'&&f.id!=='fcod')return;e.preventDefault();e.stopImmediatePropagation();const btn=f.querySelector('.btn.wide');
+  const escolhe=$('ac-cw')&&!$('ac-cw').hidden,cod=escolhe?$('ac-cod').value.trim():'';
+  try{if(escolhe)codOk(cod,($('ac-tel')||{}).value?$('ac-tel').value.replace(/\D/g,''):(acAcha(f.dataset.uid)||{}).login)}catch(err){toast(erroAc(err.message));return}
+  btn.disabled=true;
+  try{if(f.id==='fcod'){const u=acAcha(f.dataset.uid);const r=await API().codigo(u.id,cod);logA('Acessos','Trocou o código de '+u.nome);acMostra(u,r.codigo,false);return}
+    const p=$('ac-perfil').value,nome=$('ac-nome').value.trim(),uid=f.dataset.uid||null,ant=uid?acAcha(uid):null;
+    const vls=p==='lider'?[$('ac-vila').value]:p==='area'?[...document.querySelectorAll('input[name="ac-vs"]:checked')].map(x=>x.value):[];
+    if(p==='area'&&!vls.length){toast('Marque pelo menos uma vila');return}
+    const perms={};PERMS.forEach(([k])=>{const c=document.querySelector(`input[name="ac-p"][value="${k}"]`);if(c&&!c.checked&&!(k==='registro'&&p!=='geral'))perms[k]=false});
+    let liderId=ant&&ant.perfil==='lider'&&ant.vilas[0]===vls[0]?ant.lider:null;
+    if(p==='lider'&&!liderId){let l=lideres.find(x=>x.nome===nome&&x.vila===vls[0]);if(!l){l={id:'L'+(Date.now()*1000+Math.floor(Math.random()*1000)).toString(36),nome,vila:vls[0]};lideres.push(l)}liderId=l.id}
+    if(p==='lider'){const l=lideres.find(x=>x.id===liderId);if(l)l.nome=nome}
+    const d={nome,login:$('ac-tel').value,perfil:p,vilas:vls,lider:p==='lider'?liderId:null,perms,mestre:p==='geral'&&$('ac-mestre').checked};
+    if(uid){d.id=uid;d.ativo=$('ac-ativo')?$('ac-ativo').checked:true}else if(cod)d.codigo=cod;
+    const r=await API().salvar(d);
+    if(p==='area'){if(!coords.some(c=>c.id===r.id))coords.push({id:r.id,nome});else coords.find(c=>c.id===r.id).nome=nome;vilas.forEach(v=>{if(vls.includes(v.id))v.coord=r.id;else if(v.coord===r.id)v.coord=''})}
+    const bl=PERMS.filter(([k])=>perms[k]===false).map(([k])=>PNOME[k]);
+    logA('Acessos',(uid?'Alterou o acesso de ':'Criou o login de ')+nome+' ('+PAPA[p].toLowerCase()+(d.mestre?', mestre':'')+')'+(bl.length&&!d.mestre?'. Sem permissão para: '+bl.join(', '):'')+(uid&&!d.ativo?'. Acesso desativado':''));API().depois();
+    AC.lista=await API().lista().catch(()=>AC.lista);
+    if(r.codigo)acMostra(r,r.codigo,true);else{toast('Acesso salvo');$('modal').hidden=true;render()}}
+  catch(err){toast(erroAc(err.message||''))}finally{btn.disabled=false}},true);
+
 
 </script>
 
