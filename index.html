@@ -555,17 +555,65 @@ main>.md2{max-width:1480px}
 /* Aviso de sincronização */
 #gec-net{position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top,0px) + 8px);z-index:40;background:#10308f;color:#fff;font-size:.8rem;font-weight:600;padding:6px 14px;border-radius:99px;box-shadow:0 6px 18px rgba(0,0,0,.2);max-width:calc(100% - 32px);text-align:center}
 #gec-net.off{background:#3b4452}#gec-net.erro{background:#b3261e}
+
+/* identidade: cores da bandeira de Novo Repartimento, as mesmas da faixa do nome da vereadora */
+:root{--flag-verde:#0b8f45;--flag-verde-e:#087238;--flag-azul:#1f55d0;--flag-marinho:#241f7a;--flag-vermelho:#d62828;--flag-vermelho-e:#a81f2a;--flag-amarelo:#f2c418;--flag-amarelo-e:#c98f00}
+.tri{background:linear-gradient(90deg,var(--flag-verde) 0 25%,var(--flag-azul) 25% 50%,var(--flag-amarelo) 50% 75%,var(--flag-vermelho) 75%)}
+#app::before{content:"";position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:4px;z-index:7;background:linear-gradient(90deg,var(--flag-verde) 0 25%,var(--flag-azul) 25% 50%,var(--flag-amarelo) 50% 75%,var(--flag-vermelho) 75%)}
+.cover{position:relative;min-height:min(66svh,640px);justify-content:flex-end;gap:0;padding-top:calc(env(safe-area-inset-top,0px) + 22px)}
+.cover .bandeira{position:absolute;top:0;right:0;width:min(92%,600px);height:auto;opacity:.9;transform:translate(40%,-24%);-webkit-mask-image:radial-gradient(ellipse 130% 150% at 100% 0,#000 0,rgba(0,0,0,.75) 30%,rgba(0,0,0,.25) 55%,transparent 75%);mask-image:radial-gradient(ellipse 130% 150% at 100% 0,#000 0,rgba(0,0,0,.75) 30%,rgba(0,0,0,.25) 55%,transparent 75%);pointer-events:none}
+.cover .lg{position:relative}
+.lform{border-top:6px solid transparent;background:linear-gradient(var(--bg),var(--bg)) padding-box,linear-gradient(90deg,var(--flag-verde) 0 25%,var(--flag-azul) 25% 50%,#fff 50% 75%,var(--flag-vermelho) 75%) border-box}
+.cv-marca{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;width:100%;padding-block:8px 14px}
+.cover .lg{width:min(360px,88%);filter:drop-shadow(0 6px 18px rgba(4,16,60,.35))}
+.cover .ft{position:relative;z-index:1;height:clamp(210px,34svh,380px)}
+.cv-redes{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.cv-redes a{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:99px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#fff;text-decoration:none;font-weight:600;font-size:.84rem}
+.cv-redes a:hover{background:rgba(255,255,255,.24)}
+.faixa{display:block;width:132px;height:6px;border-radius:9px;position:relative;margin-top:-4px;background:linear-gradient(90deg,var(--flag-verde) 0 25%,var(--flag-azul) 25% 50%,#fff 50% 75%,var(--flag-vermelho) 75%);box-shadow:0 0 0 1px var(--line)}
+.faixa::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:12px;transform:translate(-50%,-50%) rotate(45deg);background:var(--flag-amarelo);border-radius:2px}
+@media (min-width:900px) and (min-height:501px){.lform{border-top:0;border-left:6px solid transparent;background:linear-gradient(var(--bg),var(--bg)) padding-box,linear-gradient(180deg,var(--flag-verde) 0 25%,var(--flag-azul) 25% 50%,#fff 50% 75%,var(--flag-vermelho) 75%) border-box}.cover{min-height:100svh;justify-content:flex-end}.cover .lg{width:min(480px,78%)}.cover .ft{height:min(62svh,560px)}}
+@media (max-height:640px){.cover{min-height:auto}.cover .ft{height:clamp(160px,30svh,240px)}.cover .lg{width:min(300px,80%)}}
+/* acessos: blocos para copiar */
+.copiagrid{display:grid;gap:10px}
+.copiabloco{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;text-align:left;padding:12px 14px;border-radius:16px;border:2px dashed var(--line);background:var(--surface);color:var(--fg);cursor:pointer;font:inherit}
+.copiabloco b{font-size:1.15rem;word-break:break-all}.copiabloco #ac-codv{font-size:1.9rem;letter-spacing:.14em}
+.copiabloco small{color:var(--ink);font-weight:600}.copiabloco.ok{border-color:var(--done);border-style:solid}.copiabloco.ok small::after{content:" · copiado"}
+.zap{background:#e7f8dc;color:#10220f;border-radius:14px 14px 14px 4px;padding:12px 14px;font-size:.95rem;line-height:1.45}
+.novoinline{border:2px solid var(--accent)}
+.rede{display:flex;align-items:flex-end;gap:8px}.rede .field{flex:1;min-width:0}.rede .field span{display:flex;align-items:center;gap:6px}
+.passos{display:flex;flex-direction:column;gap:10px;padding-left:22px;margin:0}
+.novaver{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(90px + env(safe-area-inset-bottom,0px));z-index:45;background:var(--flag-verde);color:#fff;border:0;border-radius:99px;padding:12px 18px;font:inherit;font-weight:700;box-shadow:0 8px 22px rgba(0,0,0,.25)}
+/* celular: o formulário acompanha o teclado e os botões ficam à vista */
+.overlay{top:var(--vvt,0px);height:var(--vvh,100%);bottom:auto}
+.sheet{max-height:calc(var(--vvh,100svh) - 10px);overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scroll-padding-bottom:96px}
+.sheet form>.actions{position:sticky;bottom:calc(-20px - env(safe-area-inset-bottom,0px));z-index:3;background:var(--bg);margin-inline:-4px;padding:12px 4px calc(14px + env(safe-area-inset-bottom,0px));box-shadow:0 -12px 14px -12px rgba(6,14,30,.25)}
+input,select,textarea{font-size:16px}
+.telx{display:flex;gap:8px;align-items:center}.telx input{flex:1;min-width:0}.tels{display:flex;flex-direction:column;gap:8px;margin-top:-6px}
+/* desenho de desbloqueio */
+.trava{position:fixed;inset:0;z-index:60;background:radial-gradient(circle at 50% 30%,#2a5fd6 0,#12318f 60%,#0b1f62 100%);color:#fff;display:flex;align-items:center;justify-content:center;padding:max(20px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.trava-in{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;max-width:360px;text-align:center}
+.trava-lg{width:min(220px,64%);height:auto}.trava h2{margin:6px 0 0;font-size:1.3rem}.trava-sub{margin:0;min-height:2.6em;color:#d8e4ff}
+.trava-g{width:min(300px,82vw);height:auto;touch-action:none;user-select:none}
+.tr-p{fill:rgba(255,255,255,.22);stroke:#fff;stroke-width:2;transition:fill .12s,r .12s}.tr-p.on{fill:#fff;r:18}.tr-p.erro{fill:var(--flag-vermelho);stroke:var(--flag-vermelho)}
+.tr-l,.tr-v{fill:none;stroke:var(--flag-amarelo);stroke-width:7;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.trava .btn.ghost{background:rgba(255,255,255,.14)!important;color:#fff!important;border:1px solid rgba(255,255,255,.35)!important;box-shadow:none!important}
 </style>
 
 <div class="login" id="login">
-  <div class="cover"><img class="lg" src="logo.webp" alt="Vereadora Netinha Siqueira" width="640" height="305"><img class="ft" src="foto.webp" alt="Foto da vereadora Netinha Siqueira" width="387" height="700"></div>
+  <div class="cover"><svg class="bandeira" viewBox="0 0 338 216" preserveAspectRatio="xMaxYMin meet" aria-hidden="true"><rect width="338" height="216" fill="#fff"/><polygon points="0,0 338,0 338,7 205,84 128,127 0,160" fill="#079447"/><polygon points="338,89 212,106 204,134 338,168" fill="#221b74"/><polygon points="17,216 135,134 190,145 283,216" fill="#d8281e"/><circle cx="167" cy="107" r="40" fill="#fff"/><polygon points="167.0,81.0 172.5,97.5 189.5,94.0 178.0,107.0 189.5,120.0 172.5,116.5 167.0,133.0 161.5,116.5 144.5,120.0 156.0,107.0 144.5,94.0 161.5,97.5" fill="#f5d33f" stroke="#1a1a1a" stroke-width="1.5"/><polygon points="167.0,133.0 161.5,116.5 144.5,120.0 156.0,107.0 144.5,94.0 161.5,97.5 167.0,81.0 167,107" fill="#1a1a1a"/></svg>
+    <div class="cv-marca"><img class="lg" src="logo.webp" alt="Vereadora Netinha Siqueira" width="640" height="305">
+      <div class="cv-redes"><a href="https://www.instagram.com/netinhasiqueira1" target="_blank" rel="noopener"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@netinhasiqueira1</a><a href="https://www.facebook.com/share/YzTRvgQyLmq1q7i2/" target="_blank" rel="noopener"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V9H6.5v3.5H9V21h3.5v-8.5h3l.5-3.5h-3.5V7a1 1 0 0 1 1-1H15z"/></svg>Facebook</a></div></div>
+    <img class="ft" src="foto.webp" alt="Foto da vereadora Netinha Siqueira" width="387" height="700"></div>
   <div class="lform">
-  <div class="t"><h1>Gabinete em Campo</h1><p class="meta">Entre com o telefone e o código que a coordenação te passou.</p></div>
+  <div class="t"><h1>Gabinete em Campo</h1><p class="meta">Entre com o telefone e o código que você recebeu.</p></div>
   <form id="fl">
     <label class="field"><span>Telefone</span><input id="fl-tel" type="tel" inputmode="tel" placeholder="(94) 9 0000-0000" autocomplete="off"></label>
     <label class="field"><span>Código de acesso</span><input id="fl-senha" type="password" inputmode="numeric" placeholder="6 números" autocomplete="off"></label>
     <label class="field"><span>Entrar como</span><select id="fl-perfil"><option value="geral">Coordenação geral</option><option value="area">Coordenador de área</option><option value="lider">Liderança</option></select></label>
+    <label class="check"><input type="checkbox" id="fl-lembra" checked><span>Lembrar meu telefone neste aparelho</span></label>
     <button class="btn wide">Entrar</button>
+    <button type="button" class="btn ghost" data-act="instalar"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Instalar o app no celular</button>
     <p class="meta" style="text-align:center">Esta é uma prévia com dados de exemplo. Pode entrar sem preencher telefone e código.</p>
     <button type="button" class="btn ghost sm" data-act="tema" style="align-self:center">Trocar cor: branco ou azul</button>
   </form>
@@ -695,6 +743,13 @@ const CATSC=Object.keys(COMI);
 const COMC={'Água e poço':'#1d8fd6','Saneamento e esgoto':'#5b7fa6','Estrada e asfalto':'#8a6a4b','Iluminação':'#c98a00','Escola e creche':'#e2701a','Posto de saúde':'#d93f74','Transporte':'#0e9fb1','Segurança':'#4b5563','Energia elétrica':'#b7860b','Internet e telefone':'#7c5ce6','Esporte e lazer':'#1f9a52','Emprego e renda':'#2f7fe0','Outros':'#6f7f99'};
 const COMEX={'Água e poço':'poço artesiano, caixa d’água','Saneamento e esgoto':'esgoto, fossa, banheiro','Estrada e asfalto':'asfalto, ponte, piçarra no ramal','Iluminação':'poste, lâmpada na rua','Escola e creche':'escola na vila, creche','Posto de saúde':'médico no posto, remédio','Transporte':'ônibus, transporte escolar','Segurança':'ronda da polícia','Energia elétrica':'energia que cai, rede nova','Internet e telefone':'sinal de celular, internet','Esporte e lazer':'quadra, campo, praça','Emprego e renda':'curso, emprego para jovens','Outros':'escreva o pedido'};
 const ACAO={'Água e poço':'a perfuração de poço artesiano e a melhoria do abastecimento de água','Saneamento e esgoto':'obras de saneamento básico e esgotamento sanitário','Estrada e asfalto':'a recuperação e pavimentação das vias de acesso','Iluminação':'a instalação e manutenção da iluminação pública','Escola e creche':'a construção ou ampliação de escola e creche','Posto de saúde':'a melhoria do atendimento no posto de saúde, com médico e medicamentos','Transporte':'a oferta regular de transporte público e escolar','Segurança':'o reforço do policiamento e da segurança pública','Energia elétrica':'a melhoria da rede de energia elétrica junto à concessionária','Internet e telefone':'a ampliação do sinal de telefonia e internet','Esporte e lazer':'a construção ou reforma de espaços de esporte e lazer','Emprego e renda':'a oferta de cursos de qualificação e programas de emprego e renda','Outros':'as providências necessárias'};
+/* Locais de votação de Novo Repartimento (zona 101), tirados dos dados abertos do TSE, eleição de 2026: [número, local, endereço, seções, eleitores] */
+const LOCAIS=[[1538,"Aldeia Paranatinga - Escola Yopaka","A Margem da BR 230 - Distante 38 KM da Sede do Cartório Eleitoral",[163],321],[1546,"Aldeia Paranoita - Escola Itayga","Acesso Vicinal 45 A 4 KM da Vila Progresso-distante 115 KM da Sede",[152],22],[1562,"Aldeia Paranowaona - Escola Koymyra","Acesso Vicinal 45 A 12 KM da Vila São Jose - Distante 72 KM da Sede",[164],75],[1090,"EM Bandeirantes","Vila Maracajá KM 212",[45,46,47,48,49,50,51,52,53,54,135,142],4047],[1155,"EM Castro Alves","Vila Brasil - Projeto Tuere II",[84,85,86],453],[1171,"EM Darci Ribeiro","Projeto Rio Gelado Vila Nova Descoberta Zona Rural",[95,96],389],[1031,"EM Papa Paulo VI","Núcleo Urbano de Novo Repartimento",[19,20,21,22,23,24,161],2356],[1120,"EM Ângelo Lima de Amorim","Rua Principal do Bairro Vila Marabá",[68,69,70,71,72,73,74,139],2850],[1317,"EMEF Anizio Teixeira","Vila Nova Jercy P.A Tuere II Capim",[113],263],[1520,"EMEF Antonio Alves dos Santos","Rua Colômbia S/n- Vale do Sol",[151,165,170,173],1134],[1180,"EMEF Antonio Baldomino Regoso","Projeto Rio Gelado Vila Progresso",[97,98],357],[1627,"EMEF Antonio Vieira de Carvalho","Distrito Belo Monte",[114,162],268],[1040,"EMEF Benjamin Franklin","Vila Divinópolis KM 112",[25,26,27],955],[1430,"EMEF Boa Esperança I","Vila Brasil Lago da UHT VIC 4",[125],175],[1635,"EMEF Brasil Infância","Vicinal 105, Vila Rica Rio X, Parakanã",[105],186],[1341,"EMEF Carajás","Vila Carajás - Perto da Belo Monte",[116],118],[1457,"EMEF Criança Feliz","Vila Nova Aliança KM 115",[127,144],599],[1350,"EMEF Cristo Rei","Vila Nova Maranhense",[117],6],[1414,"EMEF Duque de Caxias","Vicinal 07 da Parakanã",[123],152],[1333,"EMEF Estevão","Vicinal da 49 P. A Manoelito",[115],3],[1252,"EMEF Iguaraci","KM 225 Vila Iguaraci",[107],82],[1503,"EMEF Jose Soares do Couto Filho","Vila Sunil",[145],150],[1015,"EMEF José Cícero da Silva","Núcleo Urbano de Novo Repartimento",[1,2,3,4,5,6,7,8,9,10],2786],[1422,"EMEF José Dorgival","Vicinal 02 da Parakanã",[124],346],[1295,"EMEF Jânio Quadros","Vila União Vicinal do KM 220",[111],2],[1368,"EMEF Martins Monteiro","Vila Unidos do Norte Rio Gelado",[118,155],425],[1287,"EMEF Mata Verde","Vila Mata Verde Tuere II",[110],22],[1147,"EMEF Netelson Ferreira de Brito","Vila Netolândia",[81,82,83],672],[1198,"EMEF Nova Canaã","Vila Polo Pesqueiro",[99,134],683],[1570,"EMEF Novo Eldorado","P.A. Tuere II - Vila Trevo do Índio",[153],133],[1406,"EMEF Novo Progresso","Vila Novolândia Rio Gelado",[122],165],[1600,"EMEF O Bosque","Rua Palmas, S/n",[159,168],731],[1260,"EMEF Oscar Cavalcante","Tuere I Vicinal Serra da Fumaça",[108],205],[1201,"EMEF Pastor José Pinto de Meneses","Rua Sabiá Quadra 24 S/n Uirapuru",[100,101,147,166],1292],[1597,"EMEF Pedro Luis de Camargo","Projeto de Assentamento Rio Gelado - Distrito Vitória da Conquista",[158,167],478],[1082,"EMEF Pero Vaz de Caminha","Pacajazinho KM 35 Gleba Caititu",[43,44],499],[1490,"EMEF Princesa Leopoldina","Vila Brasília Pólo Pesqueiro",[131],170],[1104,"EMEF Professora Raimunda Tavares","Rua Florianopolis Qd 08 Número 08 Vila Tucurui",[55,56,57,58,59,60,61,62,63,64],3251],[1589,"EMEF Raimundo Alves Cardoso","P.A. Tuere I - Vila Maranata Conhecida Também Como Vila dos Quatorzes",[160],116],[1139,"EMEF Raimundo Nonato","Projeto Rio Gelado",[75,76,77,78,79,80,149],2006],[1066,"EMEF Rei dos Reis","Vila Novo Horizonte VIC IV",[34,35,36,37,38,39,40],1507],[1392,"EMEF Rio Gelado","Vila Pedrolândia P.A Rio Gelado",[121],156],[1228,"EMEF Santa Ana","Vila Novo Planalto - Tuere I",[103,104,154],717],[1376,"EMEF Silva Matias","Vila Nova Zelândia Rio Gelado",[119],278],[1449,"EMEF São Benedito","Vicinal 04 da Parakanã",[126],192],[1210,"EMEF São Lourenço","Vila Santa Rita Estrada Rio Pacajá",[102],219],[1074,"EMEF São Vicente","Vila São Vicente",[41,42],273],[1481,"EMEF Tapajós","Vicinal do Linhão 07 P. A. Rio Gelado",[130],16],[1309,"EMEF Tiradentes","Vila Santa Maria P.A Tuere I",[112],89],[1058,"EMEF Tomaz Antonio Gonzaga","Vila Belo Monte",[28,29,30,31,32,33,157],1931],[1384,"EMEF Uirapuru","Vila Nova Canaã Rio Gelado",[120],167],[1023,"EMEF Valdir Ribeiro de Almeida","Rua Sabiá, Quadra 23a Uirapuru",[11,12,13,14,15,16,17,18],2373],[1279,"EMEF Vale do Amanhecer","Vila Bela Vista Tuere",[109],290],[1163,"EMEF Vale do Sol","Rua Venezuela Q 04 S/n - Zona Urbana",[87,88,89,90,91,92,93,94,133,137],3318],[1473,"EMEF Valentim","Vila Valentim Vicinal KM 106",[129],1],[1244,"EMEI Castelinho do Pequeno Principe - Vila Tucurui","Rua Belo Horizonte Quadra 24a N 01",[106,132,136,138,140,141,148],2404],[1619,"EMEI Lydio de Matos","Rua Natal, S/n",[156,171],478],[1511,"Proinfancia Professora Roziane Borges M. de Lima","Av. Santarém",[150,169,172],798],[1112,"São Cristovão","Vila Pista da CIEC Projeto Tuere II",[65,66,67,143,146],1566]];
+/* listas que a coordenação personaliza (sincronizadas junto com os tipos) */
+const LISTAS={seg:['Candidato','Coordenador','Formiguinha','Liderança'],segLid:['Liderança','Coordenador','Candidato'],
+  prof:['Agente comunitário de saúde','Agricultor(a) / produtor(a) rural','Aposentado(a)','Artesão(ã)','Autônomo(a)','Comerciante','Desempregado(a)','Do lar','Empresário(a)','Enfermeiro(a) / técnico(a)','Estudante','Funcionário(a) público(a)','Mototaxista','Motorista','Pastor(a) / líder religioso(a)','Pedreiro / construção','Pescador(a)','Professor(a)','Vendedor(a)'],
+  eleitor:['Apoiador','Contrário','Indeciso','Simpatizante'],reg:[],
+  origem:['Facebook','Instagram','WhatsApp','Grupo de WhatsApp','Liderança','Gabinete da Câmara','Indicação de alguém','Visita da vereadora','Evento ou ação']};
 const TAGS=['Presidente de associação','Agente de saúde','Professor(a)','Liderança religiosa','Comerciante','Produtor rural','Motorista','Artesão(ã)'];
 const comIc=(c,cl)=>`<span class="cic cc${cl?' '+cl:''}" style="--cc:${COMC[c]||COMC.Outros}">${ic(COMI[c]||'dots')}</span>`;
 [[1,[['Água e poço','Poço artesiano, a água do igarapé está suja'],['Estrada e asfalto','Asfalto na rua principal']]],[2,[['Água e poço','Poço artesiano'],['Escola e creche','Creche para as crianças pequenas']]],[3,[['Estrada e asfalto','Asfalto'],['Iluminação','Poste na Rua 3']]],[4,[['Água e poço','Poço artesiano perto da caixa d’água']]],[5,[['Água e poço','Água encanada, poço'],['Estrada e asfalto','Asfalto até o posto']]],
@@ -741,27 +796,27 @@ const parabens=p=>'Olá, '+p.nome.split(' ')[0]+'! A vereadora Netinha Siqueira 
 let DL=null;(async()=>{try{DL=(window.claude&&await window.claude.use('downloads'))||null}catch(_){DL=null}})();
 const RG=[['com','Comunidade','O que os moradores pedem para a vila: ranking, falas e rascunho de indicação'],['pes','Pessoas','Quem está cadastrado: famílias, aniversariantes, idades e contatos'],['dem','Pedidos','Pedidos de cada pessoa: situação, atrasos, prazos e encaminhamentos'],['eq','Equipe','Trabalho da equipe e cobertura das vilas'],['ag','Agenda','Compromissos marcados'],['mon','Monte o seu','Escolha o que listar, os filtros e as colunas']];
 const pc=p=>({t:p.nome,pid:p.id});
-const fVila=ps=>S.rf.vila?ps.filter(p=>p.vila===S.rf.vila):ps;
+const fVila=ps=>S.rf.vila?ps.filter(p=>p.vila===S.rf.vila):S.rf.reg?ps.filter(p=>vReg(p.vila)===S.rf.reg):ps;
 const dsDe=ps=>{const ids=new Set(ps.map(p=>p.id));return demandas.filter(d=>ids.has(d.p))};
 const RELS=[
-{id:'com-vila',g:'com',i:'pin',c:'#1f9a52',t:'O que cada vila mais pede',d:'Ranking das demandas da comunidade em cada vila, cruzando o que todos os moradores disseram',run(){const vs=minhasVilas().filter(v=>!S.rf.vila||v.id===S.rf.vila),rows=[],chart=[];
+{id:'com-vila',g:'com',i:'pin',c:'#1f9a52',t:'O que cada vila mais pede',d:'Ranking das demandas da comunidade em cada vila, cruzando o que todos os moradores disseram',run(){const vs=minhasVilas().filter(vRelOk),rows=[],chart=[];
   vs.forEach(v=>{const ps=visP().filter(p=>p.vila===v.id),rk=rankCom(ps);rk.slice(0,S.rf.vila?99:3).forEach((r,i)=>{rows.push([v.nome,(i+1)+'º',r.cat,r.n,Math.round(r.n/ps.length*100)+'%',r.txt.slice(0,3).join('; '),{t:'Rascunho de indicação',act:'indic',id:v.id+'|'+r.cat}]);if(S.rf.vila)chart.push([r.cat,r.n])})});
   return {cols:['Vila','Posição','Demanda','Moradores que pediram','% dos cadastrados','O que disseram',''],rows,chart,vazio:'Nenhum morador informou demandas da comunidade ainda.',nota:S.rf.vila?'':'Mostrando as 3 primeiras de cada vila. Escolha uma vila no filtro para ver o ranking completo.'}}},
 {id:'com-geral',g:'com',i:'chart',c:'#2f7fe0',t:'Ranking do município',d:'As demandas da comunidade mais pedidas somando todas as vilas',run(){const ps=fVila(visP()),rk=rankCom(ps);
   return {cols:['Posição','Demanda','Moradores que pediram','Vilas onde aparece'],rows:rk.map((r,i)=>[(i+1)+'º',r.cat,r.n,[...new Set(ps.filter(p=>p.com.some(c=>c.cat===r.cat)).map(p=>vN(p.vila)))].join(', ')]),chart:rk.map(r=>[r.cat,r.n])}}},
 {id:'com-falas',g:'com',i:'chat',c:'#7c5ce6',t:'O que os moradores disseram',d:'Cada pedido para a vila, com as palavras de quem pediu',run(){const rows=[];fVila(visP()).forEach(p=>p.com.forEach(c=>rows.push([vN(p.vila),c.cat,c.txt||'',pc(p)])));rows.sort((a,b)=>a[0].localeCompare(b[0])||a[1].localeCompare(b[1]));return {cols:['Vila','Demanda','O que disse','Pessoa'],rows}}},
-{id:'p-vila',g:'pes',i:'users',c:'#0e9fb1',t:'Pessoas por vila',d:'Quantas pessoas e famílias, lideranças e pedidos em aberto',run(){const rows=minhasVilas().filter(v=>!S.rf.vila||v.id===S.rf.vila).map(v=>{const ps=visP().filter(p=>p.vila===v.id);return [v.nome,ps.length,new Set(ps.map(p=>p.fam)).size,lideres.filter(l=>l.vila===v.id).map(l=>l.nome).join(', ')||'Nenhuma',dsDe(ps).filter(ativa).length]}).filter(r=>r[1]||S.rf.vila).sort((a,b)=>b[1]-a[1]);return {cols:['Vila','Pessoas','Famílias','Lideranças','Pedidos em aberto'],rows,chart:rows.map(r=>[r[0],r[1]])}}},
+{id:'p-vila',g:'pes',i:'users',c:'#0e9fb1',t:'Pessoas por vila',d:'Quantas pessoas e famílias, lideranças e pedidos em aberto',run(){const rows=minhasVilas().filter(vRelOk).map(v=>{const ps=visP().filter(p=>p.vila===v.id);return [v.nome,ps.length,new Set(ps.map(p=>p.fam)).size,lideres.filter(l=>l.vila===v.id).map(l=>l.nome).join(', ')||'Nenhuma',dsDe(ps).filter(ativa).length]}).filter(r=>r[1]||S.rf.vila).sort((a,b)=>b[1]-a[1]);return {cols:['Vila','Pessoas','Famílias','Lideranças','Pedidos em aberto'],rows,chart:rows.map(r=>[r[0],r[1]])}}},
 {id:'p-fam',g:'pes',i:'team',c:'#b8448f',t:'Famílias e parentesco',d:'Cada família com seus membros e o parentesco de cada um',run(){const ps=fVila(visP()).slice().sort((a,b)=>fN(a.fam).localeCompare(fN(b.fam))||(a.par==='Responsável'?-1:b.par==='Responsável'?1:0));return {cols:['Família','Vila','Pessoa','Parentesco','Idade','Telefone'],rows:ps.map(p=>[fN(p.fam),vN(p.vila),pc(p),p.par,idade(p.nasc)??'',p.tel])}}},
 {id:'p-aniv',g:'pes',i:'cake',c:'#e2701a',t:'Aniversariantes',d:'Quem faz aniversário no mês, com mensagem de parabéns pronta',filtroMes:1,run(){const m=S.rf.mes,ps=fVila(visP()).filter(p=>p.nasc&&+p.nasc.slice(5,7)===m).sort((a,b)=>aniv(a).localeCompare(aniv(b)));
   return {cols:['Dia','Pessoa','Faz','Vila','Telefone',''],rows:ps.map(p=>[p.nasc.slice(8)+'/'+p.nasc.slice(5,7),pc(p),(2026-+p.nasc.slice(0,4))+' anos',vN(p.vila),p.tel,{t:'Parabéns no WhatsApp',href:wa(p,parabens(p))}]),vazio:'Ninguém cadastrado faz aniversário em '+MESES[m-1]+'.'}}},
-{id:'p-idade',g:'pes',i:'users',c:'#c98a00',t:'Faixa de idade por vila',d:'Crianças, jovens, adultos e idosos em cada vila',run(){const rows=minhasVilas().filter(v=>!S.rf.vila||v.id===S.rf.vila).map(v=>{const ps=visP().filter(p=>p.vila===v.id);return [v.nome,...FAIXAS.map(f=>ps.filter(p=>faixa(p)===f).length),ps.length]}).filter(r=>r[r.length-1]);
+{id:'p-idade',g:'pes',i:'users',c:'#c98a00',t:'Faixa de idade por vila',d:'Crianças, jovens, adultos e idosos em cada vila',run(){const rows=minhasVilas().filter(vRelOk).map(v=>{const ps=visP().filter(p=>p.vila===v.id);return [v.nome,...FAIXAS.map(f=>ps.filter(p=>faixa(p)===f).length),ps.length]}).filter(r=>r[r.length-1]);
   const tot=FAIXAS.map((f,i)=>[f,rows.reduce((s,r)=>s+r[i+1],0)]);return {cols:['Vila',...FAIXAS,'Total'],rows,chart:tot}}},
 {id:'p-incomp',g:'pes',i:'file',c:'#d93f74',t:'Cadastros incompletos',d:'Quem está sem telefone, data de nascimento, liderança, foto ou casa marcada',run(){const rows=[];fVila(visP()).forEach(p=>{const f=[];if(!p.tel)f.push('telefone');if(!p.nasc)f.push('nascimento');if(!p.lider)f.push('liderança');if(!p.foto)f.push('foto');if(!p.loc)f.push('casa no mapa');if(!p.com.length)f.push('demanda da comunidade');if(f.length)rows.push([pc(p),vN(p.vila),f.join(', '),f.length])});rows.sort((a,b)=>b[3]-a[3]);return {cols:['Pessoa','Vila','O que falta','Itens'],rows}}},
 {id:'p-news',g:'pes',i:'chat',c:'#1f9a52',t:'Recebem novidades no WhatsApp',d:'Quem autorizou receber as novidades da vereadora',run(){return {cols:['Pessoa','Vila','Telefone'],rows:fVila(visP()).filter(p=>p.news).map(p=>[pc(p),vN(p.vila),p.tel])}}},
 {id:'p-tags',g:'pes',i:'team',c:'#7c5ce6',t:'Pessoas por marcador',d:'Presidentes de associação, professores, comerciantes e outros',run(){const rows=[];fVila(visP()).forEach(p=>p.tags.forEach(t=>rows.push([t,pc(p),vN(p.vila),p.tel])));rows.sort((a,b)=>a[0].localeCompare(b[0]));return {cols:['Marcador','Pessoa','Vila','Telefone'],rows,vazio:'Ninguém tem marcador ainda. Dá para marcar no cadastro.'}}},
 {id:'p-lista',g:'pes',i:'clip',c:'#2f7fe0',t:'Lista geral de pessoas',d:'Todos os dados do cadastro numa planilha só',run(){return {cols:['Nº','Nome','Apelido','Nascimento','Idade','Telefone','Vila','Endereço','Família','Parentesco','Liderança','Marcadores','Demandas da comunidade','Cadastro','Cadastrado por'],rows:fVila(visP()).map(p=>[reg(p),pc(p),p.apelido,p.nasc?dm(p.nasc)+'/'+p.nasc.slice(0,4):'',idade(p.nasc)??'',p.tel,vN(p.vila),[p.rua,p.bairro,p.ref].filter(Boolean).join(', '),fN(p.fam),p.par,lN(p.lider),p.tags.join(', '),p.com.map(c=>c.cat).join(', '),dm(p.cad),p.por])}}},
 {id:'d-tipo',g:'dem',i:'heart',c:'#d93f74',t:'Demandas por tipo e situação',d:'Abertas, em andamento, atendidas e canceladas de cada tipo',run(){const ds=dsDe(fVila(visP())),rows=CATS.map(c=>{const x=ds.filter(d=>d.cat===c);return [c,cnt(x,'aberta'),cnt(x,'andamento'),cnt(x,'atendida'),cnt(x,'cancelada'),x.length]}).filter(r=>r[5]).sort((a,b)=>b[5]-a[5]);return {cols:['Tipo','Abertas','Em andamento','Atendidas','Canceladas','Total'],rows,chart:rows.map(r=>[r[0],r[5]])}}},
-{id:'d-vila',g:'dem',i:'pin',c:'#0e9fb1',t:'Demandas por vila e tipo',d:'Onde está cada tipo de pedido',run(){const rows=[];minhasVilas().filter(v=>!S.rf.vila||v.id===S.rf.vila).forEach(v=>{const ds=dsDe(visP().filter(p=>p.vila===v.id));CATS.forEach(c=>{const x=ds.filter(d=>d.cat===c);if(x.length)rows.push([v.nome,c,x.filter(ativa).length,cnt(x,'atendida')])})});return {cols:['Vila','Tipo','Em aberto','Atendidas'],rows}}},
+{id:'d-vila',g:'dem',i:'pin',c:'#0e9fb1',t:'Demandas por vila e tipo',d:'Onde está cada tipo de pedido',run(){const rows=[];minhasVilas().filter(vRelOk).forEach(v=>{const ds=dsDe(visP().filter(p=>p.vila===v.id));CATS.forEach(c=>{const x=ds.filter(d=>d.cat===c);if(x.length)rows.push([v.nome,c,x.filter(ativa).length,cnt(x,'atendida')])})});return {cols:['Vila','Tipo','Em aberto','Atendidas'],rows}}},
 {id:'d-atraso',g:'dem',i:'cal',c:'#d93c3c',t:'Atrasadas e sem contato',d:'O que precisa de atenção agora',run(){const rows=dsDe(fVila(visP())).filter(d=>late(d)||semContato(d)).map(d=>[prot(d),pc(pById(d.p)),vN(pById(d.p).vila),d.desc,[late(d)?'prazo vencido em '+dm(d.prazo):'',semContato(d)?'sem contato':''].filter(Boolean).join(' e '),d.resp||'Ninguém',{t:'Abrir',act:'dem',id:d.id}]);return {cols:['Protocolo','Pessoa','Vila','Demanda','Problema','Responsável',''],rows,vazio:'Nada atrasado e ninguém sem contato.'}}},
 {id:'d-resp',g:'dem',i:'team',c:'#e2701a',t:'Demandas por responsável',d:'Quanto cada pessoa da equipe tem para resolver',run(){const ds=dsDe(fVila(visP())),nomes=[...new Set(ds.map(d=>d.resp||'Ninguém'))];const rows=nomes.map(n=>{const x=ds.filter(d=>(d.resp||'Ninguém')===n);return [n,x.filter(ativa).length,x.filter(late).length,cnt(x,'atendida')]}).sort((a,b)=>b[1]-a[1]);return {cols:['Responsável','Em aberto','Atrasadas','Atendidas'],rows,chart:rows.map(r=>[r[0],r[1]])}}},
 {id:'d-tempo',g:'dem',i:'cal',c:'#0e9fb1',t:'Tempo de atendimento',d:'Quantos dias, em média, cada tipo leva para ser atendido',run(){const ds=dsDe(fVila(visP())).filter(d=>d.st==='atendida'),dias=d=>Math.round((new Date(d.fim)-new Date(d.data))/864e5);const rows=CATS.map(c=>{const x=ds.filter(d=>d.cat===c).map(dias);return x.length?[c,x.length,(x.reduce((a,b)=>a+b,0)/x.length).toFixed(1).replace('.',','),Math.min(...x),Math.max(...x)]:null}).filter(Boolean);return {cols:['Tipo','Atendidas','Média de dias','Mais rápida','Mais demorada'],rows,vazio:'Nenhuma demanda atendida ainda.'}}},
@@ -769,15 +824,15 @@ const RELS=[
 {id:'d-mes',g:'dem',i:'chart',c:'#2f7fe0',t:'Movimento do mês',d:'Cadastros, demandas registradas e atendidas, dia a dia',run(){const ps=fVila(visP()),ds=dsDe(ps),rows=[];for(let i=1;i<=10;i++){const d=MES+'-'+String(i).padStart(2,'0');rows.push([dm(d),ps.filter(p=>p.cad===d).length,ds.filter(x=>x.data===d).length,ds.filter(x=>x.fim===d&&x.st==='atendida').length])}return {cols:['Dia','Cadastros','Demandas registradas','Atendidas'],rows,chart:rows.map(r=>[r[0],r[2]])}}},
 {id:'d-hoje',g:'dem',i:'home',c:'#1f9a52',t:'Movimento de hoje',d:'O que foi cadastrado e registrado hoje',run(){const ps=fVila(visP()),rows=[...ps.filter(p=>p.cad===HOJE).map(p=>['Cadastro',pc(p),vN(p.vila),'']),...dsDe(ps).filter(d=>d.data===HOJE).map(d=>['Demanda',pc(pById(d.p)),vN(pById(d.p).vila),d.cat+': '+d.desc])];return {cols:['O quê','Pessoa','Vila','Detalhe'],rows,vazio:'Nada registrado hoje.'}}},
 {id:'e-prod',g:'eq',i:'team',c:'#b8448f',t:'Trabalho da equipe',d:'Cadastros, contatos e atendimentos de cada pessoa da equipe',run(){const ps=fVila(visP()),ds=dsDe(ps),nomes=[...new Set([...EQ(),'Coordenação geral'])];const rows=nomes.map(n=>[n,ps.filter(p=>p.por===n).length,ds.reduce((s,d)=>s+d.hist.filter(h=>h.c&&h.quem===n).length,0),ds.filter(d=>d.hist.some(h=>h.quem===n&&h.txt==='Demanda atendida')).length,ds.filter(d=>d.resp===n&&ativa(d)).length]).filter(r=>r[1]+r[2]+r[3]+r[4]).sort((a,b)=>b[1]-a[1]);return {cols:['Pessoa da equipe','Cadastros feitos','Contatos registrados','Demandas atendidas','Em aberto com ela'],rows}}},
-{id:'e-vilas',g:'eq',i:'pin',c:'#1f9a52',t:'Cobertura das vilas',d:'Vilas sem cadastro e vilas sem liderança',run(){const rows=minhasVilas().filter(v=>!S.rf.vila||v.id===S.rf.vila).map(v=>{const n=visP().filter(p=>p.vila===v.id).length,ls=lideres.filter(l=>l.vila===v.id);return [v.nome,(coords.find(c=>c.id===v.coord)||{}).nome||'',ls.map(l=>l.nome).join(', ')||'Nenhuma',n,!n?'Sem cadastro':!ls.length?'Sem liderança':'Coberta']}).sort((a,b)=>a[4].localeCompare(b[4]));return {cols:['Vila','Coordenação','Lideranças','Pessoas','Situação'],rows}}},
-{id:'a-agenda',g:'ag',i:'cal',c:'#7c5ce6',t:'Agenda',d:'Todos os compromissos marcados',run(){const vs=new Set(minhasVilas().map(v=>v.id));return {cols:['Data','Hora','Compromisso','Vila'],rows:agenda.filter(a=>vs.has(a.vila)&&(!S.rf.vila||a.vila===S.rf.vila)).sort((a,b)=>(a.data+a.hora).localeCompare(b.data+b.hora)).map(a=>[dm(a.data),a.hora,a.titulo,vN(a.vila)])}}},
+{id:'e-vilas',g:'eq',i:'pin',c:'#1f9a52',t:'Cobertura das vilas',d:'Vilas sem cadastro e vilas sem liderança',run(){const rows=minhasVilas().filter(vRelOk).map(v=>{const n=visP().filter(p=>p.vila===v.id).length,ls=lideres.filter(l=>l.vila===v.id);return [v.nome,(coords.find(c=>c.id===v.coord)||{}).nome||'',ls.map(l=>l.nome).join(', ')||'Nenhuma',n,!n?'Sem cadastro':!ls.length?'Sem liderança':'Coberta']}).sort((a,b)=>a[4].localeCompare(b[4]));return {cols:['Vila','Coordenação','Lideranças','Pessoas','Situação'],rows}}},
+{id:'a-agenda',g:'ag',i:'cal',c:'#7c5ce6',t:'Agenda',d:'Todos os compromissos marcados',run(){const vs=new Set(minhasVilas().map(v=>v.id));return {cols:['Data','Início','Fim','Compromisso','Vila'],rows:agenda.filter(a=>vs.has(a.vila)&&(!S.rf.vila||a.vila===S.rf.vila)).sort((a,b)=>(a.data+a.hora).localeCompare(b.data+b.hora)).map(a=>[dm(a.data),a.hora,a.fim||'',a.titulo,vN(a.vila)])}}},
 {id:'custom',g:'mon',i:'spark',c:'#2f7fe0',t:'Monte o seu relatório',d:'Escolha o que listar, os filtros e as colunas',custom:1,run(){return montar()}}
 ];
 ['p-vila','p-idade','d-tipo','d-vila','d-resp','d-mes','e-prod'].forEach(id=>{const r=RELS.find(x=>x.id===id);if(r)r.tot=1});
 const CPES={nome:['Nome',p=>pc(p)],num:['Nº',p=>reg(p)],vila:['Vila',p=>vN(p.vila)],tel:['Telefone',p=>p.tel],idade:['Idade',p=>idade(p.nasc)??''],aniv:['Aniversário',p=>p.nasc?dm(p.nasc):''],fam:['Família',p=>fN(p.fam)],par:['Parentesco',p=>p.par],lider:['Liderança',p=>lN(p.lider)],tags:['Marcadores',p=>p.tags.join(', ')],com:['Demandas da comunidade',p=>p.com.map(c=>c.cat+(c.txt?' ('+c.txt+')':'')).join('; ')],abertas:['Pedidos em aberto',p=>demandas.filter(d=>d.p===p.id&&ativa(d)).length],news:['Recebe novidades',p=>p.news?'Sim':'Não']};
 const CDEM={prot:['Protocolo',d=>prot(d)],pessoa:['Pessoa',d=>pc(pById(d.p))],vila:['Vila',d=>vN(pById(d.p).vila)],tipo:['Tipo',d=>d.cat],desc:['Demanda',d=>d.desc],st:['Situação',d=>late(d)?'Atrasada':ST[d.st]],resp:['Responsável',d=>d.resp||''],data:['Registrada em',d=>dm(d.data)],prazo:['Prazo',d=>dm(d.prazo)],org:['Encaminhado para',d=>d.org||''],tel:['Telefone',d=>pById(d.p).tel]};
 function montar(){const c=S.rc;let ps=fVila(visP());
-  if(c.faixa)ps=ps.filter(p=>faixa(p)===c.faixa);if(c.tag)ps=ps.filter(p=>p.tags.includes(c.tag));if(c.com)ps=ps.filter(p=>p.com.some(x=>x.cat===c.com));if(c.mes)ps=ps.filter(p=>p.nasc&&+p.nasc.slice(5,7)===+c.mes);if(c.lider)ps=ps.filter(p=>p.lider===c.lider);
+  if(c.faixa)ps=ps.filter(p=>faixa(p)===c.faixa);if(c.tag)ps=ps.filter(p=>p.tags.includes(c.tag));if(c.com)ps=ps.filter(p=>p.com.some(x=>x.cat===c.com));if(c.mes)ps=ps.filter(p=>p.nasc&&+p.nasc.slice(5,7)===+c.mes);if(c.lider)ps=ps.filter(p=>p.lider===c.lider);['prof','seg','gen'].forEach(k=>{if(c[k])ps=ps.filter(p=>p[k]===c[k])});if(c.localv)ps=ps.filter(p=>String(p.localv)===String(c.localv));if(c.eleitor&&verEleitoral())ps=ps.filter(p=>p.eleitor===c.eleitor);
   if(c.alvo==='p'){if(c.tipo)ps=ps.filter(p=>demandas.some(d=>d.p===p.id&&d.cat===c.tipo&&(!c.st||d.st===c.st)));else if(c.st)ps=ps.filter(p=>demandas.some(d=>d.p===p.id&&d.st===c.st));
     const ks=c.colsP.filter(k=>CPES[k]);return {cols:ks.map(k=>CPES[k][0]),rows:ps.map(p=>ks.map(k=>CPES[k][1](p)))}}
   let ds=dsDe(ps);if(c.tipo)ds=ds.filter(d=>d.cat===c.tipo);if(c.st)ds=ds.filter(d=>c.st==='late'?late(d):d.st===c.st);
@@ -790,14 +845,14 @@ function relTxt(r,res){const ci=res.cols.map((c,i)=>c?i:-1).filter(i=>i>=0);retu
 const filtroTxt=r=>filtroTxtX(r);
 const GRUPO=g=>(RG.find(x=>x[0]===g)||[])[1]||'';
 function relVista(r){const res=filtrados(r),vs=minhasVilas(),ch=(res.chart||[]).filter(x=>+x[1]),mx=Math.max(1,...ch.map(x=>+x[1]||0)),c=S.rc,so=S.rs&&S.rs.id===r.id?S.rs:null,top=ch.slice().sort((a,b)=>b[1]-a[1])[0];
-  const ck=(grp,obj,sel)=>`<div class="chk">${Object.entries(obj).map(([k,v])=>`<label class="chip"><input type="checkbox" data-rc="${grp}" value="${k}"${sel.includes(k)?' checked':''}>${v[0]}</label>`).join('')}</div>`;
+  const ck=(grp,obj,sel)=>`<div class="chk">${Object.entries(obj).filter(e=>e[1]).map(([k,v])=>`<label class="chip"><input type="checkbox" data-rc="${grp}" value="${k}"${sel.includes(k)?' checked':''}>${v[0]}</label>`).join('')}</div>`;
   const sl=(k,lab,ops)=>`<label class="field"><span>${lab}</span><select data-rcs="${k}"><option value="">Todos</option>${ops.map(o=>`<option value="${esc(o[0])}"${String(c[k])===String(o[0])?' selected':''}>${esc(o[1])}</option>`).join('')}</select></label>`;
   const ci=res.cols.map((h,i)=>i);
   return `<div class="bar"><button class="iconbtn" data-act="relvolta" aria-label="Voltar para os relatórios">${ic('back')}</button><div style="flex:1;min-width:0"><p class="meta">${esc(GRUPO(r.g))}</p><h1>${esc(relTit(r))}</h1></div></div>
-  <div class="filters"><label class="field"><span>Vila</span><select id="rf-vila"><option value="">Todas as vilas</option>${vs.map(v=>`<option value="${v.id}"${S.rf.vila===v.id?' selected':''}>${esc(v.nome)}</option>`).join('')}</select></label>
+  <div class="filters">${LISTAS.reg.length?`<label class="field"><span>Região</span><select id="rf-reg"><option value="">Todas as regiões</option>${LISTAS.reg.map(r=>`<option value="${r.id}"${S.rf.reg===r.id?' selected':''}>${esc(r.nome)}</option>`).join('')}</select></label>`:''}<label class="field"><span>Vila</span><select id="rf-vila"><option value="">Todas as vilas</option>${vs.filter(v=>!S.rf.reg||v.reg===S.rf.reg).map(v=>`<option value="${v.id}"${S.rf.vila===v.id?' selected':''}>${esc(v.nome)}</option>`).join('')}</select></label>
   ${r.agrupa?`<label class="field"><span>Ver por</span><select id="rf-agr">${opts(AGR,S.rf.agr||'semana')}</select></label>`:''}${r.filtroMes?`<label class="field"><span>Mês</span><select id="rf-mes">${MESES.map((m,i)=>`<option value="${i+1}"${S.rf.mes===i+1?' selected':''}>${m[0].toUpperCase()+m.slice(1)}</option>`).join('')}</select></label>`:''}</div>
   ${r.custom?`<div class="card"><div class="seg">${[['p','Listar pessoas'],['d','Listar pedidos']].map(o=>`<button data-act="rcalvo" data-id="${o[0]}" aria-pressed="${c.alvo===o[0]}">${o[1]}</button>`).join('')}</div>
-    <div class="filters f2">${sl('tipo','Tipo de pedido',CATS.map(x=>[x,x]))}${sl('st','Situação',[['aberta','Aberta'],['andamento','Em andamento'],['atendida','Atendida'],['cancelada','Cancelada']].concat(c.alvo==='d'?[['late','Atrasada']]:[]))}${sl('com','Pediu para a vila',CATSC.map(x=>[x,x]))}${sl('faixa','Idade',FAIXAS.map(x=>[x,x]))}${sl('tag','Marcador',TAGS.map(x=>[x,x]))}${sl('mes','Aniversário no mês',MESES.map((m,i)=>[i+1,m]))}${S.perfil!=='lider'?sl('lider','Liderança',lideres.map(l=>[l.id,l.nome])):''}</div>
+    <div class="filters f2">${sl('tipo','Tipo de pedido',CATS.map(x=>[x,x]))}${sl('st','Situação',[['aberta','Aberta'],['andamento','Em andamento'],['atendida','Atendida'],['cancelada','Cancelada']].concat(c.alvo==='d'?[['late','Atrasada']]:[]))}${sl('com','Pediu para a vila',CATSC.map(x=>[x,x]))}${sl('faixa','Idade',FAIXAS.map(x=>[x,x]))}${sl('tag','Marcador',TAGS.map(x=>[x,x]))}${sl('prof','Profissão',LISTAS.prof.map(x=>[x,x]))}${sl('seg','Segmento',LISTAS.seg.map(x=>[x,x]))}${sl('localv','Local de votação',LOCS().map(l=>[l[0],l[1]+' · '+l[2]]))}${sl('gen','Gênero',GENEROS.map(x=>[x,x]))}${verEleitoral()?sl('eleitor','Tipo de eleitor',LISTAS.eleitor.map(x=>[x,x])):''}${sl('mes','Aniversário no mês',MESES.map((m,i)=>[i+1,m]))}${S.perfil!=='lider'?sl('lider','Liderança',lideres.map(l=>[l.id,l.nome])):''}</div>
     <p class="meta">Colunas</p>${c.alvo==='p'?ck('colsP',CPES,c.colsP):ck('colsD',CDEM,c.colsD)}</div>`:''}
   ${S.rnota?`<p class="nota-ia">${ic('spark',16)}${esc(S.rnota)}</p>`:''}<div class="relacoes"><button class="btn" data-act="relpdf">${ic('file',18)}Baixar PDF</button><button class="btn ghost" data-act="redit" aria-pressed="${!!S.redit}">${ic('clip',18)}Personalizar</button><button class="btn ghost" data-act="relbaixa">${ic('chart',18)}Planilha</button><button class="btn ghost" data-act="relcopia">${ic('chat',18)}WhatsApp</button></div>${S.redit?rxEditor(r):''}
   <article class="folha">
@@ -826,7 +881,7 @@ function relCatalogo(){const P=painelDados(),{vs,ps,ds,at}=P;
   const grad=tot?st.map(([l,n,c])=>{const a=acc;acc+=n/tot*360;return `${c} ${a}deg ${acc}deg`}).join(','):'var(--soft) 0deg 360deg';
   const seg3=x=>[['aberta','var(--open)'],['andamento','var(--prog)'],['atendida','var(--done)']].map(([k,c])=>cnt(x,k)?`<i style="flex:${cnt(x,k)};background:${c}"></i>`:'').join('');
   return `${bar('Relatórios','',`<button class="btn ghost sm" data-act="relpdf-painel">${ic('file',16)}PDF do painel</button>`)}
-  <div class="filters"><label class="field"><span>Vila</span><select id="rf-vila"><option value="">Todas as vilas</option>${vs.map(v=>`<option value="${v.id}"${S.rf.vila===v.id?' selected':''}>${esc(v.nome)}</option>`).join('')}</select></label></div>
+  <div class="filters">${LISTAS.reg.length?`<label class="field"><span>Região</span><select id="rf-reg"><option value="">Todas as regiões</option>${LISTAS.reg.map(r=>`<option value="${r.id}"${S.rf.reg===r.id?' selected':''}>${esc(r.nome)}</option>`).join('')}</select></label>`:''}<label class="field"><span>Vila</span><select id="rf-vila"><option value="">Todas as vilas</option>${vs.filter(v=>!S.rf.reg||v.reg===S.rf.reg).map(v=>`<option value="${v.id}"${S.rf.vila===v.id?' selected':''}>${esc(v.nome)}</option>`).join('')}</select></label></div>
   <header class="folha-h painel-h"><img src="logo.webp" alt="Vereadora Netinha Siqueira" class="folha-logo" width="640" height="305"><div class="folha-tit"><span>Painel do mandato</span><strong>${S.rf.vila?esc(vN(S.rf.vila)):'Todas as vilas'}</strong><small>Atualizado em ${dm(HOJE)}/2026</small></div></header>
   <div class="kpis">${K.map(k=>`<div class="kpi"><span class="cic cc" style="--cc:${k[1]}">${ic(k[0],20)}</span><div><b>${k[3]}</b><span>${k[2]}</span><small>${k[4]}</small></div></div>`).join('')}</div>
   <div class="graf2">
@@ -883,12 +938,13 @@ async function fichaPdf(p){toast('Montando o PDF...');try{const doc=await pdfNov
   let fx=0;if(p.foto){const f=await imgPng(p.foto);if(f){const s=34;doc.addImage(f.d,'PNG',W-10-s,38,s,s*f.h/f.w);fx=s+4}}
   doc.setFont('helvetica','bold');doc.setFontSize(16);doc.text(pt(p.nome),10,y+4);doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(80,90,110);doc.text(pt([p.apelido,vN(p.vila),fN(p.fam)].filter(Boolean).join(' · ')),10,y+10);doc.setTextColor(15,31,58);y+=18;
   const kv=(t,linhas)=>{y=pdfSecao(doc,y,t);doc.autoTable({...TAB,startY:y,theme:'plain',body:linhas.map(([a,b])=>[pt(a),pt(b||'Não informado')]),columnStyles:{0:{cellWidth:48,textColor:[98,114,140]},1:{fontStyle:'bold'}},margin:{left:10,right:10+fx,bottom:15}});y=doc.lastAutoTable.finalY+7;fx=0};
-  const i=idade(p.nasc);kv('Dados pessoais',[['Número do cadastro',reg(p)],['Nome completo',p.nome],['Apelido',p.apelido],['Data de nascimento',p.nasc?dm(p.nasc)+'/'+p.nasc.slice(0,4)+(i!=null?' ('+i+' anos)':''):''],['Telefone ou WhatsApp',p.tel],['Marcadores',p.tags.join(', ')]]);
+  const i=idade(p.nasc);kv('Dados pessoais',[['Número do cadastro',reg(p)],['Nome completo',p.nome],['Apelido',p.apelido],['Data de nascimento',p.nasc?dm(p.nasc)+'/'+p.nasc.slice(0,4)+(i!=null?' ('+i+' anos)':''):''],['Telefone ou WhatsApp',p.tel],['Outros telefones',(p.tels||[]).join(', ')],['Marcadores',p.tags.join(', ')]]);
   kv('Endereço',[['Vila',vN(p.vila)],['Rua e bairro',[p.rua,p.bairro].filter(Boolean).join(', ')],['Ponto de referência',p.ref],['Casa marcada no mapa',p.loc?'Sim':'Não']]);
   const fam=vivos().filter(x=>x.fam===p.fam&&x.id!==p.id);kv('Família',[['Família',fN(p.fam)],['Parentesco',p.par],...fam.map(x=>[x.par,x.nome+(idade(x.nasc)!=null?', '+idade(x.nasc)+' anos':'')])]);
   const lg=ligDe(p);if(lg.length)kv('Parentes em outras casas',lg.map(x=>[x.rel,x.o.nome+' ('+fN(x.o.fam)+', '+vN(x.o.vila)+')']));const em=entDe(p);if(em.length)kv('Participa de',em.map(x=>[x.papel,x.e.nome]));
+  kv('Trabalho e eleitor',[['Profissão',p.prof||''],['Segmento',p.seg||''],['Região',rN(vReg(p.vila))],['Gênero',p.gen||''],['E-mail',p.email||''],['Onde vota',p.votaFora?'Outra cidade: '+p.votaFora:locN(p.localv)],['Zona e seção',[p.zona,p.secao].filter(Boolean).join(' / ')],...(verEleitoral()?[['Título de eleitor',tituloFmt(p.titulo)],['Tipo de eleitor',p.eleitor||'']]:[])]);
   kv('Acompanhamento',[['Liderança',lN(p.lider)],['Cadastrado por',p.por+' em '+dm(p.cad)+'/2026'],['Recebe novidades no WhatsApp',p.news?'Sim, autorizou':'Não'],['Observações',p.obs]]);
-  y=pdfSecao(doc,y,'O que falta na vila, segundo ela');doc.autoTable({...TAB,startY:y,head:[['Tema','O que disse']],body:p.com.length?p.com.map(c=>[pt(c.cat),pt(c.txt||'')]):[['Não informou','']]});y=doc.lastAutoTable.finalY+7;
+  y=pdfSecao(doc,y,'Demandas da comunidade');doc.autoTable({...TAB,startY:y,head:[['Tema','O que disse']],body:(p.com.length?p.com.map(c=>[pt(c.cat),pt(c.txt||'')]):[['Não informou','']]).concat(p.comObs?[['Observações',pt(p.comObs)]]:[])});y=doc.lastAutoTable.finalY+7;
   const ds=demandas.filter(d=>d.p===p.id);y=pdfSecao(doc,y,'Pedidos ('+ds.length+')');doc.autoTable({...TAB,startY:y,head:[['Protocolo','Tipo','Pedido','Situação','Data','Responsável']],body:ds.length?ds.map(d=>[prot(d),d.cat,d.desc,late(d)?'Atrasada':ST[d.st],pt(fimTxt(d)),d.resp||''].map(pt)):[['Nenhum pedido','','','','','']]});
   pdfRodape(doc);await pdfSalva(doc,'ficha-'+nomeArq(p.nome)+'.pdf')}catch(e){toast('Não consegui montar o PDF agora. Tente de novo')}}
 async function demPdf(d){toast('Montando o PDF...');try{const p=pById(d.p),doc=await pdfNovo('Comprovante de pedido','Protocolo '+prot(d)+' · '+dm(HOJE)+'/2026',false);let y=40;
@@ -937,7 +993,7 @@ const pend=p=>demandas.filter(d=>d.p===p.id&&ativa(d)).length;
 const eu=()=>window.GU?GU.nome:PERF[S.perfil].full;
 const nvTexto=p=>{const m=S.nvMsg.trim(),t=p?m.replace(/\{nome\}/g,p.nome.split(' ')[0]):m.replace(/,?\s*\{nome\}/g,'');return t+(S.nvLink.trim()?' '+S.nvLink.trim():'')};
 const MODELOS=[['Novidade ou vídeo','Olá, {nome}! Tem novidade da vereadora Netinha Siqueira. Veja aqui:'],['Convite para reunião','Olá, {nome}! A vereadora Netinha Siqueira vai estar na sua vila para uma reunião com os moradores. Contamos com você! Mais detalhes:'],['Ação atendida','Olá, {nome}! Boa notícia: o pedido da comunidade foi atendido, graças ao trabalho da vereadora Netinha Siqueira junto com vocês. Veja:'],['Mutirão ou serviço','Olá, {nome}! Vai ter atendimento gratuito para os moradores, com apoio da vereadora Netinha Siqueira. Saiba como participar:']];
-const mdLista=()=>{const m=S.md;return visP().filter(p=>p.news&&p.tel&&(!m.vila||p.vila===m.vila)&&(!m.com||p.com.some(c=>c.cat===m.com))&&(!m.tag||p.tags.includes(m.tag))&&(!m.faixa||faixa(p)===m.faixa)&&(!m.lider||p.lider===m.lider)).sort((a,b)=>a.nome.localeCompare(b.nome))};
+const mdLista=()=>{const m=S.md;return visP().filter(p=>p.news&&p.tel&&(!m.vila||p.vila===m.vila)&&(!m.com||p.com.some(c=>c.cat===m.com))&&(!m.tag||p.tags.includes(m.tag))&&(!m.faixa||faixa(p)===m.faixa)&&(!m.lider||p.lider===m.lider)&&(!m.prof||p.prof===m.prof)&&(!m.seg||p.seg===m.seg)&&(!m.gen||p.gen===m.gen)&&(!m.localv||String(p.localv)===String(m.localv))&&(!m.eleitor||p.eleitor===m.eleitor)).sort((a,b)=>a.nome.localeCompare(b.nome))};
 const mdCont=()=>{const l=mdLista(),n=l.filter(p=>S.md.env.includes(p.id)).length;return n+' de '+l.length+' enviados'};
 const wa=(p,m)=>'https://wa.me/55'+p.tel.replace(/\D/g,'')+'?text='+encodeURIComponent(m);
 const EQ=()=>[...coords.map(c=>c.nome),...lideres.map(l=>l.nome)];
@@ -999,17 +1055,18 @@ function formEditPessoa(p){S.sujo=false;const vs=minhasVilas(),coordOk=S.perfil!
   <label class="field"><span>Ponto de referência da casa</span><input id="fep-ref" value="${esc(p.ref)}"></label>
   <label class="field"><span>Casa onde mora</span><select id="fep-fam">${minhasVilas().map(v=>{const fs=familias.filter(f=>{const r=famResp(f.id);return r&&r.vila===v.id});return fs.length?`<optgroup label="${esc(v.nome)}">${fs.map(f=>`<option value="${f.id}"${f.id===p.fam?' selected':''}>${esc(fN(f.id))}${famEnd(f.id)?' · '+esc(famEnd(f.id).slice(0,40)):''}</option>`).join('')}</optgroup>`:''}).join('')}</select></label>
   <label class="field"><span>Parentesco na família</span><select id="fep-par">${opts((PARS.includes(p.par)?PARS:[p.par,...PARS]).map(x=>[x,x]),p.par)}</select></label>
-  <label class="field"><span>Liderança que acompanha</span><select id="fep-lider"${coordOk?'':' disabled'}><option value="">Sem liderança</option>${opts(lideres.filter(l=>vs.some(v=>v.id===l.vila)).map(l=>[l.id,l.nome+', '+vN(l.vila)]),p.lider)}</select></label>
+  <label class="field"><span>Liderança que acompanha</span><select id="fep-lider"${coordOk?'':' disabled'}><option value="">Sem liderança</option>${opts(lideres.filter(l=>(lidOk(l)||l.id===p.lider)&&l.pid!==p.id&&vs.some(v=>v.id===l.vila)).map(l=>[l.id,lNome(l)]),p.lider)}${optNovo('lider')}</select></label>
   <label class="field"><span>Observações</span><textarea id="fep-obs">${esc(p.obs)}</textarea></label>
   <label class="check"><input id="fep-news" type="checkbox"${p.news?' checked':''}><span>Aceita receber novidades da vereadora pelo WhatsApp. Desmarque se a pessoa pedir para sair.</span></label>
   <label class="field"><span>${p.foto?'Trocar a foto':'Colocar foto'}</span><input id="fep-foto" type="file" accept="image/*"></label>
   ${p.foto?'<label class="check"><input id="fep-semfoto" type="checkbox"><span>Remover a foto</span></label>':''}
+  ${camposExtra('fep',p)}
   <p class="meta">Marcadores</p>${tagChecks('fep-tag',p.tags)}
-  <div id="fep-com"><h3>O que falta na vila, segundo ela</h3>${comGrid('fep',p.com)}</div>
+  <div id="fep-com"><h3>Demandas da comunidade</h3>${comGrid('fep',p.com)}<label class="field"><span>Observações sobre a comunidade</span><textarea id="fep-comobs" rows="4" placeholder="Explique a necessidade com detalhes: há quanto tempo, quantas famílias sofrem, onde fica, o que já foi feito...">${esc(p.comObs||'')}</textarea></label></div>
   <div class="actions"><button type="button" class="btn ghost" data-act="fechar">Cancelar</button><button class="btn">Salvar alterações</button></div>
   ${coordOk?`<div class="card"><h3>Remover cadastro</h3><p class="meta">Use quando o cadastro foi feito em duplicidade ou a pessoa pediu para sair. Ele some das listas, mas a coordenação consegue restaurar.</p><button type="button" class="btn ghost sm perigo" data-act="premove" data-id="${p.id}">Remover cadastro</button></div>`:''}</form>`;$('modal').hidden=false;$('sheet').scrollTop=0}
 function formEditAg(a){S.sujo=false;$('sheet').innerHTML=`<div class="bar"><h2>Compromisso</h2>${fecha}</div><form id="fea" data-id="${a.id}">
-  <label class="field"><span>O que é</span><input id="fea-tit" required value="${esc(a.titulo)}" autocomplete="off"></label><label class="field"><span>Dia</span><input id="fea-data" type="date" value="${a.data}" required></label><label class="field"><span>Hora</span><input id="fea-hora" type="time" value="${a.hora}" required></label>
+  <label class="field"><span>O que é</span><input id="fea-tit" required value="${esc(a.titulo)}" autocomplete="off"></label><label class="field"><span>Dia</span><input id="fea-data" type="date" value="${a.data}" required></label><div class="two"><label class="field"><span>Início</span><input id="fea-hora" type="time" value="${a.hora}" required></label><label class="field"><span>Fim</span><input id="fea-fim" type="time" value="${a.fim||''}"></label></div>
   <label class="field"><span>Vila</span><select id="fea-vila">${opts(minhasVilas().map(v=>[v.id,v.nome]),a.vila)}</select></label>
   <button type="button" class="btn ghost" data-act="antesvis" data-id="${a.vila}">${ic('flag',18)}Resumo antes da visita</button>
   <div class="actions"><button type="button" class="btn ghost perigo" data-act="agremove" data-id="${a.id}">Apagar</button><button class="btn">Salvar</button></div></form>`;$('modal').hidden=false}
@@ -1034,7 +1091,11 @@ function demLista(){const q=nz(S.dq||'').trim(),ds=visD().filter(d=>(!S.sc||semC
   ${cur.length?`<h2 class="sec">Em dia (${cur.length})</h2>${L(cur)}`:''}
   ${fim.length?`<details class="fechadas"><summary>Resolvidas e canceladas (${fim.length})</summary>${L(fim)}</details>`:''}`}
 const pRow=p=>{const n=pend(p);return `<button class="row" data-act="pessoa" data-id="${p.id}">${av(p)}<div><strong>${esc(p.nome)}</strong><span class="meta">${esc(vN(p.vila))} · ${p.par==="Responsável"?"responsável da casa":esc(p.par.toLowerCase())+(famResp(p.fam)&&famResp(p.fam).id!==p.id?" de "+esc(famResp(p.fam).nome.split(" ")[0]):"")}</span></div>${n?`<span class="badge" title="${n} demandas pendentes">${n}</span>`:''}${ic('go',18)}</button>`};
-const agRow=a=>`<button class="row" data-act="ag" data-id="${a.id}"><span class="hora">${a.hora}</span><div><strong>${esc(a.titulo)}</strong><span class="meta">${esc(vN(a.vila))}</span></div>${ic('go',18)}</button>`;
+const horas=a=>a.hora+(a.fim?' às '+a.fim:'');
+const fimDe=a=>a.fim&&a.fim>a.hora?a.fim:(()=>{const [h,m]=a.hora.split(':').map(Number),t=h*60+m+60;return String(Math.min(23,Math.floor(t/60))).padStart(2,'0')+':'+String(t%60).padStart(2,'0')})();
+const choque=a=>agenda.find(b=>b!==a&&b.data===a.data&&b.hora<fimDe(a)&&a.hora<fimDe(b));
+function fimOk(px){const i=$(px+'-hora').value,f=$(px+'-fim').value;if(f&&f<=i){$(px+'-fim').setCustomValidity('O fim tem que ser depois do início');$(px+'-fim').reportValidity();$(px+'-fim').oninput=()=>$(px+'-fim').setCustomValidity('');return false}return true}
+const agRow=a=>{const ch=choque(a);return `<button class="row" data-act="ag" data-id="${a.id}"><span class="hora">${a.hora}${a.fim?`<small style="display:block;font-weight:600;opacity:.75">até ${a.fim}</small>`:''}</span><div><strong>${esc(a.titulo)}</strong><span class="meta">${esc(vN(a.vila))}${a.fim?' · '+horas(a):''}</span>${ch?`<span class="meta" style="color:var(--open);font-weight:600">Choca com ${esc(ch.titulo)} (${horas(ch)})</span>`:''}</div>${ic('go',18)}</button>`};
 const filtraP=()=>{const q=S.q.trim().toLowerCase();return visP().filter(p=>(!S.vila||p.vila===S.vila)&&(!q||bate(p.nome+' '+p.apelido+' '+reg(p)+' '+p.tel,q))).sort((a,b)=>q?nota(b.nome+' '+b.apelido,q)-nota(a.nome+' '+a.apelido,q):0)};
 const tileTipo=(name,c,sel)=>`<label class="tile"><input class="vh" type="radio" name="${name}" value="${esc(c)}"${c===sel?' checked':''}>${cIc(c)}${esc(c)}</label>`;
 const catTiles=(name,sel)=>`<div class="tiles" data-name="${name}">${CATS.map(c=>tileTipo(name,c,sel)).join('')}${podeTipo()?`<button type="button" class="tile novo" data-act="nt-abre" data-id="p"><span class="cic">${ic('plus',22)}</span>Novo tipo</button>`:''}</div>`;
@@ -1326,8 +1387,8 @@ pessoas(){if(S.pid&&visP().some(p=>p.id===S.pid))return V.ficha(pById(S.pid));
   ${S.arq?list(pessoas.filter(p=>p.arq).map(p=>`<div class="row">${av(p)}<div><strong>${esc(p.nome)}</strong><span class="meta">Removido em ${dm(p.arq.data)} por ${esc(p.arq.quem)}: ${esc(p.arq.motivo)}</span></div><button class="btn ghost sm" data-act="prestaura" data-id="${p.id}">Restaurar</button></div>`),''):''}`:''}`},
 
 ficha(p){const fam=vivos().filter(x=>x.fam===p.fam&&x.id!==p.id),ds=demandas.filter(d=>d.p===p.id),i=idade(p.nasc),dl=(a,b)=>`<div class="dl"><span>${a}</span><b>${esc(b)||'Não informado'}</b></div>`;
-  const corpo={dados:`<div class="card">${dl('Telefone',p.tel)}${dl('Idade',i!=null?i+' anos':'')}${dl('Vila',vN(p.vila))}${p.rua||p.bairro?dl('Endereço',[p.rua,p.bairro].filter(Boolean).join(', ')):''}${dl('Família',fN(p.fam)+', '+p.par.toLowerCase())}${p.nasc?dl('Aniversário',dm(p.nasc)+(proxAniv(p,30)?', daqui a '+proxAniv(p,30).d+' dias':'')):''}${entDe(p).length?dl('Participa de',entDe(p).map(x=>x.e.nome+' ('+x.papel.toLowerCase()+')').join('; ')):''}${dl('Liderança',lN(p.lider))}${p.tags.length?dl('Marcadores',p.tags.join(', ')):''}${dl('Cadastrado por',p.por)}${dl('Novidades no WhatsApp',p.news?'Aceitou receber':'Não aceitou')}${p.obs?dl('Observações',p.obs):''}</div>
-    <div class="card"><h3>O que falta na vila, segundo ela</h3>${p.com.length?p.com.map(c=>`<div class="row" style="padding:8px 0">${comIc(c.cat)}<div><strong>${esc(c.cat)}</strong><span class="meta">${esc(c.txt||'Sem detalhe')}</span></div></div>`).join(''):'<p class="meta">Ainda não informou. Dá para colocar em Editar cadastro.</p>'}</div>
+  const corpo={dados:`<div class="card">${dl('Telefone',p.tel)}${dl('Idade',i!=null?i+' anos':'')}${dl('Vila',vN(p.vila))}${p.rua||p.bairro?dl('Endereço',[p.rua,p.bairro].filter(Boolean).join(', ')):''}${dl('Família',fN(p.fam)+', '+p.par.toLowerCase())}${p.nasc?dl('Aniversário',dm(p.nasc)+(proxAniv(p,30)?', daqui a '+proxAniv(p,30).d+' dias':'')):''}${entDe(p).length?dl('Participa de',entDe(p).map(x=>x.e.nome+' ('+x.papel.toLowerCase()+')').join('; ')):''}${dl('Liderança',lN(p.lider))}${fichaExtra(p,dl)}${p.tags.length?dl('Marcadores',p.tags.join(', ')):''}${dl('Cadastrado por',p.por)}${dl('Novidades no WhatsApp',p.news?'Aceitou receber':'Não aceitou')}${p.obs?dl('Observações',p.obs):''}</div>
+    <div class="card"><h3>Demandas da comunidade</h3>${p.com.length?p.com.map(c=>`<div class="row" style="padding:8px 0">${comIc(c.cat)}<div><strong>${esc(c.cat)}</strong><span class="meta">${esc(c.txt||'Sem detalhe')}</span></div></div>`).join(''):'<p class="meta">Ainda não informou. Dá para colocar em Editar cadastro.</p>'}${p.comObs?`<div class="dl"><span>Observações</span><b style="white-space:pre-wrap">${esc(p.comObs)}</b></div>`:''}</div>
     <button class="btn ghost" data-act="pedit" data-id="${p.id}">${ic('clip',18)}Editar cadastro</button>
     ${(p.hist||[]).length?`<details class="card"><summary>Alterações do cadastro (${p.hist.length})</summary>${p.hist.slice().reverse().map(h=>`<div class="dl"><span>${dm(h.data)}</span><b>${esc(h.txt)}<br><span class="meta">${esc(h.quem)}</span></b></div>`).join('')}</details>`:''}`,
     demandas:`<div class="list">${ds.map(d=>demCard(d,true)).join('')||'<p class="empty">Nenhuma demanda ainda. Use o botão Nova demanda acima.</p>'}</div>`,
@@ -1381,11 +1442,11 @@ assistente(){const ex=SAMPLE?['Me dá a situação da dona Chica','Quem da famí
   <form id="fia" class="askbar"><label class="vh" for="ia-q">Pergunta</label><input id="ia-q" autocomplete="off" placeholder="Pergunte o que quiser" enterkeyhint="send"${S.iaBusy?' disabled':''}>${S.iaBusy?`<button type="button" class="btn ghost" data-act="iastop">Parar</button>`:`<button class="btn" aria-label="Perguntar">${ic('send',20)}</button>`}</form>
   ${S.ia.length?`<button class="link" data-act="ialimpa" style="align-self:center">Começar conversa nova</button>`:''}`},
 
-novidades(){const m=S.md,ps=mdLista(),fora=visP().filter(p=>!p.news).length,filtrado=m.vila||m.com||m.tag||m.faixa||m.lider;
+novidades(){const m=S.md,ps=mdLista(),fora=visP().filter(p=>!p.news).length,filtrado=m.vila||m.com||m.tag||m.faixa||m.lider||m.prof||m.seg||m.gen||m.localv||m.eleitor;
   const sl=(k,lab,ops)=>`<label class="field"><span>${lab}</span><select data-md="${k}"><option value="">Todos</option>${ops.map(o=>`<option value="${esc(o[0])}"${String(m[k])===String(o[0])?' selected':''}>${esc(o[1])}</option>`).join('')}</select></label>`;
   return `${bar('Mala direta no WhatsApp')}
   <p class="meta">Escolha para quem mandar, monte a mensagem e envie uma por uma. Só aparece quem autorizou receber as novidades da vereadora.</p>
-  <div class="card"><h3>Para quem</h3><div class="filters f2">${sl('vila','Vila',minhasVilas().map(v=>[v.id,v.nome]))}${sl('com','Pediu para a vila',CATSC.map(x=>[x,x]))}${sl('tag','Marcador',TAGS.map(x=>[x,x]))}${sl('faixa','Idade',FAIXAS.map(x=>[x,x]))}${S.perfil!=='lider'?sl('lider','Liderança',lideres.map(l=>[l.id,l.nome])):''}</div>${filtrado?`<button class="link" data-act="mdlimpa">Limpar filtros</button>`:''}</div>
+  <div class="card"><h3>Para quem</h3><div class="filters f2">${sl('vila','Vila',minhasVilas().map(v=>[v.id,v.nome]))}${sl('com','Pediu para a vila',CATSC.map(x=>[x,x]))}${sl('tag','Marcador',TAGS.map(x=>[x,x]))}${sl('prof','Profissão',LISTAS.prof.map(x=>[x,x]))}${sl('seg','Segmento',LISTAS.seg.map(x=>[x,x]))}${sl('localv','Local de votação',LOCS().map(l=>[l[0],l[1]+' · '+l[2]]))}${sl('gen','Gênero',GENEROS.map(x=>[x,x]))}${verEleitoral()?sl('eleitor','Tipo de eleitor',LISTAS.eleitor.map(x=>[x,x])):''}${sl('faixa','Idade',FAIXAS.map(x=>[x,x]))}${S.perfil!=='lider'?sl('lider','Liderança',lideres.map(l=>[l.id,l.nome])):''}</div>${filtrado?`<button class="link" data-act="mdlimpa">Limpar filtros</button>`:''}</div>
   <div class="card"><h3>Mensagem</h3><div class="chk">${MODELOS.map((o,i)=>`<button class="chip" data-act="mdmod" data-id="${i}" aria-pressed="${S.nvMsg===o[1]}">${o[0]}</button>`).join('')}</div>
   <label class="field"><span>Texto (onde estiver {nome} entra o primeiro nome da pessoa)</span><textarea id="nv-msg">${esc(S.nvMsg)}</textarea></label>
   <label class="field"><span>Link do vídeo, da publicação ou do local</span><input id="nv-link" value="${esc(S.nvLink)}" placeholder="https://www.instagram.com/..." inputmode="url" autocomplete="off"></label>
@@ -1542,7 +1603,7 @@ function filtrados(r){const base=r.run(),cfg=rxDe(r);let cols=base.cols.slice(),
   const num=cols.map((c,i)=>rows.length>0&&rows.every(row=>typeof row[i]==='number'||row[i]===''||/^\d+([,.]\d+)?%?$/.test(String(row[i]))));
   const total=r.tot&&rows.length>1?cols.map((c,i)=>i===0?'Total':num[i]&&rows.every(row=>typeof row[i]==='number')?rows.reduce((s,row)=>s+(+row[i]||0),0):''):null;
   return {...base,cols,rows,num,total,chart,nTodas:base.rows.length,dc,pc}}
-const filtroTxtX=r=>{const c=r?S.rx[r.id]:null,b=r?r.run():null,dc=b?colsData(b):[];return [S.rf.vila?'Vila: '+vN(S.rf.vila):'Todas as vilas',r&&r.filtroMes?'Mês: '+MESES[S.rf.mes-1]:'',c&&(dc.length||r.temPer)&&c.per!=='tudo'?'Período: '+perTxt(c):'',r&&r.agrupa?'Por '+(AGR.find(a=>a[0]===(S.rf.agr||'semana'))[1]).toLowerCase():'',...(c?c.filtros.filter(f=>f.vals.length).map(f=>f.col+': '+f.vals.join(', ')):[]),S.rq?'Busca: "'+S.rq+'"':''].filter(Boolean).join(' · ')};
+const filtroTxtX=r=>{const c=r?S.rx[r.id]:null,b=r?r.run():null,dc=b?colsData(b):[];return [S.rf.vila?'Vila: '+vN(S.rf.vila):S.rf.reg?'Região: '+rN(S.rf.reg):'Todas as vilas',r&&r.filtroMes?'Mês: '+MESES[S.rf.mes-1]:'',c&&(dc.length||r.temPer)&&c.per!=='tudo'?'Período: '+perTxt(c):'',r&&r.agrupa?'Por '+(AGR.find(a=>a[0]===(S.rf.agr||'semana'))[1]).toLowerCase():'',...(c?c.filtros.filter(f=>f.vals.length).map(f=>f.col+': '+f.vals.join(', ')):[]),S.rq?'Busca: "'+S.rq+'"':''].filter(Boolean).join(' · ')};
 function rxEditor(r){const base=r.run(),cfg=rxDe(r),dc=colsData(base),cats=base.cols.map((c,i)=>{if(!c||dc.includes(i))return null;const vs=[...new Set(base.rows.map(x=>celTxt(x[i])).filter(Boolean))];return vs.length>=2&&vs.length<=40&&vs.length<base.rows.length+1?{c,i,vs:vs.sort((a,b)=>a.localeCompare(b,'pt'))}:null}).filter(Boolean);
   const fc=S.rxCol&&cats.find(x=>x.c===S.rxCol),ativos=cfg.filtros.filter(f=>f.vals.length);
   return `<section class="card editor" id="rxed"><div class="bar"><h3 style="flex:1">Personalizar o relatório</h3><button class="iconbtn" data-act="redit" aria-label="Fechar">${ic('x',18)}</button></div>
@@ -1764,7 +1825,7 @@ RELS.splice(RELS.findIndex(r=>r.id==='v-lista'),0,
   visO().filter(o=>o.vila===vid&&o.st==='aguardando').forEach(o=>add(ofLate(o)?'Ofício sem resposta':'Ofício aguardando',ofNome(o),o.dest+': '+o.assunto));
   return {cols:['Assunto','Quem ou o quê','Detalhe'],rows,vazio:'Nada registrado nesta vila ainda.'}}});
 RELS.splice(RELS.findIndex(r=>r.id==='v-vilas'),0,
-{id:'v-termo',g:'eq',i:'chart',c:'#d93c3c',t:'Termômetro das vilas',d:'Nota de 0 a 100 de cada vila: pedidos atrasados, sem contato, tempo sem a vereadora e liderança',run(){const rows=minhasVilas().filter(v=>!S.rf.vila||v.id===S.rf.vila).map(v=>({v,t:termo(v.id)})).filter(x=>x.t).sort((a,b)=>a.t.n-b.t.n).map(({v,t})=>[v.nome,t.n,t.nivel,t.ps,t.ab,t.lt,t.dias==null?'Nunca foi':t.dias,t.mot.join('; ')||'Tudo em dia']);return {cols:['Vila','Nota','Situação','Pessoas','Pedidos abertos','Atrasados','Dias sem a vereadora','Por quê'],rows,chart:rows.map(r=>[r[0],r[1]]),nota:'De 70 a 100: bem atendida. De 40 a 69: atenção. Abaixo de 40: esquecida. Só entram vilas com gente cadastrada.',vazio:'Nenhuma vila com cadastro.'}}});
+{id:'v-termo',g:'eq',i:'chart',c:'#d93c3c',t:'Termômetro das vilas',d:'Nota de 0 a 100 de cada vila: pedidos atrasados, sem contato, tempo sem a vereadora e liderança',run(){const rows=minhasVilas().filter(vRelOk).map(v=>({v,t:termo(v.id)})).filter(x=>x.t).sort((a,b)=>a.t.n-b.t.n).map(({v,t})=>[v.nome,t.n,t.nivel,t.ps,t.ab,t.lt,t.dias==null?'Nunca foi':t.dias,t.mot.join('; ')||'Tudo em dia']);return {cols:['Vila','Nota','Situação','Pessoas','Pedidos abertos','Atrasados','Dias sem a vereadora','Por quê'],rows,chart:rows.map(r=>[r[0],r[1]]),nota:'De 70 a 100: bem atendida. De 40 a 69: atenção. Abaixo de 40: esquecida. Só entram vilas com gente cadastrada.',vazio:'Nenhuma vila com cadastro.'}}});
 RQR.unshift([/antes da visita|preparar (a )?visita|resumo da vila|ficha da vila|vou (na|a|em)\b/,'v-antes'],[/termometro|vilas esquecidas|vila esquecida|nota das vilas/,'v-termo'],[/coletiv|parecid|mesmo pedido|varios moradores/,'d-coletivo']);
 POPULARES.splice(2,0,['v-antes','Antes da visita','flag'],['v-termo','Termômetro das vilas','chart']);
 
@@ -1839,7 +1900,7 @@ function responder(q){const t=nz(q),ps=visP(),ds=visD(),vs=minhasVilas();
   if(/aniversari/.test(t)){const an=ps.map(p=>({p,a:proxAniv(p,30)})).filter(o=>o.a).sort((x,y)=>x.a.d-y.a.d);return an.length?`<p><strong>Aniversários nos próximos 30 dias</strong></p><ul>${an.map(({p,a})=>`<li>${dm(p.nasc)}: ${pBtn(p)}, faz ${a.faz} anos</li>`).join('')}</ul>`:'<p>Ninguém faz aniversário nos próximos 30 dias.</p>'}
   if(/atrasad|vencid|passou do prazo/.test(t))return iaLista('Demandas com prazo vencido',ds.filter(late),'Nenhuma demanda com prazo vencido. Tudo em dia.');
   if(/sem contato|ninguem falou|nao falou/.test(t))return iaLista('Demandas sem contato com a pessoa',ds.filter(semContato),'Todas as demandas abertas já tiveram contato.');
-  if(/agenda|compromisso|reuniao|visita/.test(t)){const ag=agenda.filter(a=>a.data===HOJE&&vs.some(v=>v.id===a.vila)).sort((a,b)=>a.hora.localeCompare(b.hora));return ag.length?`<p><strong>Agenda de hoje</strong></p><ul>${ag.map(a=>`<li>${a.hora}, ${esc(a.titulo)}, em ${esc(vN(a.vila))}.</li>`).join('')}</ul>`:'<p>Nada marcado para hoje.</p>'}
+  if(/agenda|compromisso|reuniao|visita/.test(t)){const ag=agenda.filter(a=>a.data===HOJE&&vs.some(v=>v.id===a.vila)).sort((a,b)=>a.hora.localeCompare(b.hora));return ag.length?`<p><strong>Agenda de hoje</strong></p><ul>${ag.map(a=>`<li>${horas(a)}, ${esc(a.titulo)}, em ${esc(vN(a.vila))}.</li>`).join('')}</ul>`:'<p>Nada marcado para hoje.</p>'}
   if(vila){const pv=ps.filter(p=>p.vila===vila.id),dv=ds.filter(d=>pv.some(p=>p.id===d.p)),ab=dv.filter(d=>ativa(d)),ls=lideres.filter(l=>l.vila===vila.id);
     if(!pv.length)return `<p><strong>${esc(vila.nome)}</strong> ainda não tem ninguém cadastrado.</p><div class="acts"><button class="btn sm" data-act="cad-vila" data-id="${vila.id}">Cadastrar a primeira pessoa</button></div>`;
     const porCat=CATS.map(c=>[c,ab.filter(d=>d.cat===c).length]).filter(x=>x[1]).map(x=>x[1]+' de '+x[0].toLowerCase());
@@ -2002,7 +2063,7 @@ function formPessoa(vp,fam0){S.sujo=false;S.step=1;const vs=minhasVilas(),v0=vp|
   <div class="step" data-s="1"><h3>Quem é a pessoa?</h3>
     <label class="field"><span>Nome completo</span><input id="fp-nome" required autocomplete="off"></label>
     <p class="dup" id="fp-dup" hidden></p>
-    <label class="field"><span>Apelido</span><input id="fp-apelido" autocomplete="off" placeholder="Como é conhecida na vila"></label>
+    <label class="field"><span>Apelido</span><input id="fp-apelido" autocomplete="off" placeholder="Como a pessoa é conhecida"></label>
     <label class="field"><span>Telefone ou WhatsApp</span><input id="fp-tel" type="tel" inputmode="tel" placeholder="(94) 9 0000-0000"></label>
     <label class="field"><span>Data de nascimento (aniversário)</span><input id="fp-nasc" type="date" max="${HOJE}"></label>
     <label class="field"><span>Foto</span><input id="fp-foto" type="file" accept="image/*"></label></div>
@@ -2022,24 +2083,25 @@ function formPessoa(vp,fam0){S.sujo=false;S.step=1;const vs=minhasVilas(),v0=vp|
     <button type="button" class="btn ghost" data-act="gps" id="fp-gps">${ic('pin',18)}<span>Marcar a casa no mapa</span></button>
     <label class="field"><span id="fp-parl">${fam0&&famResp(fam0)?'O que ela é de '+esc(famResp(fam0).nome.split(' ')[0])+', responsável da casa?':'O que ela é na casa?'}</span><select id="fp-par">${opts(PARS.map(x=>[x,x]),fam0?'Filho':'Responsável')}</select></label>
     <p class="meta">Parente que mora em outra casa (filho casado, irmã, pai) se liga depois, no cadastro dela, em Família.</p>
-    <label class="field"><span>Liderança que acompanha</span><select id="fp-lider"><option value="">Sem liderança</option>${opts(lideres.filter(l=>vs.some(v=>v.id===l.vila)).map(l=>[l.id,l.nome+', '+vN(l.vila)]),S.perfil==='lider'?(window.GU?GU.lider:'L1'):'')}</select></label>
+    <label class="field"><span>Liderança que acompanha</span><select id="fp-lider"><option value="">Sem liderança</option>${opts(lideres.filter(l=>lidOk(l)&&vs.some(v=>v.id===l.vila)).map(l=>[l.id,lNome(l)]),S.perfil==='lider'?(window.GU?GU.lider:'L1'):'')}${optNovo('lider')}</select></label>
     <p class="meta">Marcadores (opcional)</p>${tagChecks('fp-tag',[])}</div>
-  <div class="step" data-s="3" hidden><h3>O que ela precisa para ela ou a família?</h3><p class="meta">Pode registrar vários pedidos. Se não precisar de nada agora, deixe em branco: dá para registrar depois no cadastro dela.</p>
+  <div class="step" data-s="3" hidden><h3>Trabalho e título de eleitor</h3>${camposExtra('fp',{})}</div>
+  <div class="step" data-s="4" hidden><h3>O que ela precisa para ela ou a família?</h3><p class="meta">Pode registrar vários pedidos. Se não precisar de nada agora, deixe em branco: dá para registrar depois no cadastro dela.</p>
     <div id="fp-peds">${pedRow()}</div><button type="button" class="btn ghost" data-act="ped-mais">${ic('plus',18)}Adicionar outro pedido</button></div>
-  <div class="step" data-s="4" hidden><h3>O que falta na vila dela?</h3><p class="meta">Marque o que ela disse que a comunidade precisa e escreva o pedido. Depois o relatório cruza a resposta de todos os moradores.</p>
-    ${comGrid('fp',[])}
+  <div class="step" data-s="5" hidden><h3>Demandas da comunidade</h3><p class="meta">Marque o que a comunidade dela precisa. Cada item marcado abre um campo para escrever o pedido. Embaixo, use as observações para explicar a necessidade a fundo. O relatório cruza a resposta de todos os moradores.</p>
+    ${comGrid('fp',[])}<label class="field"><span>Observações sobre a comunidade</span><textarea id="fp-comobs" rows="4" placeholder="Explique a necessidade com detalhes: há quanto tempo, quantas famílias sofrem, onde fica, o que já foi feito...">${esc('')}</textarea></label>
     <label class="check"><input id="fp-ok" type="checkbox" required><span>A pessoa autorizou guardar esses dados para o gabinete acompanhar o pedido dela.</span></label>
     <label class="check"><input id="fp-news" type="checkbox"><span>Ela aceita receber novidades da vereadora pelo WhatsApp.</span></label></div>
   <div class="actions"><button type="button" class="btn ghost" data-act="passo-volta" id="fp-back">Voltar</button><button class="btn" id="fp-next">Continuar</button></div></form>`;
   $('modal').hidden=false;passo();locUI();$('fp-nome').focus()}
 function passo(){document.querySelectorAll('#fp .step').forEach(s=>s.hidden=+s.dataset.s!==S.step);
-  $('steps').innerHTML=[1,2,3,4].map(i=>`<i class="${i<=S.step?'on':''}"></i>`).join('')+`<span class="meta">Passo ${S.step} de 4</span>`;
-  $('fp-back').hidden=S.step===1;$('fp-next').textContent=S.step===4?'Salvar cadastro':'Continuar';$('sheet').scrollTop=0}
+  $('steps').innerHTML=[1,2,3,4,5].map(i=>`<i class="${i<=S.step?'on':''}"></i>`).join('')+`<span class="meta">Passo ${S.step} de 5</span>`;
+  $('fp-back').hidden=S.step===1;$('fp-next').textContent=S.step===5?'Salvar cadastro':'Continuar';$('sheet').scrollTop=0}
 const pedRow=()=>`<div class="pedrow"><label class="field"><span>Tipo</span><select class="ped-cat">${opts(CATS.map(c=>[c,c]),'Saúde')}</select></label>${podeTipo()?`<button type="button" class="link" data-act="nt-abre" data-id="p" style="align-self:flex-start">+ Novo tipo de pedido</button>`:''}<label class="field"><span>O que ela precisa</span><textarea class="ped-desc" placeholder="Ex.: consulta de dente, está com dor"></textarea></label><button type="button" class="link" data-act="ped-x">Tirar este pedido</button></div>`;
-const comItem=(c,x)=>`<div class="comit"><label class="check"><input type="checkbox" class="com-c" value="${esc(c)}"${x?' checked':''}>${comIc(c)}<span>${esc(c)}</span></label><input class="com-t" aria-label="Qual é a demanda de ${esc(c.toLowerCase())}" placeholder="Qual é a demanda? Ex.: ${esc(COMEX[c]||'escreva o pedido')}" value="${esc(x?x.txt:'')}"${x?'':' hidden'}></div>`;
+const comItem=(c,x)=>`<div class="comit"><label class="check"><input type="checkbox" class="com-c" value="${esc(c)}"${x?' checked':''}>${comIc(c)}<span>${esc(c)}</span></label><input class="com-t" aria-label="Qual é a demanda de ${esc(c.toLowerCase())}" placeholder="Qual é o pedido? Ex.: ${esc(COMEX[c]||'escreva o pedido')}" value="${esc(x?x.txt:'')}"${x?'':' hidden'}></div>`;
 const comGrid=(px,sel)=>`<div class="comwrap"><div class="comgrid">${CATSC.map(c=>comItem(c,sel.find(o=>o.cat===c))).join('')}</div>${podeTipo()?`<button type="button" class="btn ghost" data-act="nt-abre" data-id="c">${ic('plus',18)}Novo tema</button>`:''}</div>`;
 const lerCom=px=>[...document.querySelectorAll('#'+px+' .comit')].filter(d=>d.querySelector('.com-c').checked).map(d=>({cat:d.querySelector('.com-c').value,txt:d.querySelector('.com-t').value.trim()}));
-const tagChecks=(id,sel)=>`<div class="chk" id="${id}">${TAGS.map(t=>`<label class="chip"><input type="checkbox" value="${esc(t)}"${sel.includes(t)?' checked':''}>${esc(t)}</label>`).join('')}</div>`;
+const tagChecks=(id,sel)=>`<div class="chk" id="${id}">${TAGS.map(t=>`<label class="chip"><input type="checkbox" value="${esc(t)}"${sel.includes(t)?' checked':''}>${esc(t)}</label>`).join('')}</div>${podeListas()?'<button type="button" class="link" data-act="tag-novo" style="align-self:flex-start">+ Novo marcador</button>':''}`;
 const lerTags=id=>[...document.querySelectorAll('#'+id+' input:checked')].map(i=>i.value);
 function formDemanda(pid){S.sujo=false;const ps=visP();
   $('sheet').innerHTML=`<div class="bar"><h2>Nova demanda</h2>${fecha}</div><form id="fd">
@@ -2057,7 +2119,7 @@ const mini=(t,id,campos,btn)=>{S.sujo=false;$('sheet').innerHTML=`<div class="ba
 const selVila=id=>`<label class="field"><span>Vila</span><select id="${id}">${opts(minhasVilas().map(v=>[v.id,v.nome]))}</select></label>`;
 function formVila(){mini('Nova vila','fv',`<label class="field"><span>Nome da vila</span><input id="fv-nome" required autocomplete="off"></label>${S.perfil==='geral'?`<label class="field"><span>Quem coordena</span><select id="fv-coord">${opts(coords.map(c=>[c.id,c.nome]))}</select></label>`:''}<p class="meta">Depois de salvar, você toca no mapa onde a vila fica.</p>`,'Adicionar vila')}
 function formLider(){mini('Nova liderança','fn',`<label class="field"><span>Nome</span><input id="fn-nome" required autocomplete="off"></label>${selVila('fn-vila')}`,'Salvar liderança')}
-function formAgenda(){mini('Novo compromisso','fa',`<label class="field"><span>O que é</span><input id="fa-tit" required autocomplete="off" placeholder="Visita, reunião, mutirão"></label><label class="field"><span>Dia</span><input id="fa-data" type="date" value="${HOJE}" required></label><label class="field"><span>Hora</span><input id="fa-hora" type="time" value="09:00" required></label>${selVila('fa-vila')}`,'Salvar na agenda')}
+function formAgenda(){mini('Novo compromisso','fa',`<label class="field"><span>O que é</span><input id="fa-tit" required autocomplete="off" placeholder="Visita, reunião, mutirão"></label><label class="field"><span>Dia</span><input id="fa-data" type="date" value="${HOJE}" required></label><div class="two"><label class="field"><span>Início</span><input id="fa-hora" type="time" value="09:00" required></label><label class="field"><span>Fim</span><input id="fa-fim" type="time" value="10:00"></label></div>${selVila('fa-vila')}`,'Salvar na agenda')}
 const nextId=a=>window.GEC_CFG?Date.now()*1000+Math.floor(Math.random()*1000):Math.max(0,...a.map(x=>x.id))+1;
 const uidCurto=p=>p+Date.now().toString(36)+Math.floor(Math.random()*1296).toString(36);
 const marcado=n=>(document.querySelector(`input[name="${n}"]:checked`)||{}).value;
@@ -2067,12 +2129,12 @@ document.addEventListener('submit',e=>{e.preventDefault();const val=id=>$(id).va
   if(f==='fp'){const st=document.querySelector(`#fp .step[data-s="${S.step}"]`);
     if(S.step===2&&!$('fp-junto').hidden&&$('fp-fam').value==='nova'){$('fp-casaq').setCustomValidity('Escolha a casa na lista, ou toque em "É uma casa nova"')}else if($('fp-casaq'))$('fp-casaq').setCustomValidity('');
     if(![...st.querySelectorAll('input,select,textarea')].every(x=>x.reportValidity()))return;
-    if(S.step<4){S.step++;passo();return}
+    if(S.step<5){S.step++;passo();return}
     const nome=val('fp-nome');let fam=$('fp-fam').value,vila=$('fp-vila').value;
     if(vila==='nova'){vila=window.GEC_CFG?uidCurto('V'):'N'+vilas.length;vilas.push({id:vila,nome:val('fp-vnova'),coord:window.GU?(GU.perfil==='area'?GU.id:''):'C1'})}
     if(fam==='nova'){fam=window.GEC_CFG?uidCurto('F'):'F'+(familias.length+1);familias.push({id:fam,nome:'Família '+(nome.split(' ').slice(1).join(' ')||nome)})}
     const p={id:nextId(pessoas),nome,apelido:val('fp-apelido'),tel:val('fp-tel'),nasc:$('fp-nasc').value,vila,bairro:vila==='SD'?$('fp-bairro').value:'',rua:$('fp-rw').hidden?'':val('fp-rua'),ref:val('fp-ref'),fam,par:$('fp-par').value,lider:window.GU&&S.perfil==='lider'?GU.lider:$('fp-lider').value,cad:HOJE,news:$('fp-news').checked,por:eu(),obs:'',foto:'',com:lerCom('fp'),tags:lerTags('fp-tag'),loc:$('fp-gps').dataset.on==='1'};
-    pessoas.push(p);lerFoto($('fp-foto').files[0],p);logA('Cadastro','Cadastrou '+p.nome+' ('+vN(p.vila)+', '+fN(p.fam)+', '+p.par.toLowerCase()+')',{t:'p',id:p.id});
+    Object.assign(p,lerExtra('fp'));pessoas.push(p);sincLideres();lerFoto($('fp-foto').files[0],p);logA('Cadastro','Cadastrou '+p.nome+' ('+vN(p.vila)+', '+fN(p.fam)+', '+p.par.toLowerCase()+')',{t:'p',id:p.id});
     let nd=0;document.querySelectorAll('#fp-peds .pedrow').forEach(r=>{const t=r.querySelector('.ped-desc').value.trim();if(t){novaDem(D(nextId(demandas),p.id,r.querySelector('.ped-cat').value,t,'aberta',HOJE,'2026-11-17'));nd++}});
     $('modal').hidden=true;S.pid=p.id;S.tab='dados';go('pessoas');toast('Cadastro salvo, número '+reg(p)+(nd?', com '+nd+(nd>1?' pedidos':' pedido'):''))}
   if(f==='fia'){perguntar($('ia-q').value);return}
@@ -2088,17 +2150,17 @@ document.addEventListener('submit',e=>{e.preventDefault();const val=id=>$(id).va
     if($('fep-semfoto')&&$('fep-semfoto').checked){p.foto='';mud.push('foto removida')}
     if($('fep-foto').files[0]){lerFoto($('fep-foto').files[0],p);mud.push('foto nova')}
     const nt=lerTags('fep-tag');if(nt.join()!==p.tags.join()){p.tags=nt;mud.push('marcadores')}
-    const nc=lerCom('fep-com');if(JSON.stringify(nc)!==JSON.stringify(p.com)){p.com=nc;mud.push('demandas da comunidade')}
+    const nc=lerCom('fep-com');if(JSON.stringify(nc)!==JSON.stringify(p.com)){p.com=nc;mud.push('demandas da comunidade')}mud.push(...aplicaExtra('fep',p));sincLideres();
     if(!mud.length){fecharModal(true);toast('Nada foi alterado');return}
     (p.hist=p.hist||[]).push({data:HOJE,quem:eu(),txt:'Alterou: '+mud.join(', ')});logA('Edição','Alterou o cadastro de '+p.nome+': '+mud.join(', '),{t:'p',id:p.id});fecharModal(true);render();
     desfazivel('Cadastro atualizado',()=>{const h=p.hist;Object.keys(p).forEach(k=>delete p[k]);Object.assign(p,ant,{hist:h});p.hist.push({data:HOJE,quem:eu(),txt:'Desfeita a alteração'});render();toast('Desfeito')});return}
-  if(f==='fea'){const g=agenda.find(x=>x.id===+e.target.dataset.id);Object.assign(g,{titulo:val('fea-tit'),data:$('fea-data').value,hora:$('fea-hora').value,vila:$('fea-vila').value});fecharModal(true);render();toast('Compromisso atualizado');return}
+  if(f==='fea'){const g=agenda.find(x=>x.id===+e.target.dataset.id);if(!fimOk('fea'))return;Object.assign(g,{titulo:val('fea-tit'),data:$('fea-data').value,hora:$('fea-hora').value,fim:$('fea-fim').value,vila:$('fea-vila').value});const ch=choque(g);if(ch)toast('Atenção: choca com '+ch.titulo+' ('+horas(ch)+')');fecharModal(true);render();toast('Compromisso atualizado');return}
   if(f==='fel'){const l=lideres.find(x=>x.id===e.target.dataset.id),velho=l.nome;l.nome=val('fel-nome');l.vila=$('fel-vila').value;if(velho!==l.nome)demandas.forEach(d=>{if(d.resp===velho)d.resp=l.nome});fecharModal(true);render();toast('Liderança atualizada');return}
   if(f==='fev'){const v=vilas.find(x=>x.id===e.target.dataset.id);if(!v.geo&&GEO[v.nome])v.geo=GEO[v.nome];v.nome=val('fev-nome');if($('fev-coord'))v.coord=$('fev-coord').value;fecharModal(true);render();toast('Vila atualizada');return}
   if(f==='fc'){const d=demandas.find(x=>x.id===+e.target.dataset.id);d.hist.push({data:HOJE,quem:eu(),txt:val('fc-txt'),c:1});logA('Contato','Registrou contato com '+pById(d.p).nome+': '+val('fc-txt'),{t:'d',id:d.id});render();verDem(d.id);toast('Contato registrado')}
   if(f==='fv'){vilas.push({id:window.GEC_CFG?uidCurto('V'):'N'+vilas.length,nome:val('fv-nome'),coord:$('fv-coord')?$('fv-coord').value:(window.GU?'':'C1')});MP.todas=true;MP.mark=vilas[vilas.length-1].id;MP.sel=null;$('modal').hidden=true;render();toast('Agora toque no mapa onde fica a vila')}
   if(f==='fn'){lideres.push({id:window.GEC_CFG?uidCurto('L'):'L'+(lideres.length+1),nome:val('fn-nome'),vila:$('fn-vila').value});logA('Equipe','Cadastrou a liderança '+val('fn-nome')+' em '+vN($('fn-vila').value));$('modal').hidden=true;render();toast('Liderança salva')}
-  if(f==='fa'){agenda.push({id:nextId(agenda),data:$('fa-data').value,hora:$('fa-hora').value,titulo:val('fa-tit'),vila:$('fa-vila').value});$('modal').hidden=true;render();toast('Compromisso salvo')}
+  if(f==='fa'){if(!fimOk('fa'))return;const g={id:nextId(agenda),data:$('fa-data').value,hora:$('fa-hora').value,fim:$('fa-fim').value,titulo:val('fa-tit'),vila:$('fa-vila').value};agenda.push(g);$('modal').hidden=true;render();const ch=choque(g);toast(ch?'Salvo. Atenção: choca com '+ch.titulo+' ('+horas(ch)+')':'Compromisso salvo')}
   if(f==='fd'){const ne=+$('fd-ent').value;novaDem(D(nextId(demandas),+$('fd-p').value,marcado('fd-cat')||'Outros',val('fd-desc'),'aberta',HOJE,$('fd-prazo').value));if(ne)demandas[demandas.length-1].ent=ne;S.fdEnt=null;
     $('modal').hidden=true;render();toast('Demanda salva')}});
 
@@ -2242,8 +2304,8 @@ const ehSessao=e=>/SESSAO/.test(e&&e.message||'');
 const COLS={pessoas,familias,demandas,entidades,oficios,visitas,agenda,lideres,coords,vilas,lig:LIG,log:LOG};
 const VILAS0=vilas.map(v=>({...v,coord:''}));
 const zera=()=>{Object.values(COLS).forEach(a=>a.length=0)};
-const cfgDoc=()=>({CATS:[...CATS],CI:{...CI},CC:{...CC},CATSC:[...CATSC],COMI:{...COMI},COMC:{...COMC}});
-const cfgAplica=d=>{if(!d)return;[['CATS',CATS],['CATSC',CATSC]].forEach(([k,a])=>{if(Array.isArray(d[k])){a.length=0;a.push(...d[k])}});[['CI',CI],['CC',CC],['COMI',COMI],['COMC',COMC]].forEach(([k,o])=>{if(d[k]&&typeof d[k]==='object'){Object.keys(o).forEach(x=>delete o[x]);Object.assign(o,d[k])}})};
+const cfgDoc=()=>({CATS:[...CATS],CI:{...CI},CC:{...CC},CATSC:[...CATSC],COMI:{...COMI},COMC:{...COMC},LISTAS:JSON.parse(JSON.stringify(LISTAS)),TAGS:[...TAGS]});
+const cfgAplica=d=>{if(!d)return;if(d.LISTAS&&typeof d.LISTAS==='object')Object.keys(LISTAS).forEach(k=>{if(Array.isArray(d.LISTAS[k]))LISTAS[k]=d.LISTAS[k]});if(Array.isArray(d.TAGS)){TAGS.length=0;TAGS.push(...d.TAGS)}[['CATS',CATS],['CATSC',CATSC]].forEach(([k,a])=>{if(Array.isArray(d[k])){a.length=0;a.push(...d[k])}});[['CI',CI],['CC',CC],['COMI',COMI],['COMC',COMC]].forEach(([k,o])=>{if(d[k]&&typeof d[k]==='object'){Object.keys(o).forEach(x=>delete o[x]);Object.assign(o,d[k])}})};
 const SY={token:null,seq:0,last:{},fila:new Map(),online:navigator.onLine,enviando:false,sujo:false,t:null,erro:''};
 Object.keys(COLS).concat('config').forEach(c=>SY.last[c]={});
 /* ---------- avisos na tela ---------- */
@@ -2268,7 +2330,7 @@ function varre(){for(const [c,arr] of Object.entries(COLS)){const vistos=new Set
     for(const x of arr){if(x.id==null||x.id==='')x.id=uid();const id=String(x.id);vistos.add(id);let s;try{s=JSON.stringify(x)}catch(_){continue}
       if(SY.last[c][id]!==s)SY.fila.set(c+'|'+id,{col:c,id,data:x})}
     for(const id of Object.keys(SY.last[c]))if(!vistos.has(id))SY.fila.set(c+'|'+id,{col:c,id,del:true})}
-  const cs=JSON.stringify(cfgDoc());if(SY.last.config.tipos!==cs)SY.fila.set('config|tipos',{col:'config',id:'tipos',data:JSON.parse(cs)});
+  const cs=JSON.stringify(cfgDoc());if(SY.cfgOk&&SY.last.config.tipos!==cs)SY.fila.set('config|tipos',{col:'config',id:'tipos',data:JSON.parse(cs)});
   mostraBarra();if(SY.fila.size)guarda()}
 let tg=null;const guarda=()=>{clearTimeout(tg);tg=setTimeout(salvaLocal,150)};
 addEventListener('pagehide',()=>{if(S.on){varre();salvaLocal()}});
@@ -2284,6 +2346,7 @@ async function envia(){if(SY.enviando||!SY.online||!SY.token||!SY.fila.size)retu
   finally{SY.enviando=false;mostraBarra();salvaLocal()}}
 async function recebe(){if(!SY.online||!SY.token)return;try{let mais=true,n=0;while(mais&&n<50){const r=await rpc('gec_puxar',{p_token:SY.token,p_desde:SY.seq});n++;
       if(r.usuario)atualizaUsuario(r.usuario);aplica(r.docs||[]);SY.seq=r.ate||SY.seq;mais=!!r.mais}
+    SY.cfgOk=true;
     if(S.perfil==='geral'&&!vilas.length&&!SY.vilasIniciais){SY.vilasIniciais=true;vilas.push(...VILAS0.map(v=>({...v})));varre();redesenha()}
     salvaLocal()}catch(e){if(ehSessao(e))return sessaoAcabou();if(!navigator.onLine)SY.online=false}mostraBarra()}
 async function ciclo(){if(!SY.token)return;varre();await envia();await recebe()}
@@ -2306,26 +2369,30 @@ document.addEventListener('submit',async e=>{if(e.target.id!=='fl')return;e.prev
     if(r.erro){m.textContent=r.erro==='BLOQUEADO'?'Muitas tentativas erradas. Espere 15 minutos e tente de novo.':'Telefone ou código não conferem. Confira com a coordenação.';return}
     const ant=await IDB.get('snap');if(ant&&ant.u&&ant.u.id!==r.usuario.id){await IDB.limpa()}
     SY.token=r.token;await IDB.set('token',r.token);$('fl-senha').value='';m.textContent='';
-    await carregaLocal();atualizaUsuario(r.usuario);logA('Acesso','Entrou no sistema');entra();ciclo()}
+    await carregaLocal();atualizaUsuario(r.usuario);logA('Acesso','Entrou no sistema');entra();ciclo();setTimeout(()=>window.GEC_TRAVA.oferecer(r.token,async x=>{await IDB.set('token',x)}),1200)}
   catch(err){m.textContent=navigator.onLine?'Não consegui falar com o servidor. Tente de novo.':'Sem internet. Para entrar pela primeira vez neste aparelho, precisa de internet.'}
   finally{b.disabled=false}},true);
 document.addEventListener('click',async e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
   if(a==='sair'){e.stopImmediatePropagation();varre();if(SY.fila.size&&SY.online)await envia();
     if(SY.fila.size){toast('Ainda tem alteração sem enviar. Conecte na internet antes de sair.');return}
-    try{await rpc('gec_sair',{p_token:SY.token})}catch(_){}SY.token=null;await IDB.limpa();zera();window.GU=null;S.on=false;$('app').hidden=true;$('login').hidden=false;barra.hidden=true;scrollTo(0,0)}
+    try{await rpc('gec_sair',{p_token:SY.token})}catch(_){}SY.token=null;window.GEC_TRAVA.enc=null;await IDB.limpa();zera();window.GU=null;S.on=false;$('app').hidden=true;$('login').hidden=false;barra.hidden=true;scrollTo(0,0)}
   },true);
 /* ---------- baixar arquivos (PDF, planilha) fora do Claude ---------- */
 function baixa(blob,nome){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=nome;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(u);a.remove()},4000)}
 setTimeout(()=>{if(!DL)DL={save:async({filename,data})=>{const tipo=/\.pdf$/i.test(filename)?'application/pdf':/\.csv$/i.test(filename)?'text/csv':/\.json$/i.test(filename)?'application/json':'application/octet-stream';baixa(data instanceof Blob?data:new Blob([data],{type:tipo}),filename)}}},300);
 /* ---------- começar ---------- */
-async function carregaLocal(){const s=await IDB.get('snap');zera();if(!s||!s.cols)return;for(const [c,a] of Object.entries(s.cols))if(COLS[c]&&Array.isArray(a))COLS[c].push(...a);cfgAplica(s.config);SY.seq=s.seq||0;
+async function carregaLocal(){const s=await IDB.get('snap');zera();if(!s||!s.cols)return;for(const [c,a] of Object.entries(s.cols))if(COLS[c]&&Array.isArray(a))COLS[c].push(...a);cfgAplica(s.config);SY.seq=s.seq||0;if(SY.seq>0)SY.cfgOk=true;
   const pend=new Set(s.fila||[]);for(const [c,a] of Object.entries(COLS))for(const x of a){const id=String(x.id);if(!pend.has(c+'|'+id))SY.last[c][id]=JSON.stringify(x)}if(!pend.has('config|tipos'))SY.last.config.tipos=JSON.stringify(cfgDoc())}
-(async()=>{zera();const tok=await IDB.get('token');if(!tok)return;SY.token=tok;await carregaLocal();const s=await IDB.get('snap');
+(async()=>{zera();let tok=await IDB.get('token');if(!tok)return;
+  if(typeof tok==='object'){const enc=tok;tok=await window.GEC_TRAVA.abrir(enc,async x=>{await IDB.set('token',x)});if(!tok)return}SY.token=tok;await carregaLocal();const s=await IDB.get('snap');
   if(s&&s.u){atualizaUsuario(s.u);entra()}
   if(navigator.onLine){try{const u=await rpc('gec_eu',{p_token:tok});atualizaUsuario(u);if(!S.on)entra();ciclo()}catch(e){if(ehSessao(e))sessaoAcabou()}}})();
 /* aplicativo instalável e funcionando sem internet */
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 window.GEC_SYNC=SY;
+window.GEC_TOKEN_ATUAL=()=>SY.token;
+window.GEC_TOKEN_SALVA=async(x,manter)=>{if(manter||x===undefined){await IDB.set('token',SY.token);return}await IDB.set('token',x)};
+window.GEC_SAIR=async()=>{SY.token=null;window.GEC_TRAVA.enc=null;await IDB.set('token',null);S.on=false;$('app').hidden=true;$('login').hidden=false;barra.hidden=true;scrollTo(0,0)};
 /* acessos da equipe: chamadas ao banco (a tela fica no módulo Acessos) */
 window.GEC_API={
   lista:()=>rpc('gec_usuarios',{p_token:SY.token}),
@@ -2339,7 +2406,7 @@ window.GEC_API={
    e escolher o que cada pessoa pode fazer. O banco segue as mesmas regras.
    ===================================================================== */
 const PAPA={geral:'Coordenação geral',area:'Coordenador de área',lider:'Liderança'};
-const PERMS=[['cadastro','Cadastrar e editar pessoas e casas','users'],['demandas','Criar e mudar demandas','heart'],['oficios','Ofícios e entidades','mail'],['agenda','Agenda e visitas','cal'],['relatorios','Ver relatórios','chart'],['exportar','Baixar PDF e planilhas','file'],['mala','Mala direta no WhatsApp','chat'],['registro','Ver o registro de atividades da equipe','shield']];
+const PERMS=[['cadastro','Cadastrar e editar pessoas e casas','users'],['demandas','Criar e mudar demandas','heart'],['oficios','Ofícios e entidades','mail'],['agenda','Agenda e visitas','cal'],['relatorios','Ver relatórios','chart'],['exportar','Baixar PDF e planilhas','file'],['mala','Mala direta no WhatsApp','chat'],['registro','Ver o registro de atividades da equipe','shield'],['listas','Criar e mudar listas, regiões, vilas e tipos','list']];
 function ehMestre(){return window.GU?!!GU.mestre:S.perfil==='geral'}
 function temPerm(k){if(ehMestre()||!window.GU)return true;return (GU.perms||{})[k]!==false}
 /* o que cada permissão bloqueia na tela */
@@ -2370,14 +2437,14 @@ Object.keys(V).forEach(k=>{const f=V[k];if(typeof f!=='function')return;V[k]=fun
 /* ---------- de onde vêm os acessos: banco (site oficial) ou prévia ---------- */
 const novoCod=()=>{const a=new Uint32Array(1);crypto.getRandomValues(a);return String(a[0]%100000000).padStart(8,'0')};
 const DEMO={u:null,ini(){if(this.u)return;let i=0;const tel=()=>'949910000'+String(10+i++);
-    this.u=[{id:'eu',nome:PERF.geral.full==='Coordenação geral'?'Adriano Araújo':PERF.geral.full,login:'94981194050',perfil:'geral',vilas:[],lider:null,ativo:true,perms:{},mestre:true,ult_login:new Date().toISOString()}]
-      .concat(coords.map(c=>({id:'c'+c.id,nome:c.nome,login:tel(),perfil:'area',vilas:vilas.filter(v=>v.coord===c.id).map(v=>v.id),lider:null,ativo:true,perms:{},mestre:false,ult_login:null})))
-      .concat(lideres.slice(0,6).map(l=>({id:'l'+l.id,nome:l.nome,login:tel(),perfil:'lider',vilas:[l.vila],lider:l.id,ativo:true,perms:{},mestre:false,ult_login:null})))},
+    const g=(id,nome,cargo,perms)=>({id,nome,cargo,login:tel(),perfil:'geral',vilas:[],lider:null,ativo:true,perms:perms||{},mestre:false,ult_login:null});
+    this.u=[{id:'eu',nome:'Adriano Araújo',cargo:'Mestre do sistema',login:'94981194050',perfil:'geral',vilas:[],lider:null,ativo:true,perms:{},mestre:true,ult_login:new Date().toISOString()},
+      g('n1','Netinha Siqueira','Vereadora'),g('n2','Alexandre Siqueira','Coordenação'),g('n3','Assessora de exemplo','Assessora',{exportar:false,registro:false,listas:false})]},
   async lista(){this.ini();return JSON.parse(JSON.stringify(this.u))},
   async salvar(d){this.ini();const lg=String(d.login).replace(/\D/g,'');if(lg.length<10)throw new Error('TELEFONE');if(this.u.some(x=>x.login===lg&&x.id!==d.id))throw new Error('duplicate');
     let cod=null;if(d.codigo)codOk(d.codigo,lg);const pr={};PERMS.forEach(([k])=>{if(d.perms&&d.perms[k]===false)pr[k]=false});
-    if(!d.id){cod=d.codigo||novoCod();const x={id:'n'+Date.now(),nome:d.nome,login:lg,perfil:d.perfil,vilas:d.vilas,lider:d.lider,ativo:true,perms:pr,mestre:!!d.mestre&&d.perfil==='geral',ult_login:null};this.u.push(x);return {...x,codigo:cod}}
-    const x=this.u.find(y=>y.id===d.id);const eu=x.id==='eu';Object.assign(x,{nome:d.nome,login:lg,perfil:eu?'geral':d.perfil,vilas:d.vilas,lider:d.lider,ativo:eu?true:d.ativo,perms:eu?{}:pr,mestre:eu||(!!d.mestre&&d.perfil==='geral')});return {...x,codigo:null}},
+    if(!d.id){cod=d.codigo||novoCod();const x={id:'n'+Date.now(),nome:d.nome,cargo:d.cargo||'',login:lg,perfil:d.perfil,vilas:d.vilas,lider:d.lider,ativo:true,perms:pr,mestre:false,ult_login:null};this.u.push(x);return {...x,codigo:cod}}
+    const x=this.u.find(y=>y.id===d.id);const eu=x.id==='eu';Object.assign(x,{nome:d.nome,cargo:d.cargo||'',login:lg,perfil:eu?'geral':d.perfil,vilas:d.vilas,lider:d.lider,ativo:eu?true:d.ativo,perms:eu?{}:pr,mestre:eu});return {...x,codigo:null}},
   async codigo(id,c){this.ini();const x=this.u.find(y=>y.id===id);if(c)codOk(c,x.login);return {codigo:c||novoCod()}},
   async backup(){return {gerado:new Date().toISOString(),docs:Object.entries({pessoas,familias,demandas,entidades,oficios,visitas,agenda,lideres,coords,vilas}).flatMap(([col,a])=>a.map(d=>({col,id:String(d.id),data:d})))}},
   depois(){},online:()=>true,
@@ -2395,46 +2462,47 @@ async function acCarrega(){if(AC.carregando)return;AC.carregando=true;AC.erro=''
 const acIc=u=>u.mestre?'shield':u.perfil==='geral'?'shield':u.perfil==='area'?'team':'users';
 const acCor=u=>!u.ativo?'#9aa8bf':u.mestre?'#1d4f9e':u.perfil==='geral'?'#2f7fe0':u.perfil==='area'?'#7c5ce6':'#1f9a52';
 const acBloq=u=>u.mestre?[]:PERMS.filter(([k])=>(u.perms||{})[k]===false&&(k!=='registro'||u.perfil==='geral'));
-const acSub=u=>(u.mestre?'Login mestre · ':'')+PAPA[u.perfil]+(u.perfil!=='geral'&&u.vilas.length?' · '+u.vilas.map(vN).join(', '):'');
+const acSub=u=>u.mestre?'Mestre · acesso livre a tudo':(u.cargo?u.cargo+' · ':'')+PAPA[u.perfil]+(u.perfil!=='geral'&&u.vilas.length?' · '+u.vilas.map(vN).join(', '):'');
 V.acessos=function(){ajustaNav();if(!ehMestre())return `${bar('Acessos')}<div class="card"><p class="empty">Só o login mestre vê esta aba.</p></div>`;
   if(!AC.lista&&!AC.erro){acCarrega();return `${bar('Acessos')}<p class="meta">Carregando os acessos...</p>`}
   if(AC.erro&&!AC.lista)return `${bar('Acessos')}<div class="card"><p class="empty">${esc(AC.erro)}</p><button class="btn" data-act="ac-recarrega">Tentar de novo</button></div>`;
-  const L=AC.lista,q=AC.q.trim(),cont=p=>L.filter(u=>u.perfil===p).length;
-  const fs=L.filter(u=>(AC.f==='todos'||(AC.f==='off'?!u.ativo:u.perfil===AC.f&&u.ativo))&&(!q||bate(u.nome+' '+u.login,q)));
+  const L=AC.lista,q=AC.q.trim(),ativos=L.filter(u=>u.ativo&&!u.mestre).length,off=L.filter(u=>!u.ativo).length;
+  const fs=L.filter(u=>(AC.f==='todos'||(AC.f==='off'?!u.ativo:u.ativo))&&(!q||bate(u.nome+' '+u.login+' '+(u.cargo||''),q))).sort((a,b)=>(b.mestre-a.mestre)||a.nome.localeCompare(b.nome));
   const row=u=>{const bl=acBloq(u);return `<button class="row" data-act="ac-edit" data-id="${esc(u.id)}"><span class="cic cc" style="--cc:${acCor(u)}">${ic(acIc(u))}</span><div><strong>${esc(u.nome)}${u.ativo?'':' (desativado)'}</strong><span class="meta">${esc(acSub(u))}</span><span class="meta">${esc(u.login)} · ${u.ult_login?'último acesso '+dm(String(u.ult_login).slice(0,10)):'ainda não entrou'}${bl.length?' · '+bl.length+(bl.length>1?' bloqueios':' bloqueio'):''}</span></div>${ic('go',18)}</button>`};
   return `${bar('Acessos')}
   ${window.GEC_API?'':'<p class="meta">Prévia: aqui você vê como funciona. Os logins de verdade são criados no site oficial.</p>'}
-  <div class="tiles" style="grid-template-columns:repeat(3,minmax(0,1fr))">
-    <div class="card" style="gap:2px"><strong style="font-size:1.4rem">${cont('geral')}</strong><span class="meta">Coordenação geral</span></div>
-    <div class="card" style="gap:2px"><strong style="font-size:1.4rem">${cont('area')}</strong><span class="meta">Coord. de área</span></div>
-    <div class="card" style="gap:2px"><strong style="font-size:1.4rem">${cont('lider')}</strong><span class="meta">Lideranças</span></div></div>
+  <p class="meta">Só você, o mestre, cria e muda acessos. Lideranças e coordenadores são cadastrados no sistema, mas não entram com login.</p>
+  <div class="tiles" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+    <div class="card" style="gap:2px"><strong style="font-size:1.4rem">${ativos}</strong><span class="meta">Com acesso ativo</span></div>
+    <div class="card" style="gap:2px"><strong style="font-size:1.4rem">${off}</strong><span class="meta">Desativados</span></div></div>
   <button class="btn wide" data-act="ac-novo">${ic('plus',18)}Criar login</button>
   <label class="search"><span class="vh">Procurar acesso</span>${ic('search',18)}<input id="acq" type="search" autocomplete="off" placeholder="Procurar por nome ou telefone" value="${esc(AC.q)}"></label>
-  ${seg('acf',AC.f,[['todos','Todos'],['geral','Geral'],['area','Área'],['lider','Liderança'],['off','Desativados']])}
+  ${seg('acf',AC.f,[['todos','Todos'],['ativos','Ativos'],['off','Desativados']])}
   <div id="ac-lista">${list(fs.map(row),'Nenhum acesso aqui.')}</div>
   <div class="card"><h3>Meu código</h3><p class="meta">Troque o código do seu login mestre quando quiser. Os outros aparelhos onde você entrou saem sozinhos; este continua conectado.</p><button class="btn ghost" data-act="ac-meucod">${ic('shield',18)}Trocar meu código</button></div>
   <div class="card"><h3>Cópia de segurança</h3><p class="meta">Baixa um arquivo com todos os dados. Guarde num lugar seguro: ele tem dados pessoais.</p><button class="btn ghost" data-act="ac-backup">${ic('file',18)}Baixar cópia de tudo</button></div>`};
 document.addEventListener('input',e=>{if(e.target.id!=='acq')return;AC.q=e.target.value;const L=AC.lista||[],q=AC.q.trim();const el=$('ac-lista');if(!el)return;
   const ok=new Set(L.filter(u=>!q||bate(u.nome+' '+u.login,q)).map(u=>u.id));el.querySelectorAll('[data-act="ac-edit"]').forEach(b=>b.hidden=!ok.has(b.dataset.id))});
 
-function acForm(u){const vs=vilas.slice().sort((a,b)=>a.nome.localeCompare(b.nome)),pf=u?u.perfil:'lider',eu=u&&(window.GU?u.id===GU.id:u.id==='eu'),ms=u?u.mestre:false,pr=u?u.perms||{}:{};
+function acForm(u){const vs=vilas.slice().sort((a,b)=>a.nome.localeCompare(b.nome)),pf=u?u.perfil:'geral',eu=u&&(window.GU?u.id===GU.id:u.id==='eu'),ms=u?u.mestre:false,pr=u?u.perms||{}:{};
   $('sheet').innerHTML=`<div class="bar"><h2 style="flex:1">${u?(eu?'Meu acesso':'Editar acesso'):'Criar login'}</h2>${fecha}</div><form id="fac"${u?` data-uid="${esc(u.id)}"`:''}>
   <label class="field"><span>Nome</span><input id="ac-nome" required value="${esc(u?u.nome:'')}" autocomplete="off"></label>
   <label class="field"><span>Telefone com DDD (é o login)</span><input id="ac-tel" required type="tel" inputmode="tel" value="${esc(u?u.login:'')}" placeholder="94 9 0000-0000"></label>
-  <label class="field"><span>Nível de acesso</span><select id="ac-perfil"${eu?' disabled':''}>${opts([['lider','Liderança (vê só o pessoal dela)'],['area','Coordenador de área (vê as vilas dele)'],['geral','Coordenação geral (vê tudo)']],pf)}</select></label>
+  <label class="field"><span>Cargo ou função</span><input id="ac-cargo" value="${esc(u?u.cargo||'':'')}" list="ac-cargos" autocomplete="off" placeholder="Vereadora, assessor, coordenação..."${eu?' disabled':''}><datalist id="ac-cargos">${['Vereadora','Assessor(a)','Coordenação','Chefe de gabinete','Comunicação'].map(x=>`<option value="${x}">`).join('')}</datalist></label>
+  <label class="field"${pf==='geral'?' hidden':''}><span>Nível de acesso</span><select id="ac-perfil"${eu?' disabled':''}>${opts([['geral','Coordenação geral (vê tudo)'],['area','Coordenador de área (só as vilas dele)'],['lider','Liderança (só o pessoal dela)']],pf)}</select></label>
   <div id="ac-lider"${pf==='lider'?'':' hidden'}><label class="field"><span>Vila da liderança</span><select id="ac-vila">${opts(vs.map(v=>[v.id,v.nome]),u&&u.vilas[0]||'')}</select></label></div>
   <div id="ac-area"${pf==='area'?'':' hidden'}><p class="meta">Vilas que essa pessoa coordena</p><div class="chk">${vs.map(v=>`<label class="chip"><input type="checkbox" name="ac-vs" value="${v.id}"${u&&u.vilas.includes(v.id)?' checked':''}>${esc(v.nome)}</label>`).join('')}</div></div>
-  <div id="ac-mw"${pf==='geral'&&!eu?'':' hidden'}><label class="check"><input type="checkbox" id="ac-mestre"${ms?' checked':''}><span><strong>Login mestre</strong><br><span class="meta">Pode criar logins e mudar o acesso de todo mundo. Dê só para quem você confia muito.</span></span></label></div>
-  <div id="ac-pw"${ms||eu?' hidden':''}><p class="meta" style="margin-top:6px"><strong>O que essa pessoa pode fazer</strong></p><div class="list">${PERMS.map(([k,t,i])=>`<label class="row check" data-perm="${k}"${k==='registro'&&pf!=='geral'?' hidden':''} style="cursor:pointer"><span class="cic cc" style="--cc:#2f7fe0">${ic(i,18)}</span><span style="flex:1">${t}</span><input type="checkbox" name="ac-p" value="${k}"${pr[k]===false?'':' checked'}></label>`).join('')}</div><p class="meta">Ela só vê as pessoas das vilas ou da liderança dela, mesmo com tudo marcado.</p></div>
+  ${eu?'<p class="meta"><strong>Você é o mestre:</strong> acesso livre a tudo e o único que cria e muda acessos.</p>':''}
+  <div id="ac-pw"${eu?' hidden':''}><p class="meta" style="margin-top:6px"><strong>O que essa pessoa pode fazer</strong></p><div class="list">${PERMS.map(([k,t,i])=>`<label class="row check" data-perm="${k}"${k==='registro'&&pf!=='geral'?' hidden':''} style="cursor:pointer"><span class="cic cc" style="--cc:#2f7fe0">${ic(i,18)}</span><span style="flex:1">${t}</span><input type="checkbox" name="ac-p" value="${k}"${pr[k]===false?'':' checked'}></label>`).join('')}</div><p class="meta">Desmarque o que essa pessoa não pode fazer. O banco também bloqueia.</p></div>
   ${u?'':`<p class="meta" style="margin-top:6px"><strong>Código de acesso</strong></p><div class="seg" id="ac-cm"><button type="button" data-act="ac-cm" data-id="auto" aria-pressed="true">Gerar automático</button><button type="button" data-act="ac-cm" data-id="eu" aria-pressed="false">Eu escolho</button></div>
   <label class="field" id="ac-cw" hidden><span>Código (6 a 12 números)</span><input id="ac-cod" type="text" inputmode="numeric" autocomplete="off" maxlength="12" pattern="[0-9]{6,12}" placeholder="Ex.: 4 8 2 9 1 7"></label>`}
   ${u&&!eu?`<label class="check"><input type="checkbox" id="ac-ativo"${u.ativo?' checked':''}><span>Acesso ativo<br><span class="meta">Desmarque para bloquear a pessoa na hora, em todos os aparelhos.</span></span></label>`:''}
   <button class="btn wide">${u?'Salvar':'Criar login'}</button>
   ${u?`<button type="button" class="btn ghost wide" data-act="ac-trocacod" data-id="${esc(u.id)}">${eu?'Trocar meu código':'Trocar código'}</button><p class="meta">${eu?'Este aparelho continua conectado.':'Trocar o código desconecta a pessoa de todos os aparelhos. Use se ela esqueceu o código ou perdeu o celular.'}</p>`:''}
   </form>`;$('modal').hidden=false;$('sheet').scrollTop=0;
-  const sincr=()=>{const p=$('ac-perfil').value;$('ac-lider').hidden=p!=='lider';$('ac-area').hidden=p!=='area';$('ac-mw').hidden=p!=='geral'||eu;if(p!=='geral')$('ac-mestre').checked=false;$('ac-pw').hidden=eu||$('ac-mestre').checked;
+  const sincr=()=>{const p=$('ac-perfil').value;$('ac-lider').hidden=p!=='lider';$('ac-area').hidden=p!=='area';
     const r=document.querySelector('[data-perm="registro"]');if(r)r.hidden=p!=='geral'};
-  $('ac-perfil').onchange=sincr;$('ac-mestre').onchange=sincr}
+  $('ac-perfil').onchange=sincr}
 function acCodForm(u){const eu=window.GU?u.id===GU.id:u.id==='eu';
   $('sheet').innerHTML=`<div class="bar"><h2 style="flex:1">${eu?'Trocar meu código':'Trocar código de '+esc(u.nome.split(' ')[0])}</h2>${fecha}</div><form id="fcod" data-uid="${esc(u.id)}">
   <div class="seg" id="ac-cm"><button type="button" data-act="ac-cm" data-id="auto" aria-pressed="${!eu}">Gerar automático</button><button type="button" data-act="ac-cm" data-id="eu" aria-pressed="${eu}">Eu escolho</button></div>
@@ -2442,11 +2510,16 @@ function acCodForm(u){const eu=window.GU?u.id===GU.id:u.id==='eu';
   <p class="meta">Não use sequência (123456), número repetido (111111) nem pedaço do telefone.</p>
   <button class="btn wide">Trocar código</button><button type="button" class="btn ghost wide" data-act="ac-edit" data-id="${esc(u.id)}">Voltar</button></form>`;$('modal').hidden=false}
 const grupo4=c=>c.replace(/(\d{4})(?=\d)/g,'$1 ');
-function acMostra(u,cod,novo){const eu=window.GU?u.id===GU.id:u.id==='eu',link=location.origin+location.pathname,txt=`Olá, ${u.nome.split(' ')[0]}! Seu acesso ao Gabinete em Campo:\n\nSite: ${link}\nTelefone: ${u.login}\nCódigo: ${cod}\n\nNo iPhone, abra o site no Safari e toque em Compartilhar > Adicionar à Tela de Início. No Android, abra no Chrome e toque em Instalar.\nNão passe esse código para ninguém.`;
-  $('sheet').innerHTML=`<div class="bar"><h2 style="flex:1">${novo?'Login criado':eu?'Seu código novo':'Código novo'}</h2>${fecha}</div><div class="card" style="text-align:center"><p class="meta">${eu?'Seu código':'Código de '+esc(u.nome)}</p><p style="font-size:2.2rem;font-weight:800;letter-spacing:.12em;margin:6px 0">${grupo4(cod)}</p><p class="meta">Ele aparece só agora. ${eu?'Anote num lugar seguro.':'Passe para a pessoa de forma reservada.'}</p></div>
-  ${eu?'':`<label class="field"><span>Mensagem pronta para mandar no WhatsApp da pessoa</span><textarea id="ac-txt" rows="9">${esc(txt)}</textarea></label>
-  <div class="two"><button class="btn" data-act="ac-copia">Copiar mensagem</button><a class="btn ghost" target="_blank" rel="noopener" href="https://wa.me/55${esc(u.login)}?text=${encodeURIComponent(txt)}">Abrir no WhatsApp</a></div>`}
+function acMostra(u,cod,novo){const eu=window.GU?u.id===GU.id:u.id==='eu',link=location.origin+location.pathname,nm=u.nome.split(' ')[0];
+  const txt=`Olá, *${nm}*! Seu acesso ao *Gabinete em Campo* está pronto.\n\n*Site:* ${link}\n*Telefone:* ${u.login}\n*Código:* ${cod}\n\n*Para instalar no celular:*\niPhone: abra o site no Safari, toque em Compartilhar e depois em _Adicionar à Tela de Início_.\nAndroid: abra no Chrome e toque em _Instalar o app_.\n\n_Não passe esse código para ninguém._`;
+  const bloco=(r,v,id)=>`<button type="button" class="copiabloco" data-act="ac-cp" data-v="${esc(v)}"><span class="meta">${r}</span><b${id?` id="${id}"`:''}>${esc(v)}</b><small>Toque para copiar</small></button>`;
+  $('sheet').innerHTML=`<div class="bar"><h2 style="flex:1">${novo?'Login criado':eu?'Seu código novo':'Código novo'}</h2>${fecha}</div>
+  <p class="meta">${eu?'Anote seu código num lugar seguro. Ele aparece só agora.':'Toque em cada informação para copiar, ou copie a mensagem inteira já arrumada para o WhatsApp. O código aparece só agora.'}</p>
+  <div class="copiagrid">${eu?'':bloco('Site',link)+bloco('Telefone (login)',u.login)}${bloco(eu?'Seu código':'Código de '+nm,cod,'ac-codv')}</div>
+  ${eu?'':`<div class="card" style="gap:8px"><h3>Mensagem pronta</h3><div class="zap" id="ac-zap">${esc(txt).replace(/\*([^*\n]+)\*/g,'<b>$1</b>').replace(/_([^_\n]+)_/g,'<i>$1</i>').replace(/\n/g,'<br>')}</div><textarea id="ac-txt" hidden>${esc(txt)}</textarea>
+  <button class="btn wide" data-act="ac-copia">${ic('chat',18)}Copiar mensagem inteira</button><a class="btn ghost wide" target="_blank" rel="noopener" href="https://wa.me/55${esc(u.login)}?text=${encodeURIComponent(txt)}">Abrir no WhatsApp da pessoa</a></div>`}
   <button class="btn ghost wide" data-act="ac-fim">Voltar para os acessos</button>`;$('modal').hidden=false;$('sheet').scrollTop=0}
+async function copia(t,ok){try{await navigator.clipboard.writeText(t);toast(ok)}catch(_){const x=document.createElement('textarea');x.value=t;x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();let f=false;try{f=document.execCommand('copy')}catch(__){}x.remove();toast(f?ok:'Não deu para copiar. Segure o dedo no texto para copiar.')}}
 const acAcha=id=>(AC.lista||[]).find(x=>x.id===id);
 document.addEventListener('click',async e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;if(!/^ac-|^acf$/.test(a))return;e.stopImmediatePropagation();
   if(!ehMestre()){toast('Só o login mestre pode mexer nos acessos');return}
@@ -2457,7 +2530,8 @@ document.addEventListener('click',async e=>{const b=e.target.closest('[data-act]
   else if(a==='ac-meucod'){const u=(AC.lista||[]).find(x=>window.GU?x.id===GU.id:x.id==='eu');if(u)acCodForm(u)}
   else if(a==='ac-trocacod'){const u=acAcha(b.dataset.id);if(u)acCodForm(u)}
   else if(a==='ac-cm'){const p=b.closest('.seg');p.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));const w=$('ac-cw');w.hidden=b.dataset.id!=='eu';$('ac-cod').required=!w.hidden;if(!w.hidden)$('ac-cod').focus()}
-  else if(a==='ac-copia'){const t=$('ac-txt');try{await navigator.clipboard.writeText(t.value);toast('Mensagem copiada')}catch(_){t.select();toast('Selecione e copie')}}
+  else if(a==='ac-copia')copia($('ac-txt').value,'Mensagem copiada. É só colar no WhatsApp.');
+  else if(a==='ac-cp'){copia(b.dataset.v,'Copiado: '+b.dataset.v);b.classList.add('ok');setTimeout(()=>b.classList.remove('ok'),1200)}
   else if(a==='ac-fim'){$('modal').hidden=true;$('sheet').innerHTML='';render()}
   else if(a==='ac-backup'){try{toast('Gerando a cópia...');const r=await API().backup();API().baixa(new Blob([JSON.stringify(r)],{type:'application/json'}),'gabinete-em-campo-copia-'+HOJE+'.json');logA('Acessos','Baixou a cópia de segurança')}catch(_){toast('Não deu para gerar a cópia agora')}}},true);
 document.addEventListener('submit',async e=>{const f=e.target;if(f.id!=='fac'&&f.id!=='fcod')return;e.preventDefault();e.stopImmediatePropagation();const btn=f.querySelector('.btn.wide');
@@ -2472,15 +2546,319 @@ document.addEventListener('submit',async e=>{const f=e.target;if(f.id!=='fac'&&f
     let liderId=ant&&ant.perfil==='lider'&&ant.vilas[0]===vls[0]?ant.lider:null;
     if(p==='lider'&&!liderId){let l=lideres.find(x=>x.nome===nome&&x.vila===vls[0]);if(!l){l={id:'L'+(Date.now()*1000+Math.floor(Math.random()*1000)).toString(36),nome,vila:vls[0]};lideres.push(l)}liderId=l.id}
     if(p==='lider'){const l=lideres.find(x=>x.id===liderId);if(l)l.nome=nome}
-    const d={nome,login:$('ac-tel').value,perfil:p,vilas:vls,lider:p==='lider'?liderId:null,perms,mestre:p==='geral'&&$('ac-mestre').checked};
+    const d={nome,cargo:$('ac-cargo').value.trim(),login:$('ac-tel').value,perfil:p,vilas:vls,lider:p==='lider'?liderId:null,perms};
     if(uid){d.id=uid;d.ativo=$('ac-ativo')?$('ac-ativo').checked:true}else if(cod)d.codigo=cod;
     const r=await API().salvar(d);
     if(p==='area'){if(!coords.some(c=>c.id===r.id))coords.push({id:r.id,nome});else coords.find(c=>c.id===r.id).nome=nome;vilas.forEach(v=>{if(vls.includes(v.id))v.coord=r.id;else if(v.coord===r.id)v.coord=''})}
     const bl=PERMS.filter(([k])=>perms[k]===false).map(([k])=>PNOME[k]);
-    logA('Acessos',(uid?'Alterou o acesso de ':'Criou o login de ')+nome+' ('+PAPA[p].toLowerCase()+(d.mestre?', mestre':'')+')'+(bl.length&&!d.mestre?'. Sem permissão para: '+bl.join(', '):'')+(uid&&!d.ativo?'. Acesso desativado':''));API().depois();
+    logA('Acessos',(uid?'Alterou o acesso de ':'Criou o login de ')+nome+' ('+PAPA[p].toLowerCase()+')'+(bl.length?'. Sem permissão para: '+bl.join(', '):'')+(uid&&!d.ativo?'. Acesso desativado':''));API().depois();
     AC.lista=await API().lista().catch(()=>AC.lista);
     if(r.codigo)acMostra(r,r.codigo,true);else{toast('Acesso salvo');$('modal').hidden=true;render()}}
   catch(err){toast(erroAc(err.message||''))}finally{btn.disabled=false}},true);
+/* =====================================================================
+   Cadastro completo: segmento, profissão, título de eleitor, regiões,
+   listas personalizáveis e a opção "+ Criar novo" em todo lugar.
+   ===================================================================== */
+const podeListas=()=>ehMestre()||(S.perfil==='geral'&&temPerm('listas'));
+const verEleitoral=()=>ehMestre()||S.perfil==='geral';
+const LIDSEG=()=>LISTAS.segLid||[];
+const vReg=vid=>(vilas.find(v=>v.id===vid)||{}).reg||'';
+const rN=id=>(LISTAS.reg.find(r=>r.id===id)||{}).nome||'';
+const locN=n=>{const l=LOCAIS.find(x=>String(x[0])===String(n));return l?l[1]:''};
+const lNome=l=>l.nome+(l.seg&&l.seg!=='Liderança'?' ('+l.seg.toLowerCase()+')':'')+', '+vN(l.vila);
+const lidOk=l=>!l.pid||LIDSEG().includes(l.seg);
+const optNovo=k=>podeListas()?`<option value="__novo">+ Criar ${({prof:'profissão',seg:'segmento',eleitor:'tipo de eleitor',lider:'liderança',vila:'vila',reg:'região'})[k]||({origem:'opção'})[k]||'novo'}...</option>`:'';
+const tituloFmt=t=>String(t||'').replace(/\D/g,'').replace(/(\d{4})(?=\d)/g,'$1 ').trim();
+const GENEROS=['Feminino','Masculino','Outro','Prefere não dizer'];
+const LOCS=()=>LOCAIS.slice().sort((a,b)=>a[2].localeCompare(b[2]));
+
+/* --- campos novos do cadastro (usados no cadastro e no editar) --- */
+function camposExtra(px,p){p=p||{};const fora=p.votaFora?'fora':(p.localv?String(p.localv):'');
+  return `<h3 style="margin-top:4px">Trabalho e participação</h3>
+  <label class="field"><span>Profissão ou o que faz hoje</span><select id="${px}-prof" data-cria="prof"><option value="">Não informou</option>${opts(LISTAS.prof.map(x=>[x,x]),p.prof||'')}${optNovo('prof')}</select></label>
+  <label class="field"><span>Segmento</span><select id="${px}-seg" data-cria="seg"><option value="">Nenhum</option>${opts(LISTAS.seg.map(x=>[x,x]),p.seg||'')}${optNovo('seg')}</select></label>
+  <p class="meta">Quem é ${LIDSEG().map(x=>x.toLowerCase()).join(', ').replace(/, ([^,]*)$/,' ou $1')} aparece na lista de quem acompanha os outros cadastros.</p>
+  <div class="two"><label class="field"><span>Gênero</span><select id="${px}-gen"><option value="">Não informou</option>${opts(GENEROS.map(x=>[x,x]),p.gen||'')}</select></label>
+  <label class="field"><span>E-mail</span><input id="${px}-email" type="email" autocomplete="off" value="${esc(p.email||'')}" placeholder="opcional"></label></div>
+  <h3 style="margin-top:4px">Título de eleitor</h3>
+  <label class="field"><span>Onde vota</span><select id="${px}-localv" data-px="${px}"><option value="">Não sabe ou não informou</option>${LOCS().map(l=>`<option value="${l[0]}"${fora===String(l[0])?' selected':''}>${esc(l[2])} · ${esc(l[1])}</option>`).join('')}<option value="fora"${fora==='fora'?' selected':''}>Vota em outra cidade</option></select></label>
+  <label class="field" id="${px}-foraw"${fora==='fora'?'':' hidden'}><span>Cidade onde vota</span><input id="${px}-votafora" autocomplete="off" value="${esc(p.votaFora||'')}" placeholder="Ex.: Tucuruí"></label>
+  <div class="two"><label class="field"><span>Zona</span><input id="${px}-zona" inputmode="numeric" maxlength="4" value="${esc(p.zona||(fora&&fora!=='fora'?'101':''))}"></label>
+  <label class="field"><span>Seção</span><input id="${px}-secao" inputmode="numeric" maxlength="4" list="${px}-secoes" autocomplete="off" value="${esc(p.secao||'')}"><datalist id="${px}-secoes">${secoesDe(fora)}</datalist></label></div>
+  ${verEleitoral()?`<label class="field"><span>Número do título</span><input id="${px}-titulo" inputmode="numeric" maxlength="14" autocomplete="off" value="${esc(tituloFmt(p.titulo))}" placeholder="0000 0000 0000"></label>
+  <label class="field"><span>Tipo de eleitor</span><select id="${px}-eleitor" data-cria="eleitor"><option value="">Não informado</option>${opts(LISTAS.eleitor.map(x=>[x,x]),p.eleitor||'')}${optNovo('eleitor')}</select></label>
+  <p class="meta">O número do título e o tipo de eleitor só aparecem para a coordenação geral.</p>`:''}`}
+const secoesDe=n=>{const l=LOCAIS.find(x=>String(x[0])===String(n));return l?l[3].map(s=>`<option value="${s}">`).join(''):''};
+document.addEventListener('change',e=>{const s=e.target;if(!s.id||!/-localv$/.test(s.id))return;const px=s.dataset.px,v=s.value;
+  $(px+'-foraw').hidden=v!=='fora';$(px+'-secoes').innerHTML=secoesDe(v);if(v&&v!=='fora'&&!$(px+'-zona').value)$(px+'-zona').value='101';if(v==='fora')$(px+'-votafora').focus()});
+document.addEventListener('input',e=>{const t=e.target;if(t.id&&/-titulo$/.test(t.id)){const c=t.selectionStart===t.value.length;t.value=tituloFmt(t.value);if(c)t.selectionStart=t.selectionEnd=t.value.length}});
+const XCAMPOS=[['prof','profissão'],['seg','segmento'],['gen','gênero'],['email','e-mail'],['localv','local de votação'],['votaFora','cidade onde vota'],['zona','zona'],['secao','seção'],['titulo','título de eleitor'],['eleitor','tipo de eleitor']];
+function lerExtra(px){const o={},g=id=>{const el=$(px+'-'+id);return el?el.value.trim():null};
+  const lv=g('localv');if(lv!==null){o.localv=lv&&lv!=='fora'?+lv:'';o.votaFora=lv==='fora'?g('votafora'):''}
+  [['prof','prof'],['seg','seg'],['gen','gen'],['email','email'],['zona','zona'],['secao','secao'],['eleitor','eleitor']].forEach(([k,id])=>{const v=g(id);if(v!==null&&v!=='__novo')o[k]=v});
+  const t=g('titulo');if(t!==null)o.titulo=t.replace(/\D/g,'');return o}
+function aplicaExtra(px,p){const o=lerExtra(px),mud=[];XCAMPOS.forEach(([k,n])=>{if(k in o&&String(o[k]??'')!==String(p[k]??'')){p[k]=o[k];mud.push(n)}});return mud}
+function fichaExtra(p,dl){const loc=p.votaFora?'Outra cidade: '+p.votaFora:p.localv?locN(p.localv):'';
+  return `${p.prof?dl('Profissão',p.prof):''}${p.seg?dl('Segmento',p.seg):''}${vReg(p.vila)?dl('Região',rN(vReg(p.vila))):''}${p.gen?dl('Gênero',p.gen):''}${p.email?dl('E-mail',p.email):''}
+  ${loc||p.zona||p.secao?dl('Onde vota',[loc,p.zona?'zona '+p.zona:'',p.secao?'seção '+p.secao:''].filter(Boolean).join(', ')):''}${verEleitoral()&&p.titulo?dl('Título de eleitor',tituloFmt(p.titulo)):''}${verEleitoral()&&p.eleitor?dl('Tipo de eleitor',p.eleitor):''}`}
+
+/* --- quem é liderança, coordenador ou candidato vira "quem acompanha" --- */
+function sincLideres(){pessoas.forEach(p=>{if(p.del)return;const l=lideres.find(x=>x.pid===p.id);
+  if(LIDSEG().includes(p.seg)){if(!l)lideres.push({id:window.GEC_CFG?uidCurto('L'):'LP'+p.id,nome:p.nome,vila:p.vila,pid:p.id,seg:p.seg});else if(l.nome!==p.nome||l.vila!==p.vila||l.seg!==p.seg)Object.assign(l,{nome:p.nome,vila:p.vila,seg:p.seg})}
+  else if(l&&l.seg!==(p.seg||''))l.seg=p.seg||''})}
+
+/* --- "+ Criar novo" em qualquer lista --- */
+document.addEventListener('focusin',e=>{const s=e.target;if(s.tagName==='SELECT'&&s.value!=='__novo')s.dataset.prev=s.value});
+document.addEventListener('change',e=>{const s=e.target;if(s.tagName!=='SELECT'||s.value!=='__novo')return;const k=s.dataset.cria||(s.id==='fp-lider'||s.id==='fep-lider'?'lider':'');if(!k)return;
+  s.value=s.dataset.prev||'';if(!podeListas()){toast('Só a coordenação geral cria itens novos');return}
+  document.querySelectorAll('.novoinline').forEach(x=>x.remove());const lab=s.closest('label')||s;
+  const nm={prof:'Nome da profissão',seg:'Nome do segmento',eleitor:'Tipo de eleitor',lider:'Nome da liderança',vila:'Nome da vila',reg:'Nome da região',origem:'Por onde chegou (ex.: Rádio)'}[k];
+  lab.insertAdjacentHTML('afterend',`<div class="novoinline card" data-k="${k}" data-sel="${s.id}" style="gap:8px"><label class="field"><span>${nm}</span><input class="ni-nome" autocomplete="off"></label>${k==='lider'?`<label class="field"><span>Vila</span><select class="ni-vila">${opts(minhasVilas().map(v=>[v.id,v.nome]),($('fp-vila')||$('fep-vila')||{}).value)}</select></label><label class="field"><span>É o quê?</span><select class="ni-seg">${opts(LIDSEG().map(x=>[x,x]),'Liderança')}</select></label>`:''}<div class="two"><button type="button" class="btn ghost" data-act="ni-x">Cancelar</button><button type="button" class="btn" data-act="ni-ok">Adicionar</button></div></div>`);
+  lab.nextElementSibling.querySelector('.ni-nome').focus()});
+function criaItem(k,nome,extra){nome=nome.trim();if(nome.length<2)return {erro:'Escreva o nome'};
+  if(['prof','seg','eleitor'].includes(k)){const a=LISTAS[k];if(a.some(x=>nz(x)===nz(nome)))return {val:a.find(x=>nz(x)===nz(nome)),ja:1};a.push(nome);a.sort((x,y)=>x.localeCompare(y));logA('Listas','Criou '+({prof:'a profissão',seg:'o segmento',eleitor:'o tipo de eleitor'})[k]+' '+nome);return {val:nome,txt:nome}}
+  if(k==='reg'){if(LISTAS.reg.some(r=>nz(r.nome)===nz(nome)))return {erro:'Já existe uma região com esse nome'};const r={id:uidCurto('R'),nome};LISTAS.reg.push(r);logA('Listas','Criou a região '+nome);return {val:r.id,txt:nome}}
+  if(k==='vila'){if(vilas.some(v=>nz(v.nome)===nz(nome)))return {erro:'Já existe uma vila com esse nome'};const v={id:window.GEC_CFG?uidCurto('V'):'N'+Date.now().toString(36),nome,coord:'',reg:extra&&extra.reg||''};vilas.push(v);logA('Listas','Criou a vila '+nome);return {val:v.id,txt:nome}}
+  if(k==='lider'){const l={id:window.GEC_CFG?uidCurto('L'):'L'+Date.now().toString(36),nome,vila:extra.vila,seg:extra.seg||'Liderança'};lideres.push(l);logA('Listas','Criou '+l.seg.toLowerCase()+' '+nome+' ('+vN(l.vila)+')');return {val:l.id,txt:lNome(l)}}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act="ni-ok"],[data-act="ni-x"]');if(!b)return;e.stopImmediatePropagation();const box=b.closest('.novoinline');
+  if(b.dataset.act==='ni-x'){box.remove();return}const k=box.dataset.k,s=$(box.dataset.sel);
+  const r=criaItem(k,box.querySelector('.ni-nome').value,{vila:(box.querySelector('.ni-vila')||{}).value,seg:(box.querySelector('.ni-seg')||{}).value});if(r.erro){toast(r.erro);return}
+  if(!r.ja)document.querySelectorAll(k==='lider'?'#fp-lider,#fep-lider':`select[data-cria="${k}"]`).forEach(x=>{const n=x.querySelector('option[value="__novo"]'),o=new Option(r.txt,r.val);if(n)x.insertBefore(o,n);else x.add(o)});
+  if(s){s.value=r.val;s.dispatchEvent(new Event('change',{bubbles:true}))}box.remove();toast(r.ja?'Já existia, escolhido':'Criado e escolhido: '+r.txt)},true);
+/* marcador novo direto no cadastro */
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act="tag-novo"]');if(!b)return;e.stopImmediatePropagation();const w=b.previousElementSibling;
+  const box=document.createElement('div');box.className='novoinline card';box.style.gap='8px';box.innerHTML=`<label class="field"><span>Nome do marcador</span><input class="ni-nome" autocomplete="off"></label><div class="two"><button type="button" class="btn ghost" data-act="tg-x">Cancelar</button><button type="button" class="btn" data-act="tg-ok">Adicionar</button></div>`;b.replaceWith(box);box.querySelector('input').focus();
+  box.addEventListener('click',ev=>{const a=ev.target.closest('[data-act]');if(!a)return;ev.stopPropagation();if(a.dataset.act==='tg-ok'){const n=box.querySelector('input').value.trim();if(n.length<2){toast('Escreva o nome');return}
+    if(!TAGS.some(t=>nz(t)===nz(n))){TAGS.push(n);logA('Listas','Criou o marcador '+n)}w.insertAdjacentHTML('beforeend',`<label class="chip"><input type="checkbox" value="${esc(n)}" checked>${esc(n)}</label>`)}box.remove()})},true);
+
+/* --- tela de listas, regiões e vilas --- */
+const LNOME={seg:['Segmentos','Liderança, candidato, coordenador, formiguinha...'],prof:['Profissões','O que a pessoa faz hoje'],eleitor:['Tipos de eleitor','Só a coordenação geral vê'],marc:['Marcadores','Etiquetas livres no cadastro']};
+const usoL=(k,n)=>k==='marc'?pessoas.filter(p=>!p.del&&(p.tags||[]).includes(n)).length:pessoas.filter(p=>!p.del&&p[k]===n).length;
+const arrL=k=>k==='marc'?TAGS:LISTAS[k];
+let LT={aba:'seg',ed:null};
+function abrirListas(){if(!podeListas()){toast('Só a coordenação geral mexe nas listas');return}const k=LT.aba;
+  const abas=[['seg','Segmentos'],['prof','Profissões'],['eleitor','Eleitor'],['origem','Como chegou'],['marc','Marcadores'],['reg','Regiões'],['vila','Vilas']];
+  let corpo='';
+  if(LNOME[k]){const a=arrL(k);corpo=`<p class="meta">${LNOME[k][1]}. Toque para renomear ou apagar.</p><div class="list">${a.map(n=>`<button class="row" data-act="lt-ed" data-id="${esc(n)}"><div><strong>${esc(n)}</strong><span class="meta">${usoL(k,n)} ${usoL(k,n)===1?'pessoa':'pessoas'}${k==='seg'&&LIDSEG().includes(n)?' · aparece em "quem acompanha"':''}</span></div>${ic('go',18)}</button>`).join('')||'<p class="empty">Nada ainda.</p>'}</div>
+    <button class="btn ghost" data-act="lt-novo">${ic('plus',18)}Criar novo</button>`}
+  else if(k==='reg'){corpo=`<p class="meta">Junte vilas em regiões, como a Região do 112. Os relatórios e o mapa ganham o filtro por região.</p><div class="list">${LISTAS.reg.map(r=>{const vs=vilas.filter(v=>v.reg===r.id);return `<button class="row" data-act="lt-reg" data-id="${r.id}"><span class="cic cc" style="--cc:var(--flag-verde)">${ic('pin')}</span><div><strong>${esc(r.nome)}</strong><span class="meta">${vs.length?vs.map(v=>v.nome).join(', '):'Nenhuma vila ainda'}</span></div>${ic('go',18)}</button>`}).join('')||'<p class="empty">Nenhuma região criada.</p>'}</div><button class="btn ghost" data-act="lt-reg" data-id="">${ic('plus',18)}Criar região</button>`}
+  else{corpo=`<p class="meta">Crie vilas novas e diga de qual região cada uma é.</p><div class="list">${vilas.slice().sort((a,b)=>a.nome.localeCompare(b.nome)).map(v=>`<button class="row" data-act="lt-vila" data-id="${v.id}"><div><strong>${esc(v.nome)}</strong><span class="meta">${v.reg?esc(rN(v.reg)):'Sem região'} · ${pessoas.filter(p=>!p.del&&p.vila===v.id).length} pessoas</span></div>${ic('go',18)}</button>`).join('')}</div><button class="btn ghost" data-act="lt-vila" data-id="">${ic('plus',18)}Criar vila</button>`}
+  $('sheet').innerHTML=`<div class="bar"><h2 style="flex:1">Listas, regiões e vilas</h2>${fecha}</div><div class="seg" style="flex-wrap:wrap">${abas.map(a=>`<button data-act="lt-aba" data-id="${a[0]}" aria-pressed="${k===a[0]}">${a[1]}</button>`).join('')}</div><div id="lt-corpo" style="display:flex;flex-direction:column;gap:12px">${corpo}</div>`;$('modal').hidden=false}
+function ltItemForm(k,n){const u=n?usoL(k,n):0;$('lt-corpo').innerHTML=`<form id="flt" data-k="${k}" data-old="${esc(n||'')}" class="card" style="gap:10px"><h3>${n?'Editar':'Criar'}</h3><label class="field"><span>Nome</span><input id="lt-nome" required value="${esc(n||'')}" autocomplete="off"></label>
+  ${k==='seg'?`<label class="check"><input type="checkbox" id="lt-lid"${!n||LIDSEG().includes(n)?(n?' checked':''):''}><span>Quem tem este segmento aparece na lista de "Liderança que acompanha"</span></label>`:''}
+  ${n&&u?`<p class="meta">Usado em ${u} ${u===1?'cadastro':'cadastros'}. Se mudar o nome, muda em todos.</p>`:''}
+  <div class="two"><button type="button" class="btn ghost" data-act="lt-volta">Voltar</button><button class="btn">Salvar</button></div>${n?`<button type="button" class="btn ghost perigo" data-act="lt-del">${u?'Apagar e tirar de '+u+(u===1?' cadastro':' cadastros'):'Apagar'}</button>`:''}</form>`;$('lt-nome').focus()}
+function ltRegForm(id){const r=LISTAS.reg.find(x=>x.id===id);$('lt-corpo').innerHTML=`<form id="flr" data-id="${id||''}" class="card" style="gap:10px"><h3>${r?'Editar região':'Criar região'}</h3><label class="field"><span>Nome da região</span><input id="lr-nome" required value="${esc(r?r.nome:'')}" placeholder="Ex.: Região do 112" autocomplete="off"></label>
+  <p class="meta">Vilas desta região${r?'':' (cada vila fica em uma região só)'}</p><div class="chk">${vilas.slice().sort((a,b)=>a.nome.localeCompare(b.nome)).map(v=>`<label class="chip"><input type="checkbox" name="lr-v" value="${v.id}"${r&&v.reg===r.id?' checked':''}>${esc(v.nome)}${v.reg&&(!r||v.reg!==r.id)?` <small class="meta">(${esc(rN(v.reg))})</small>`:''}</label>`).join('')}</div>
+  <div class="two"><button type="button" class="btn ghost" data-act="lt-volta">Voltar</button><button class="btn">Salvar</button></div>${r?`<button type="button" class="btn ghost perigo" data-act="lr-del" data-id="${r.id}">Apagar região</button>`:''}</form>`}
+function ltVilaForm(id){const v=vilas.find(x=>x.id===id);$('lt-corpo').innerHTML=`<form id="flv" data-id="${id||''}" class="card" style="gap:10px"><h3>${v?'Editar vila':'Criar vila'}</h3><label class="field"><span>Nome da vila</span><input id="lv-nome" required value="${esc(v?v.nome:'')}" autocomplete="off"></label>
+  <label class="field"><span>Região</span><select id="lv-reg" data-cria="reg"><option value="">Sem região</option>${opts(LISTAS.reg.map(r=>[r.id,r.nome]),v?v.reg||'':'')}${optNovo('reg')}</select></label>
+  ${coords.length?`<label class="field"><span>Quem coordena</span><select id="lv-coord"><option value="">Ninguém</option>${opts(coords.map(c=>[c.id,c.nome]),v?v.coord||'':'')}</select></label>`:''}
+  <div class="two"><button type="button" class="btn ghost" data-act="lt-volta">Voltar</button><button class="btn">Salvar</button></div></form>`}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;if(!/^l[tr]-/.test(a)&&a!=='listas')return;e.stopImmediatePropagation();
+  if(a==='listas'){LT.aba='seg';abrirListas()}else if(a==='lt-aba'){LT.aba=b.dataset.id;abrirListas()}else if(a==='lt-volta')abrirListas();
+  else if(a==='lt-ed')ltItemForm(LT.aba,b.dataset.id);else if(a==='lt-novo')ltItemForm(LT.aba,'');else if(a==='lt-reg')ltRegForm(b.dataset.id);else if(a==='lt-vila')ltVilaForm(b.dataset.id);
+  else if(a==='lt-del'){const f=$('flt'),k=f.dataset.k,n=f.dataset.old,arr=arrL(k);arr.splice(arr.indexOf(n),1);pessoas.forEach(p=>{if(k==='marc')p.tags=(p.tags||[]).filter(t=>t!==n);else if(p[k]===n)p[k]=''});if(k==='seg')LISTAS.segLid=LIDSEG().filter(x=>x!==n);logA('Listas','Apagou '+n+' de '+LNOME[k][0].toLowerCase());abrirListas();render();toast('Apagado')}
+  else if(a==='lr-del'){const r=LISTAS.reg.find(x=>x.id===b.dataset.id);LISTAS.reg.splice(LISTAS.reg.indexOf(r),1);vilas.forEach(v=>{if(v.reg===r.id)v.reg=''});logA('Listas','Apagou a região '+r.nome);abrirListas();render();toast('Região apagada')}},true);
+document.addEventListener('submit',e=>{const f=e.target;if(!['flt','flr','flv'].includes(f.id))return;e.preventDefault();e.stopImmediatePropagation();
+  if(f.id==='flt'){const k=f.dataset.k,old=f.dataset.old,n=$('lt-nome').value.trim(),arr=arrL(k);if(n.length<2){toast('Escreva o nome');return}if(arr.some(x=>nz(x)===nz(n)&&x!==old)){toast('Já existe');return}
+    if(!old)arr.push(n);else if(old!==n){arr[arr.indexOf(old)]=n;pessoas.forEach(p=>{if(k==='marc')p.tags=(p.tags||[]).map(t=>t===old?n:t);else if(p[k]===old)p[k]=n});if(k==='seg')lideres.forEach(l=>{if(l.seg===old)l.seg=n})}
+    if(k!=='marc')arr.sort((x,y)=>x.localeCompare(y));
+    if(k==='seg'){const l=LIDSEG().filter(x=>x!==old&&x!==n);if($('lt-lid').checked)l.push(n);LISTAS.segLid=l}
+    logA('Listas',(old?'Renomeou '+old+' para ':'Criou ')+n+' em '+LNOME[k][0].toLowerCase());abrirListas();render();toast('Salvo')}
+  else if(f.id==='flr'){const n=$('lr-nome').value.trim();if(n.length<2){toast('Escreva o nome');return}let r=LISTAS.reg.find(x=>x.id===f.dataset.id);
+    if(LISTAS.reg.some(x=>nz(x.nome)===nz(n)&&x!==r)){toast('Já existe uma região com esse nome');return}if(!r){r={id:uidCurto('R'),nome:n};LISTAS.reg.push(r)}else r.nome=n;
+    const sel=new Set([...document.querySelectorAll('input[name="lr-v"]:checked')].map(x=>x.value));vilas.forEach(v=>{if(sel.has(v.id))v.reg=r.id;else if(v.reg===r.id)v.reg=''});
+    logA('Listas','Salvou a região '+n+' ('+sel.size+' vilas)');abrirListas();render();toast('Região salva')}
+  else{const n=$('lv-nome').value.trim(),rg=$('lv-reg').value==='__novo'?'':$('lv-reg').value;if(n.length<2){toast('Escreva o nome');return}let v=vilas.find(x=>x.id===f.dataset.id);
+    if(vilas.some(x=>nz(x.nome)===nz(n)&&x!==v)){toast('Já existe uma vila com esse nome');return}
+    if(!v){const r=criaItem('vila',n,{reg:rg});v=vilas.find(x=>x.id===r.val)}else{v.nome=n;v.reg=rg}if($('lv-coord'))v.coord=$('lv-coord').value;abrirListas();render();toast('Vila salva')}},true);
+
+/* --- relatórios: região, profissão, segmento, eleitoral --- */
+RG.splice(RG.findIndex(g=>g[0]==='mon'),0,['ele','Eleitoral','Onde as pessoas votam, zona, seção, segmento e profissão']);
+const pesF=()=>fVila(visP());
+const contaPor=(ps,f,vazio)=>{const m={};ps.forEach(p=>{const k=f(p)||vazio;m[k]=(m[k]||0)+1});return Object.entries(m).sort((a,b)=>b[1]-a[1])};
+const novosRel=[
+{id:'p-prof',g:'pes',i:'case',c:'#0e9fb1',t:'Pessoas por profissão',d:'Professores, agentes de saúde, produtores e todas as outras profissões',run(){const ps=pesF().filter(p=>p.prof).sort((a,b)=>a.prof.localeCompare(b.prof)||a.nome.localeCompare(b.nome));return {cols:['Profissão','Pessoa','Vila','Região','Telefone'],rows:ps.map(p=>[p.prof,pc(p),vN(p.vila),rN(vReg(p.vila)),p.tel]),chart:contaPor(ps,p=>p.prof),vazio:'Ninguém com profissão informada ainda. Dá para colocar no cadastro.'}}},
+{id:'p-seg',g:'ele',i:'team',c:'#1f9a52',t:'Pessoas por segmento',d:'Lideranças, candidatos, coordenadores, formiguinhas e outros segmentos',run(){const ps=pesF().filter(p=>p.seg).sort((a,b)=>a.seg.localeCompare(b.seg)||a.nome.localeCompare(b.nome));return {cols:['Segmento','Pessoa','Vila','Região','Profissão','Telefone'],rows:ps.map(p=>[p.seg,pc(p),vN(p.vila),rN(vReg(p.vila)),p.prof||'',p.tel]),chart:contaPor(ps,p=>p.seg),vazio:'Ninguém com segmento ainda.'}}},
+{id:'p-regiao',g:'pes',i:'pin',c:'#2f7fe0',t:'Pessoas por região',d:'Cada região com suas vilas, pessoas, famílias, lideranças e pedidos em aberto',run(){const ps=pesF(),regs=[...LISTAS.reg,{id:'',nome:'Sem região'}];const rows=regs.map(r=>{const x=ps.filter(p=>vReg(p.vila)===r.id),vs=vilas.filter(v=>(v.reg||'')===r.id);return [r.nome,vs.map(v=>v.nome).join(', '),x.length,new Set(x.map(p=>p.fam)).size,lideres.filter(l=>vs.some(v=>v.id===l.vila)&&lidOk(l)).length,dsDe(x).filter(ativa).length]}).filter(r=>r[2]||r[0]!=='Sem região');return {cols:['Região','Vilas','Pessoas','Famílias','Lideranças','Pedidos em aberto'],rows,chart:rows.map(r=>[r[0],r[2]])}}},
+{id:'e-local',g:'ele',i:'flag',c:'#7c5ce6',t:'Eleitores por local de votação',d:'Cada escola de votação de Novo Repartimento, com o eleitorado do TSE e quantos estão cadastrados',run(){const ps=pesF();const rows=LOCAIS.map(l=>{const n=ps.filter(p=>String(p.localv)===String(l[0])).length;return [l[1],l[2],l[3].join(', '),l[4],n,l[4]?(n/l[4]*100).toFixed(1).replace('.',',')+'%':'']}).filter(r=>r[4]||!S.rf.vila).sort((a,b)=>b[4]-a[4]||b[3]-a[3]);
+  const fora=ps.filter(p=>p.votaFora).length,sem=ps.filter(p=>!p.localv&&!p.votaFora).length;return {cols:['Local de votação','Endereço','Seções','Eleitores (TSE)','Cadastrados','% do local'],rows,chart:rows.filter(r=>r[4]).map(r=>[r[0],r[4]]),nota:`Zona 101. ${fora} cadastrados votam em outra cidade e ${sem} ainda sem local informado. Eleitorado do TSE de 2026.`}}},
+{id:'e-secao',g:'ele',i:'clip',c:'#0e9fb1',t:'Lista por local e seção',d:'Quem vota em cada local e seção, para organizar o dia da eleição',run(){const ps=pesF().filter(p=>p.localv||p.votaFora).sort((a,b)=>(locN(a.localv)||'zz').localeCompare(locN(b.localv)||'zz')||(+a.secao||0)-(+b.secao||0)||a.nome.localeCompare(b.nome));return {cols:['Local de votação','Seção','Pessoa','Vila','Segmento','Liderança','Telefone'],rows:ps.map(p=>[p.votaFora?'Outra cidade: '+p.votaFora:locN(p.localv),p.secao||'',pc(p),vN(p.vila),p.seg||'',lN(p.lider),p.tel]),vazio:'Ninguém com local de votação informado ainda.'}}},
+{id:'e-tipo',g:'ele',i:'chart',c:'#d93f74',t:'Tipo de eleitor por vila',d:'Apoiadores, simpatizantes, indecisos e outros em cada vila (só a coordenação geral)',run(){if(!verEleitoral())return {cols:['Aviso'],rows:[],vazio:'Só a coordenação geral vê este relatório.'};const ts=[...LISTAS.eleitor,''];
+  const rows=minhasVilas().filter(vRelOk).map(v=>{const x=pesF().filter(p=>p.vila===v.id);return [v.nome,rN(v.reg),...ts.map(t=>x.filter(p=>(p.eleitor||'')===t).length),x.length]}).filter(r=>r[r.length-1]);
+  return {cols:['Vila','Região',...LISTAS.eleitor,'Não informado','Total'],rows,chart:ts.map((t,i)=>[t||'Não informado',rows.reduce((s,r)=>s+r[i+2],0)])}}}];
+novosRel.forEach(r=>RELS.splice(RELS.findIndex(x=>x.id==='custom'),0,r));['p-regiao','e-local'].forEach(id=>{const r=RELS.find(x=>x.id===id);if(r)r.tot=1});
+function vRelOk(v){return (!S.rf.vila||v.id===S.rf.vila)&&(!S.rf.reg||v.reg===S.rf.reg)}
+Object.assign(CPES,{prof:['Profissão',p=>p.prof||''],seg:['Segmento',p=>p.seg||''],regiao:['Região',p=>rN(vReg(p.vila))],gen:['Gênero',p=>p.gen||''],email:['E-mail',p=>p.email||''],
+  localv:['Local de votação',p=>p.votaFora?'Outra cidade: '+p.votaFora:locN(p.localv)],zona:['Zona',p=>p.zona||''],secao:['Seção',p=>p.secao||'']});
+Object.defineProperty(CPES,'titulo',{enumerable:true,configurable:true,get(){return verEleitoral()?['Título de eleitor',p=>tituloFmt(p.titulo)]:undefined}});
+Object.defineProperty(CPES,'eleitor',{enumerable:true,configurable:true,get(){return verEleitoral()?['Tipo de eleitor',p=>p.eleitor||'']:undefined}});
+document.addEventListener('change',e=>{if(e.target.id==='rf-reg'){S.rf.reg=e.target.value;S.rf.vila='';render()}});
+/* pedido em texto: "professores da região do 112", "formiguinhas", "quem vota na escola..." */
+(()=>{const ent0=entender;entender=function(qq){const q=nz(qq),stem=w=>nz(w).replace(/\(.*?\)/g,'').replace(/[^a-z ]/g,' ').trim().split(' ')[0];
+  const achou=(arr)=>arr.find(x=>{const s=stem(x);return s.length>3&&new RegExp('\\b'+s.slice(0,Math.max(4,s.length-2))).test(q)});
+  const prof=achou(LISTAS.prof),seg=!prof&&achou(LISTAS.seg),reg=LISTAS.reg.find(r=>q.includes(nz(r.nome).replace(/^regiao (do |da |de )?/,'')));
+  if(!prof&&!seg)return ent0(qq);const id=prof?'p-prof':'p-seg',col=prof?'Profissão':'Segmento',val=prof||seg;
+  let vila='';vilas.slice().sort((a,b)=>b.nome.length-a.nome.length).some(v=>{const n=nz(v.nome.replace(/ \(.*\)/,''));if(n.length>2&&q.includes(n)){vila=v.id;return true}return false});
+  if(reg)S.rf.reg=reg.id;return {id,cfg:{tit:'',ocultas:[],filtros:[{col,vals:[val]}],per:'tudo',de:'',ate:'',pcol:''},vila,diz:[val.toLowerCase(),...(reg?[reg.nome]:[]),...(vila?[vN(vila)]:[])]}}})();
+
+/* --- ganchos nas telas existentes --- */
+Object.keys(V).forEach(k=>{const f=V[k];if(typeof f!=='function'||f.gec27)return;V[k]=function(){sincLideres();return f.apply(this,arguments)};V[k].gec27=1});
+(()=>{const f=V.equipe;V.equipe=function(){let h=f.apply(this,arguments);if(podeListas()){const i=h.indexOf('</div>');h=h.slice(0,i+6)+`<button class="btn ghost" data-act="listas">${ic('list',18)}Listas, regiões e vilas</button>`+h.slice(i+6)}return h}})();
+/* =====================================================================
+   Identidade, redes sociais, "como chegou", celular mais fácil,
+   atualização sozinha, instalar o app e desenho de desbloqueio.
+   ===================================================================== */
+Object.assign(I,{insta:'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>',
+  face:'<path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V9H6.5v3.5H9V21h3.5v-8.5h3l.5-3.5h-3.5V7a1 1 0 0 1 1-1H15z"/>',
+  tiktok:'<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.6 2.2 4.2 5 4.5"/>',
+  yt:'<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/>',
+  kwai:'<rect x="3" y="7" width="13" height="10" rx="3"/><path d="M16 10.5 21 8v8l-5-2.5"/><circle cx="7.5" cy="5" r="2"/><circle cx="12.5" cy="5" r="2"/>',
+  lock:'<rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  baixar:'<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>'});
+
+/* ---------- redes sociais e "como chegou" no cadastro ---------- */
+if(!LISTAS.origem)LISTAS.origem=['Facebook','Instagram','WhatsApp','Grupo de WhatsApp','Liderança','Gabinete da Câmara','Indicação de alguém','Visita da vereadora','Evento ou ação'];
+const REDES=[['ig','Instagram','insta',n=>'https://www.instagram.com/explore/search/keyword/?q='+encodeURIComponent(n),h=>'https://www.instagram.com/'+h],
+  ['tt','TikTok','tiktok',n=>'https://www.tiktok.com/search/user?q='+encodeURIComponent(n),h=>'https://www.tiktok.com/@'+h],
+  ['kwai','Kwai','kwai',n=>'https://www.google.com/search?q='+encodeURIComponent('"'+n+'" kwai'),h=>'https://www.kwai.com/@'+h],
+  ['fb','Facebook','face',n=>'https://www.facebook.com/search/people/?q='+encodeURIComponent(n),h=>/^\d+$/.test(h)?'https://www.facebook.com/profile.php?id='+h:'https://www.facebook.com/'+h],
+  ['yt','YouTube','yt',n=>'https://www.youtube.com/results?search_query='+encodeURIComponent(n),h=>'https://www.youtube.com/@'+h]];
+const arroba=v=>{v=String(v||'').trim();if(!v)return '';try{if(/^https?:|\.com/.test(v)){const u=new URL(/^https?:/.test(v)?v:'https://'+v);const id=u.searchParams.get('id');v=id||u.pathname.split('/').filter(Boolean).pop()||''}}catch(_){}return v.replace(/^@+/,'').replace(/[?#].*$/,'').trim()};
+const _campos0=camposExtra;camposExtra=function(px,p){p=p||{};return _campos0(px,p)+`
+  <h3 style="margin-top:4px">Redes sociais</h3><p class="meta">Se a pessoa não souber o @, toque em Procurar: abre a busca da rede com o nome dela. Achou o perfil certo, copie o @ ou o link e cole aqui.</p>
+  ${REDES.map(([k,n,i])=>`<div class="rede"><label class="field"><span>${ic(i,16)} ${n}</span><input id="${px}-${k}" autocomplete="off" autocapitalize="off" spellcheck="false" value="${esc(p[k]?'@'+p[k]:'')}" placeholder="@usuario ou link do perfil"></label><button type="button" class="btn ghost sm" data-act="rede-busca" data-k="${k}" data-px="${px}">${ic('search',16)}Procurar</button></div>`).join('')}
+  <h3 style="margin-top:4px">Como chegou ao gabinete</h3>
+  <label class="field"><span>Por onde a pessoa conheceu ou chegou</span><select id="${px}-origem" data-cria="origem"><option value="">Não informou</option>${opts(LISTAS.origem.map(x=>[x,x]),p.origem||'')}${optNovo('origem')}</select></label>`};
+XCAMPOS.push(...REDES.map(r=>[r[0],r[1]]),['origem','como chegou']);
+const _ler0=lerExtra;lerExtra=function(px){const o=_ler0(px);REDES.forEach(([k])=>{const el=$(px+'-'+k);if(el)o[k]=arroba(el.value)});const og=$(px+'-origem');if(og&&og.value!=='__novo')o.origem=og.value;return o};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act="rede-busca"]');if(!b)return;e.stopImmediatePropagation();const px=b.dataset.px,nome=(($(px+'-nome')||{}).value||'').trim()||(S.pid&&pById(S.pid)?pById(S.pid).nome:'');
+  if(!nome){toast('Escreva o nome da pessoa primeiro');return}const r=REDES.find(x=>x[0]===b.dataset.k);const vila=(vilas.find(v=>v.id===($(px+'-vila')||{}).value)||{}).nome||'';
+  window.open(r[3](nome+(r[0]==='kwai'?' '+vila:'')),'_blank','noopener');toast('Achou? Copie o @ e cole no campo do '+r[1])},true);
+const redesHtml=p=>REDES.filter(r=>p[r[0]]).map(r=>`<a class="chip" target="_blank" rel="noopener" href="${esc(r[4](p[r[0]]))}">${ic(r[2],16)}@${esc(p[r[0]])}</a>`).join('');
+const _ficha0=fichaExtra;fichaExtra=function(p,dl){const rs=redesHtml(p);return _ficha0(p,dl)+(p.origem?dl('Como chegou',p.origem):'')+(rs?`<div class="dl"><span>Redes sociais</span><b class="chk" style="justify-content:flex-start">${rs}</b></div>`:'')};
+['prof','seg','eleitor'].forEach(()=>{});
+const _cria0=criaItem;criaItem=function(k,nome,extra){if(k!=='origem')return _cria0(k,nome,extra);nome=nome.trim();if(nome.length<2)return {erro:'Escreva o nome'};const a=LISTAS.origem;if(a.some(x=>nz(x)===nz(nome)))return {val:a.find(x=>nz(x)===nz(nome)),ja:1};a.push(nome);logA('Listas','Criou a origem '+nome);return {val:nome,txt:nome}};
+LNOME.origem=['Como chegou','Por onde as pessoas chegam ao gabinete'];
+Object.assign(CPES,{origem:['Como chegou',p=>p.origem||''],...Object.fromEntries(REDES.map(r=>[r[0],[r[1],p=>p[r[0]]?'@'+p[r[0]]:'']]))});
+RELS.splice(RELS.findIndex(x=>x.id==='custom'),0,{id:'p-origem',g:'pes',i:'chat',c:'#0b8f45',t:'Como as pessoas chegam',d:'Por onde cada pessoa conheceu ou chegou ao gabinete: Facebook, Instagram, WhatsApp, liderança, Câmara e outros',tot:1,run(){const ps=pesF();const m=contaPor(ps,p=>p.origem,'Não informou');
+  return {cols:['Como chegou','Pessoas','% do total','Pedidos em aberto'],rows:m.map(([o,n])=>[o,n,(n/Math.max(1,ps.length)*100).toFixed(0)+'%',dsDe(ps.filter(p=>(p.origem||'Não informou')===o)).filter(ativa).length]),chart:m.filter(x=>x[0]!=='Não informou')}}});
+RELS.splice(RELS.findIndex(x=>x.id==='custom'),0,{id:'p-redes',g:'pes',i:'insta',c:'#d93f74',t:'Redes sociais das pessoas',d:'Instagram, TikTok, Kwai, Facebook e YouTube de quem está cadastrado',run(){const ps=pesF().filter(p=>REDES.some(r=>p[r[0]]));return {cols:['Pessoa','Vila',...REDES.map(r=>r[1])],rows:ps.map(p=>[pc(p),vN(p.vila),...REDES.map(r=>p[r[0]]?'@'+p[r[0]]:'')]),vazio:'Ninguém com rede social informada ainda.'}}});
+/* "como chegou" também em cada pedido */
+(()=>{const f=formDemanda;formDemanda=function(pid){f(pid);const pz=$('fd-prazo');if(!pz)return;const p=pById(+$('fd-p').value);
+  pz.closest('label').insertAdjacentHTML('beforebegin',`<label class="field"><span>Como chegou este pedido</span><select id="fd-origem" data-cria="origem"><option value="">Não informou</option>${opts(LISTAS.origem.map(x=>[x,x]),p&&p.origem||'')}${optNovo('origem')}</select></label>`)}})();
+document.addEventListener('submit',e=>{if(e.target.id!=='fd')return;const o=$('fd-origem');const v=o&&o.value!=='__novo'?o.value:'';const n=demandas.length;setTimeout(()=>{if(demandas.length>n&&v){const d=demandas[demandas.length-1];d.origem=v;const p=pById(d.p);if(p&&!p.origem)p.origem=v}},0)},true);
+Object.assign(CDEM,{origem:['Como chegou',d=>d.origem||'']});
+
+/* ---------- cores da identidade nas telas ---------- */
+(()=>{const f=V.inicio;const COR={'#2f7fe0':'var(--flag-verde)','#e2701a':'var(--flag-vermelho)','#0e9fb1':'var(--flag-azul)','#d93f74':'var(--flag-amarelo-e)','#1f9a52':'var(--flag-verde-e)','#7c5ce6':'var(--flag-marinho)','#c98a00':'var(--flag-azul)','#b8448f':'var(--flag-vermelho-e)'};
+  V.inicio=function(){let h=f.apply(this,arguments);return h.replace(/<button class="tile"([^>]*)><span class="cic cheio" style="--cc:(#[0-9a-f]{6})"/g,(m,a,c)=>`<button class="tile"${a}><span class="cic cheio" style="--cc:${COR[c]||c}"`).replace('--cc:#1d4f9e','--cc:var(--flag-marinho)')}})();
+
+/* ---------- celular: teclado, rolagem e "Próximo" ---------- */
+(()=>{const vv=window.visualViewport;if(!vv)return;const aj=()=>{document.documentElement.style.setProperty('--vvh',vv.height+'px');document.documentElement.style.setProperty('--vvt',vv.offsetTop+'px')};vv.addEventListener('resize',aj);vv.addEventListener('scroll',aj);aj()})();
+const campoSel='input:not([type=hidden]):not([type=checkbox]):not([type=radio]):not([type=file]):not([type=submit]):not([disabled]),select:not([disabled]),textarea:not([disabled])';
+const visivel=el=>!!(el.offsetWidth||el.offsetHeight)&&!el.closest('[hidden]');
+document.addEventListener('focusin',e=>{const t=e.target;if(!t.closest||!t.closest('#sheet'))return;if(t.matches('input,textarea,select')){if(t.tagName==='INPUT'&&!t.getAttribute('enterkeyhint')){const f=t.form,cs=f?[...f.querySelectorAll(campoSel)].filter(visivel):[];t.setAttribute('enterkeyhint',cs.indexOf(t)<cs.length-1?'next':'done')}
+  setTimeout(()=>{if(document.activeElement===t)t.scrollIntoView({block:'center',behavior:'smooth'})},320)}});
+document.addEventListener('keydown',e=>{const t=e.target;if(e.key!=='Enter'||e.shiftKey||t.tagName!=='INPUT'||!t.closest('#sheet')||t.list&&t.value==='')return;const f=t.form;if(!f)return;
+  const cs=[...f.querySelectorAll(campoSel)].filter(visivel),i=cs.indexOf(t);if(i>-1&&i<cs.length-1){e.preventDefault();cs[i+1].focus()}},true);
+
+/* ---------- atualização sozinha, sem precisar sair ---------- */
+(()=>{if(!('serviceWorker' in navigator)||!window.GEC_CFG)return;let recarregando=false;const tinha=!!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(recarregando||!tinha)return;recarregando=true;const ocupado=!$('modal').hidden&&S.sujo;
+    if(ocupado){const b=document.createElement('button');b.className='novaver';b.textContent='Nova versão pronta. Toque para atualizar';b.onclick=()=>location.reload();document.body.appendChild(b)}else{toast('Atualizando para a versão nova...');setTimeout(()=>location.reload(),900)}});
+  const checa=()=>navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{});setInterval(checa,15*60e3);document.addEventListener('visibilitychange',()=>{if(!document.hidden)checa()})})();
+
+/* ---------- instalar o app no celular ---------- */
+let INST=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();INST=e;document.querySelectorAll('[data-act="instalar"]').forEach(b=>b.hidden=false)});
+const instalado=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+const ehIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+function comoInstalar(primeira){$('sheet').innerHTML=`<div class="bar"><h2 style="flex:1">Instalar no celular</h2>${fecha}</div>${primeira?'<p class="meta">Instale o Gabinete em Campo no celular: abre mais rápido, em tela cheia, e funciona sem internet.</p>':''}${!ehIOS()&&INST?`<button class="btn wide" data-act="instalar">${ic('baixar',18)}Instalar agora</button>`:''}
+  ${ehIOS()?`<p class="meta">No iPhone e no iPad a Apple não deixa instalar com um toque. São três passos, uma vez só:</p><ol class="passos"><li><b>Abra este site no Safari</b> (o navegador da bússola azul).</li><li>Toque no botão <b>Compartilhar</b>, o quadrado com a seta para cima, embaixo da tela.</li><li>Role e toque em <b>Adicionar à Tela de Início</b>, depois em <b>Adicionar</b>.</li></ol><p class="meta">Pronto: aparece o ícone da Netinha na tela, abre em tela cheia e funciona sem internet.</p>`
+  :`<ol class="passos"><li>Abra este site no <b>Chrome</b>.</li><li>Toque nos <b>três pontinhos</b> no canto de cima.</li><li>Toque em <b>Instalar app</b> ou <b>Adicionar à tela inicial</b>.</li></ol><p class="meta">Se aparecer um aviso "Instalar Gabinete em Campo", é só tocar em Instalar.</p>`}
+  <button class="btn ${!ehIOS()&&INST?'ghost':''} wide" data-act="modal-x">${primeira?'Agora não':'Entendi'}</button>`;$('modal').hidden=false}
+/* o botão de instalar só aparece no celular e para quem ainda não instalou; na primeira vez o app já oferece */
+const celular=()=>ehIOS()||/android/i.test(navigator.userAgent)||(matchMedia('(pointer:coarse)').matches&&innerWidth<900);
+function ajustaInstalar(){const mostra=!instalado()&&celular();document.querySelectorAll('[data-act="instalar"]').forEach(b=>b.hidden=!mostra)}
+ajustaInstalar();new MutationObserver(()=>ajustaInstalar()).observe($('app'),{childList:true,subtree:true});
+matchMedia('(display-mode: standalone)').addEventListener('change',ajustaInstalar);
+setTimeout(()=>{if(instalado()||!celular())return;let visto=false;try{visto=localStorage.getItem('gec-inst-visto')==='1'}catch(_){}if(visto||!$('modal').hidden||document.querySelector('.trava'))return;
+  try{localStorage.setItem('gec-inst-visto','1')}catch(_){}comoInstalar(true)},2500);
+/* ---------- mais de um telefone por pessoa ---------- */
+const telRow=v=>`<div class="telx"><input type="tel" inputmode="tel" class="tel-extra" value="${esc(v||'')}" placeholder="(94) 9 0000-0000" aria-label="Outro telefone"><button type="button" class="iconbtn" data-act="tel-x" aria-label="Tirar este telefone">${ic('x',18)}</button></div>`;
+function telsUI(px,tels){const t=$(px+'-tel');if(!t||$(px+'-tels'))return;t.closest('label').insertAdjacentHTML('afterend',`<div id="${px}-tels" class="tels">${(tels||[]).map(telRow).join('')}<button type="button" class="link" data-act="tel-mais" data-px="${px}" style="align-self:flex-start">+ Adicionar outro telefone</button></div>`)}
+(()=>{const f=formPessoa;formPessoa=function(){const r=f.apply(this,arguments);telsUI('fp',[]);return r}})();
+(()=>{const f=formEditPessoa;formEditPessoa=function(p){const r=f.apply(this,arguments);telsUI('fep',p.tels||[]);return r}})();
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act="tel-mais"],[data-act="tel-x"]');if(!b)return;e.stopImmediatePropagation();
+  if(b.dataset.act==='tel-x'){b.closest('.telx').remove();return}b.insertAdjacentHTML('beforebegin',telRow(''));b.previousElementSibling.querySelector('input').focus()},true);
+XCAMPOS.push(['tels','outros telefones']);
+(()=>{const f=lerExtra;lerExtra=function(px){const o=f(px),w=$(px+'-tels');if(w)o.tels=[...w.querySelectorAll('.tel-extra')].map(i=>i.value.trim()).filter(Boolean);return o}})();
+(()=>{const f=fichaExtra;fichaExtra=function(p,dl){return ((p.tels||[]).length?dl('Outros telefones',p.tels.join(' · ')):'')+f(p,dl)}})();
+CPES.tels=['Outros telefones',p=>(p.tels||[]).join(', ')];
+XCAMPOS.push(['comObs','observações da comunidade']);
+(()=>{const f=lerExtra;lerExtra=function(px){const o=f(px),t=$(px+'-comobs');if(t)o.comObs=t.value.trim();return o}})();
+(()=>{const r=RELS.find(x=>x.id==='com-falas');if(!r)return;const f=r.run;r.run=function(){const o=f.apply(this,arguments);fVila(visP()).forEach(p=>{if(p.comObs)o.rows.push([vN(p.vila),'Observações',p.comObs,pc(p)])});o.rows.sort((a,b)=>String(a[0]).localeCompare(String(b[0])));return o}})();
+CPES.comObs=['Observações da comunidade',p=>p.comObs||''];
+
+
+
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-act="instalar"]');if(!b)return;e.stopImmediatePropagation();if(instalado()){toast('O app já está instalado neste aparelho');return}
+  if(INST){INST.prompt();const r=await INST.userChoice.catch(()=>({}));INST=null;if(r&&r.outcome==='accepted')toast('Instalado. Procure o ícone na tela do celular.');return}comoInstalar()},true);
+document.addEventListener('click',e=>{if(e.target.closest('[data-act="modal-x"]')){e.stopImmediatePropagation();$('modal').hidden=true}},true);
+
+/* ---------- lembrar o telefone ---------- */
+(()=>{const tel=$('fl-tel'),lb=$('fl-lembra');let v='';try{v=localStorage.getItem('gec-tel')||''}catch(_){}if(tel&&v&&!tel.value)tel.value=v;if(lb&&v)lb.checked=true;
+  window.addEventListener('submit',e=>{if(e.target.id!=='fl')return;try{if($('fl-lembra')&&$('fl-lembra').checked)localStorage.setItem('gec-tel',$('fl-tel').value.trim());else localStorage.removeItem('gec-tel')}catch(_){}},true)})();
+
+/* ---------- desenho de desbloqueio (pontinhos) ---------- */
+const TRAVA=(()=>{const te=new TextEncoder(),td=new TextDecoder(),b64=u=>btoa(String.fromCharCode(...new Uint8Array(u))),ub=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+  const chave=async(pad,salt)=>{const k=await crypto.subtle.importKey('raw',te.encode('gec|'+pad.join('-')),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:150000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])};
+  async function fecha(seg,pad){const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},await chave(pad,salt),te.encode(seg));return {trava:1,salt:b64(salt),iv:b64(iv),ct:b64(ct),erros:0}}
+  async function abre(enc,pad){try{const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(enc.iv)},await chave(pad,ub(enc.salt)),ub(enc.ct));return td.decode(pt)}catch(_){return null}}
+  /* tela com a grade 3x3 */
+  function grade(titulo,sub,cb,extra){const ov=document.createElement('div');ov.className='trava';ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');
+    ov.innerHTML=`<div class="trava-in"><img src="logo.webp" alt="Vereadora Netinha Siqueira" class="trava-lg" width="640" height="305"><h2>${titulo}</h2><p class="trava-sub">${sub}</p><svg class="trava-g" viewBox="0 0 300 300" aria-label="Grade de 9 pontos para desenhar"><polyline class="tr-l" points="" /><line class="tr-v" x1="-60" y1="-60" x2="-60" y2="-60"/>${[0,1,2,3,4,5,6,7,8].map(i=>`<circle class="tr-p" data-i="${i}" cx="${50+(i%3)*100}" cy="${50+Math.floor(i/3)*100}" r="14"/>`).join('')}</svg><div class="trava-x">${extra||''}</div></div>`;
+    document.body.appendChild(ov);const svg=ov.querySelector('svg'),pl=ov.querySelector('.tr-l'),ln=ov.querySelector('.tr-v'),ps=[...ov.querySelectorAll('.tr-p')];let seq=[],ativo=false;
+    const pt=e=>{const r=svg.getBoundingClientRect();return [(e.clientX-r.left)/r.width*300,(e.clientY-r.top)/r.height*300]};
+    const toca=([x,y])=>{ps.forEach(c=>{const i=+c.dataset.i;if(seq.includes(i))return;const cx=+c.getAttribute('cx'),cy=+c.getAttribute('cy');if(Math.hypot(x-cx,y-cy)<38){
+      if(seq.length){const a=seq[seq.length-1],m=(a+i)/2;if(Number.isInteger(m)&&Math.abs(a%3-i%3)!==1&&Math.abs(Math.floor(a/3)-Math.floor(i/3))!==1&&!seq.includes(m)){seq.push(m);ps[m].classList.add('on')}}
+      seq.push(i);c.classList.add('on');if(navigator.vibrate)try{navigator.vibrate(8)}catch(_){}pl.setAttribute('points',seq.map(j=>ps[j].getAttribute('cx')+','+ps[j].getAttribute('cy')).join(' '))}})};
+    svg.addEventListener('pointerdown',e=>{e.preventDefault();svg.setPointerCapture(e.pointerId);ativo=true;seq=[];ps.forEach(c=>c.classList.remove('on','erro'));pl.setAttribute('points','');toca(pt(e))});
+    svg.addEventListener('pointermove',e=>{if(!ativo)return;const p=pt(e);toca(p);if(seq.length){const l=ps[seq[seq.length-1]];ln.setAttribute('x1',l.getAttribute('cx'));ln.setAttribute('y1',l.getAttribute('cy'));ln.setAttribute('x2',p[0]);ln.setAttribute('y2',p[1])}});
+    const fim=()=>{if(!ativo)return;ativo=false;ln.setAttribute('x2',ln.getAttribute('x1'));ln.setAttribute('y2',ln.getAttribute('y1'));if(seq.length)cb(seq.slice(),{erro:m=>{ps.forEach(c=>c.classList.contains('on')&&c.classList.add('erro'));ov.querySelector('.trava-sub').textContent=m;setTimeout(()=>{ps.forEach(c=>c.classList.remove('on','erro'));pl.setAttribute('points','')},700)},sub:m=>{ov.querySelector('.trava-sub').textContent=m;ps.forEach(c=>c.classList.remove('on','erro'));pl.setAttribute('points','')},fecha:()=>ov.remove(),ov})};
+    svg.addEventListener('pointerup',fim);svg.addEventListener('pointercancel',fim);return ov}
+  /* criar o desenho (duas vezes para conferir) */
+  function criar(segredo,salva){return new Promise(res=>{let primeiro=null;const ov=grade('Crie seu desenho','Ligue pelo menos 4 pontinhos sem tirar o dedo.',async(seq,u)=>{
+      if(seq.length<4){u.erro('Use pelo menos 4 pontinhos. Tente de novo.');return}
+      if(!primeiro){primeiro=seq;u.sub('Faça o mesmo desenho de novo para confirmar.');return}
+      if(primeiro.join()!==seq.join()){primeiro=null;u.erro('Os desenhos não bateram. Comece de novo.');return}
+      u.sub('Guardando...');const enc=await fecha(segredo,seq);await salva(enc);u.fecha();res(enc)},`<button class="btn ghost" data-tr="pular">Agora não</button>`);
+    ov.querySelector('[data-tr="pular"]').onclick=()=>{ov.remove();res(null)}})}
+  /* abrir: pede o desenho; 5 erros apagam e pedem o código de novo */
+  function pedir(enc,salva,titulo){return new Promise(res=>{const ov=grade(titulo||'Gabinete em Campo','Faça o seu desenho para entrar.',async(seq,u)=>{const s=await abre(enc,seq);
+      if(s!==null){enc.erros=0;await salva(enc);u.fecha();res(s);return}enc.erros=(enc.erros||0)+1;
+      if(enc.erros>=5){await salva(null);u.fecha();toast('Errou o desenho 5 vezes. Por segurança, entre de novo com o telefone e o código.');res(null);return}
+      await salva(enc);u.erro('Desenho errado. Restam '+(5-enc.erros)+' tentativas.')},`<button class="btn ghost" data-tr="codigo">Esqueci o desenho, entrar com o código</button>`);
+    ov.querySelector('[data-tr="codigo"]').onclick=async()=>{await salva(null);ov.remove();res(null)}})}
+  return {criar,pedir,fecha,abre}})();
+/* liga o desenho ao login de verdade (site oficial) e a uma demonstração na prévia */
+const TRV={enc:null,salva:null,saiu:0,
+  async oferecer(seg,salva){if(this.enc)return;let pulou=false;try{pulou=localStorage.getItem('gec-trava-nao')==='1'}catch(_){}if(pulou)return;
+    const enc=await TRAVA.criar(seg,async x=>{await salva(x||seg)});if(enc){this.enc=enc;this.salva=salva;toast('Pronto: da próxima vez é só fazer o desenho.')}else{try{localStorage.setItem('gec-trava-nao','1')}catch(_){}}},
+  async abrir(enc,salva){this.salva=salva;const s=await TRAVA.pedir(enc,async x=>{this.enc=x;await salva(x)});this.enc=s?enc:null;return s},
+  async conferir(){if(!this.enc)return;const ok=await TRAVA.pedir(this.enc,async x=>{this.enc=x;if(this.salva)await this.salva(x)},'Bloqueado');if(ok===null&&window.GEC_SAIR)window.GEC_SAIR()}};
+window.GEC_TRAVA=TRV;
+document.addEventListener('visibilitychange',()=>{if(document.hidden){TRV.saiu=Date.now();return}if(TRV.enc&&S.on&&TRV.saiu&&Date.now()-TRV.saiu>5*60e3&&!document.querySelector('.trava'))TRV.conferir()});
+(()=>{const f=V.equipe;V.equipe=function(){let h=f.apply(this,arguments);const tem=!!TRV.enc;
+  h+=`<section class="card"><h3>Este aparelho</h3><p class="meta">${tem?'O app pede o seu desenho quando abre e quando fica mais de 5 minutos fechado.':'Crie um desenho de pontinhos para entrar sem digitar o código. Se o celular for perdido, ninguém entra sem o desenho.'}</p>
+  <div class="two"><button class="btn ghost" data-act="trava-criar">${ic('lock',18)}${tem?'Trocar desenho':'Criar desenho'}</button>${tem?`<button class="btn ghost" data-act="trava-agora">${ic('lock',18)}Bloquear agora</button>`:''}</div>
+  ${tem?`<button class="link" data-act="trava-tirar" style="align-self:flex-start">Tirar o desenho deste aparelho</button>`:''}<button class="btn ghost" data-act="instalar">${ic('baixar',18)}Instalar o app no celular</button></section>`;return h}})();
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-act^="trava-"]');if(!b)return;e.stopImmediatePropagation();const a=b.dataset.act;
+  if(a==='trava-agora'){await TRV.conferir();return}
+  if(a==='trava-tirar'){if(window.GEC_TOKEN_SALVA)await window.GEC_TOKEN_SALVA(null,true);TRV.enc=null;render();toast('Desenho tirado. Na próxima vez entra direto.');return}
+  try{localStorage.removeItem('gec-trava-nao')}catch(_){}const seg=window.GEC_TOKEN_ATUAL?window.GEC_TOKEN_ATUAL():'previa-'+Date.now();
+  const enc=await TRAVA.criar(seg,async x=>{if(window.GEC_TOKEN_SALVA)await window.GEC_TOKEN_SALVA(x)});if(enc){TRV.enc=enc;TRV.salva=window.GEC_TOKEN_SALVA||(async x=>{TRV.enc=x});render();toast('Desenho criado. Teste em "Bloquear agora".')}},true);
 
 
 </script>
